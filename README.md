@@ -1,6 +1,6 @@
 # React-final-project
 
-To Run Locally-
+#To Run Locally-
 
 Run Backend-
 $ cd backend
@@ -8,7 +8,7 @@ $ npm install
 $ npm start
 
 Run Frontend-
-# open new terminal
+open new terminal
 $ cd frontend
 $ npm install
 $ npm start
