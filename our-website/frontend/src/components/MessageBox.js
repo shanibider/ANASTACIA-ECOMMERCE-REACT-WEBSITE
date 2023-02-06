@@ -1,9 +1,6 @@
 import React from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
-import { Alert } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
 
 export default function MessageBox(props) {
-  return (
-    <Alert variant={propTypes.variant || 'info'}>{propTypes.children}</Alert>
-  );
+  return <Alert variant={props.variant || 'info'}>{props.children}</Alert>;
 }
