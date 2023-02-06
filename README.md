@@ -1,20 +1,25 @@
 # React-final-project
 
-# To Run Locally-
+## To Run Locally-
 
-Run Backend-
+### Run Backend-
+```
 $ cd our-website
 $ cd backend
 $ npm i
 $ npm start
+```
 
-Run Frontend-
+
+### Run Frontend-
+```
 open new terminal
 
 $ cd our-website
 $ cd frontend
 $ npm i
 $ npm start
+```
 
 
 Seed Users and Products (backend)-
