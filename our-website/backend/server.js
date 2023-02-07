@@ -6,10 +6,10 @@ import seedRouter from './routes/seedRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 
-//run it to fetch the env variables
+//fetch variables in .env file
 dotenv.config();
 
-//connect to mongodb
+//connect to mongodb data base
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {

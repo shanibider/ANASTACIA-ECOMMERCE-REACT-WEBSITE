@@ -51,6 +51,9 @@ function reducer(state, action) {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case 'CART_CLEAR':
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
+
     case 'USER_SIGNIN':
       return { ...state, userInfo: action.payload }; //we return- keeping the previos state and add the userInfo property to it (based on the data we get from backend)
     case 'USER_SIGNOUT':

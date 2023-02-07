@@ -26,6 +26,7 @@ export default function ShippingAddressScreen() {
       navigate('/signin?redirect=/shipping');
     }
   }, [userInfo, navigate]);
+
   const [country, setCountry] = useState(shippingAddress.country || '');
 
   const submitHandler = (e) => {

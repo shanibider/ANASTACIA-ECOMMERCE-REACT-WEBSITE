@@ -51,14 +51,6 @@ function ProductScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state; //diconstructing
 
-  //increase quantity when user click add to cart once
-  /*const addToCartHandler = () => {
-    ctxDispatch({
-      type: 'CART_ADD_ITEM',
-      payload: { ...product, quantity: 1 },
-    });
-  };*/
-
   //increase quantity when user click add to cart multiple times
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x._id === product._id);

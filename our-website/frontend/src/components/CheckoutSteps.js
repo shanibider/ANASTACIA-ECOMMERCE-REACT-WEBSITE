@@ -7,7 +7,7 @@ export default function CheckoutSteps(props) {
     <Row className="checkout-steps">
       <Col className={props.step1 ? 'active' : ''}>Sign-In</Col>
       <Col className={props.step1 ? 'active' : ''}>Shipping</Col>
-      <Col className={props.step1 ? 'active' : ''}>Paymont</Col>
+      <Col className={props.step1 ? 'active' : ''}>Payment</Col>
       <Col className={props.step1 ? 'active' : ''}>Place Order</Col>
     </Row>
   );
