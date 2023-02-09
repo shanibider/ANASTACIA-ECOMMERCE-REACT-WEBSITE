@@ -51,9 +51,9 @@ function reducer(state, action) {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    //here we keep the state of the context, also keep the state of cart. and we change the cartItems to an empty array
     case 'CART_CLEAR':
       return { ...state, cart: { ...state.cart, cartItems: [] } };
-
     case 'USER_SIGNIN':
       return { ...state, userInfo: action.payload }; //we return- keeping the previos state and add the userInfo property to it (based on the data we get from backend)
     case 'USER_SIGNOUT':

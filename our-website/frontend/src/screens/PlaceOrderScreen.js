@@ -1,15 +1,22 @@
-import React, { useContext, useEffect, useReducer } from 'react';
-import { Card, Col, Row, Button, ListGroup } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
-import CheckoutSteps from '../components/CheckoutSteps';
-import { Store } from '../Store';
 import { Link, useNavigate } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { Store } from '../Store';
+import CheckoutSteps from '../components/CheckoutSteps';
+import Axios from 'axios';
+import React, { useContext, useEffect, useReducer } from 'react';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
-import { Axios } from 'axios';
 import LoadingBox from '../components/LoadingBox';
 
-//reducer
+//reducer function itself.
+//here we define switch case that check the action.type
+//(reducer is independent component)
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'CREATE_REQUEST':
@@ -26,16 +33,17 @@ const reducer = (state, action) => {
 export default function PlaceOrderScreen() {
   const navigate = useNavigate();
 
+  //from useReducer we get data (loading state) and dispatch function
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
 
+  //we use useContext to get userInfo from Store.js
+  //rename this dispatch to ctxDispatch
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
 
-  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; //123.2345 => 123.23
-
-  //calculate prices (for items, shipping, tax)
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
   cart.itemsPrice = round2(
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
@@ -46,6 +54,9 @@ export default function PlaceOrderScreen() {
   const placeOrderHandler = async () => {
     try {
       dispatch({ type: 'CREATE_REQUEST' });
+      //send ajax request to backend to '/api/orders' api
+      //second parameter in post request is options. By the option we create here- this api is authenticated and in the server i can detect if the request is coming from a looged in user or a hacker
+
       const { data } = await Axios.post(
         '/api/orders',
         {
@@ -59,13 +70,13 @@ export default function PlaceOrderScreen() {
         },
         {
           headers: {
-            Authorization: `Bearer ${userInfo.token}`,
+            authorization: `Bearer ${userInfo.token}`,
           },
         }
       );
-      ctxDispatch({ type: 'CLEAR_CART' });
-      dispatch({ type: 'CREATE_SUCCESS' });
-      localStorage.removeItem('cartItems');
+      ctxDispatch({ type: 'CART_CLEAR' }); //this one goes to the Store.js
+      dispatch({ type: 'CREATE_SUCCESS' }); //this one goes to the reducer we defined here
+      localStorage.removeItem('cartItems'); //remove cartItems from localStorage (after we send the order the cart should be clear)
       navigate(`/order/${data.order._id}`);
     } catch (err) {
       dispatch({ type: 'CREATE_FAIL' });
@@ -77,8 +88,7 @@ export default function PlaceOrderScreen() {
     if (!cart.paymentMethod) {
       navigate('/payment');
     }
-  }, [cart, navigate]);
-
+  }, [cart, navigate]); //dependency array
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
@@ -100,7 +110,6 @@ export default function PlaceOrderScreen() {
               <Link to="/shipping">Edit</Link>
             </Card.Body>
           </Card>
-
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Payment</Card.Title>
@@ -110,7 +119,6 @@ export default function PlaceOrderScreen() {
               <Link to="/payment">Edit</Link>
             </Card.Body>
           </Card>
-
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Items</Card.Title>
@@ -138,7 +146,6 @@ export default function PlaceOrderScreen() {
             </Card.Body>
           </Card>
         </Col>
-
         <Col md={4}>
           <Card>
             <Card.Body>
@@ -165,14 +172,13 @@ export default function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong>Order Total</strong>
+                      <strong> Order Total</strong>
                     </Col>
                     <Col>
                       <strong>${cart.totalPrice.toFixed(2)}</strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
-
                 <ListGroup.Item>
                   <div className="d-grid">
                     <Button
