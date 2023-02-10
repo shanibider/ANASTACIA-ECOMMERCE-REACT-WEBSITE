@@ -1,11 +1,11 @@
 import express from 'express';
-import data from './data.js';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import seedRouter from './routes/seedRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
+import path from 'path';
 
 //fetch variables in .env file
 dotenv.config();
@@ -38,6 +38,13 @@ app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/frontend/build')));
+//* means that everything the user enter after the server name (website domain) is going to be served by index.html file
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+);
 
 //error handler for express
 app.use((err, req, res, next) => {

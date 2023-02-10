@@ -35,6 +35,7 @@ export default function App() {
     localStorage.removeItem('userInfo'); //remove user info from local storage
     localStorage.removeItem('shippingAddress');
     localStorage.removeItem('paymentMethod');
+    //    window.location.href = '/signin';
   };
 
   return (
