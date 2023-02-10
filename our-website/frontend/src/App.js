@@ -19,7 +19,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { ToastContainer } from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
-import SignupScreen from './screens/SigniupScreen';
+import SignupScreen from './screens/SignupScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
@@ -29,8 +29,7 @@ import { getError } from './utils';
 import axios from 'axios';
 import { Toast } from 'react-bootstrap';
 import SearchBox from './components/SearchBox';
-
-
+import SearchScreen from './screens/SearchScreen';
 
 export default function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -45,7 +44,7 @@ export default function App() {
   };
 
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [categories , setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -61,23 +60,30 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className={sidebarIsOpen 
-        ? "d-flex flex-column site-container active-cont" 
-        : "d-flex flex-column site-container"}>
+      <div
+        className={
+          sidebarIsOpen
+            ? 'd-flex flex-column site-container active-cont'
+            : 'd-flex flex-column site-container'
+        }
+      >
         <ToastContainer position="bottom-center" limit={1} />
         <header>
           <Navbar bg="dark" variant="dark" expand="lg">
             <Container>
-            <Button variant="dark" onClick={()=>setSidebarIsOpen (!sidebarIsOpen)}>
-            <i className="fas fa-bars"></i>
-            </Button>
+              <Button
+                variant="dark"
+                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+              >
+                <i className="fas fa-bars"></i>
+              </Button>
               <LinkContainer to="/">
                 <Navbar.Brand>amazon</Navbar.Brand>
               </LinkContainer>
 
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-              <SearchBox/>
+                <SearchBox />
                 <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
                     Cart
@@ -115,13 +121,13 @@ export default function App() {
           </Navbar>
         </header>
         <div
-        className={
-          sidebarIsOpen
-            ? 'active-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
-            : 'side-navbar d-flex justify-content-between flex-wrap flex-column'
-        }
-      >
-      <Nav className="flex-column text-white w-100 p-2">
+          className={
+            sidebarIsOpen
+              ? 'active-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
+              : 'side-navbar d-flex justify-content-between flex-wrap flex-column'
+          }
+        >
+          <Nav className="flex-column text-white w-100 p-2">
             <Nav.Item>
               <strong>Categories</strong>
             </Nav.Item>
@@ -136,12 +142,13 @@ export default function App() {
               </Nav.Item>
             ))}
           </Nav>
-      </div>
+        </div>
         <main>
           <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
+              <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />

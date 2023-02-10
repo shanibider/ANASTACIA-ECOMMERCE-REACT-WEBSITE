@@ -4,11 +4,10 @@ export const Store = createContext();
 
 const initialState = {
   //inital value for user info we need to check the local storage
-  userInfo: {
-    userInfo: localStorage.getItem('userInfo') //check the local storage for userInfo
-      ? JSON.parse(localStorage.getItem('userInfo')) //if it does exist use JSON.parse to convert userInfo string to a javascript object
-      : null, //if it doesn't exist set it to null
-  },
+  userInfo: localStorage.getItem('userInfo') //check the local storage for userInfo
+    ? JSON.parse(localStorage.getItem('userInfo')) //if it does exist use JSON.parse to convert userInfo string to a javascript object
+    : null, //if it doesn't exist set it to null
+
   cart: {
     shippingAddress: localStorage.getItem('shippingAddress')
       ? JSON.parse(localStorage.getItem('shippingAddress'))

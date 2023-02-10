@@ -13,10 +13,6 @@ import Button from 'react-bootstrap/Button';
 import Product from '../components/Product';
 import LinkContainer from 'react-router-bootstrap/LinkContainer';
 
-/*reducer defination*/
-//if 'FETCH_REQUEST'- loading is true,
-//if 'FETCH_SUCCESS'- fill products from backend,current page, number of pages, number of all products,  and loading is false
-//if there is an error- show the error, fill the error with action.payload, and set loadong to false
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -32,7 +28,7 @@ const reducer = (state, action) => {
       };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
-    //as a default return thr current state
+
     default:
       return state;
   }
@@ -78,16 +74,14 @@ export const ratings = [
 export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-
-  const sp = new URLSearchParams(search); // /if the url is like this: search?category=Shirts
-  const category = sp.get('category') || 'all'; //this function will return: Shirts
+  const sp = new URLSearchParams(search); // /search?category=Shirts
+  const category = sp.get('category') || 'all';
   const query = sp.get('query') || 'all';
   const price = sp.get('price') || 'all';
   const rating = sp.get('rating') || 'all';
   const order = sp.get('order') || 'newest';
   const page = sp.get('page') || 1;
 
-  //we get { loading, error, products, pages, countProducts } from the reducer
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
       loading: true,
@@ -95,15 +89,11 @@ export default function SearchScreen() {
     });
 
   useEffect(() => {
-    /*fetchData() defenitaion*/
     const fetchData = async () => {
       try {
-        //sending ajax request to this api '/api/products/search'
-        //we also pass the page number, query string, category, price, rating and order as a parameter
         const { data } = await axios.get(
           `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
         );
-        //after getting data dispatch 'FETCH_SUCCESS'. The payload is the data
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({
@@ -112,15 +102,10 @@ export default function SearchScreen() {
         });
       }
     };
-    //calling fetchData()
     fetchData();
-  }, [category, error, order, page, price, query, rating]); //dependencies (all variables that we use in the quary string)
-  //if we change any of this variables, this function runs again (the try part), and fetchData() will apply the filter
+  }, [category, error, order, page, price, query, rating]);
 
-  /*define categories*/
   const [categories, setCategories] = useState([]);
-
-  //define useEffect to fetch categories and set them in the category variable
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -133,9 +118,6 @@ export default function SearchScreen() {
     fetchCategories();
   }, [dispatch]);
 
-  /*define getFilterUrl function*/
-  //we use it when we change the filter
-  //for example- if we change the page we check the 'filter.page', if its exist- use it, otherwise- use the page we define in the reducer
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
@@ -143,10 +125,8 @@ export default function SearchScreen() {
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    //it will return the filter url
     return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
-
   return (
     <div>
       <Helmet>
@@ -154,15 +134,10 @@ export default function SearchScreen() {
       </Helmet>
       <Row>
         <Col md={3}>
-          {/*Department implemantion*/}
           <h3>Department</h3>
           <div>
             <ul>
               <li>
-                {/*when we click on this link we call- getFiletUrl and change the category to 'all'
-                   like this- `/search?category=${all}...
-                   and returns all products from backend in all categories
-              */}
                 <Link
                   className={'all' === category ? 'text-bold' : ''}
                   to={getFilterUrl({ category: 'all' })}
@@ -170,11 +145,6 @@ export default function SearchScreen() {
                   Any
                 </Link>
               </li>
-              {/*rendering all categories-
-              set key to category name (c), if current category equal to selected category- make it bold, otherwise set the class to empty.
-              when user click on it he will be redirected to getFilterUrl function, 
-              and render the name of the link to the category (meaning of this:  {c})
-              */}
               {categories.map((c) => (
                 <li key={c}>
                   <Link
@@ -188,13 +158,9 @@ export default function SearchScreen() {
             </ul>
           </div>
           <div>
-            {/*Price implemantion*/}
             <h3>Price</h3>
             <ul>
               <li>
-                {/*this <li> 
-              
-              is to remove the price range filter and show all products price*/}
                 <Link
                   className={'all' === price ? 'text-bold' : ''}
                   to={getFilterUrl({ price: 'all' })}
