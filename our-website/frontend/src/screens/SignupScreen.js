@@ -18,13 +18,13 @@ export default function SignupScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
+  //every screen
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
 
   const submitHandler = async (e) => {
     e.preventDefault(); //prevent refreshing the page when user click on sign in button
-    //send ajax request backend
+    //send ajax request backend 
     if (password !== confirmPassword) {
       toast.error('Passwords are not match');
       return;
@@ -43,7 +43,7 @@ export default function SignupScreen() {
       toast.error(getError(err));
     }
   };
-
+  
   useEffect(() => {
     if (userInfo) {
       navigate(redirect);
