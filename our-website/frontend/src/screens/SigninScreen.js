@@ -5,7 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Axios from 'axios';
 import { Store } from '../Store';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { getError } from '../utils';
 
 export default function SigninScreen() {
@@ -70,7 +71,7 @@ export default function SigninScreen() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="mb-3">
-          <Button type="submit">Sign In</Button>
+          <Button type="submit" className="sign-in-button">Sign In</Button>
         </div>
         <div className="mb-3">
           New customer? {''}
