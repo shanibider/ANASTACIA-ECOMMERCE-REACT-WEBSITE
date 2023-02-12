@@ -1,23 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Button, Container, Form, Toast } from 'react-bootstrap';
-import { Helmet } from 'react-helmet-async';
-import { Link, useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import Axios from 'axios';
-import { Store } from '../Store';
-import { toast } from 'react-toastify';
-import { getError } from '../utils';
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Container, Form, Toast } from "react-bootstrap";
+import { Helmet } from "react-helmet-async";
+import { Link, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import Axios from "axios";
+import { Store } from "../Store";
+import { toast } from "react-toastify";
+import { getError } from "../utils";
 
 export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
+  const redirectInUrl = new URLSearchParams(search).get("redirect");
+  const redirect = redirectInUrl ? redirectInUrl : "/";
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   //for userInfo-
   //we bring it from useContext, and extract state from it
@@ -29,20 +29,20 @@ export default function SignupScreen() {
     e.preventDefault(); //prevent refreshing the page when user click on sign in button
     //send ajax request backend
     if (password !== confirmPassword) {
-      toast.error('Passwords are not match');
+      toast.error("Passwords are not match");
       return;
     }
     try {
       //send ajax request using axios to this url: '/api/users/signup'
-      const { data } = await Axios.post('/api/users/signup', {
+      const { data } = await Axios.post("/api/users/signup", {
         name,
         email,
         password,
       });
       //save user info in local storage
-      ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-      localStorage.setItem('userInfo', JSON.stringify(data));
-      navigate(redirect || '/');
+      ctxDispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      navigate(redirect || "/");
     } catch (err) {
       toast.error(getError(err));
     }
@@ -109,7 +109,7 @@ export default function SignupScreen() {
           <Button type="submit">Sign Up</Button>
         </div>
         <div className="mb-3">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
         </div>
       </Form>
