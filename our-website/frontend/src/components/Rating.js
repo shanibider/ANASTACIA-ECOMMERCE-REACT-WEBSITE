@@ -59,6 +59,7 @@ function Rating(props) {
         />
       </span>
       <span> {numReviews} reviews</span>
+      {/*if caption exist set it to caption, otherwise make it like before*/}
       {caption ? (
         <span>{caption}</span>
       ) : (

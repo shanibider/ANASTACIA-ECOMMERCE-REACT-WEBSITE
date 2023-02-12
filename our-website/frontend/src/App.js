@@ -16,7 +16,6 @@ import Nav from 'react-bootstrap/Nav';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { ToastContainer } from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -30,6 +29,7 @@ import axios from 'axios';
 import { Toast } from 'react-bootstrap';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -134,7 +134,10 @@ export default function App() {
             {categories.map((category) => (
               <Nav.Item key={category}>
                 <LinkContainer
-                  to={{ pathname: '/search', search: `category=${category}` }}
+                  to={{
+                    pathname: '/search',
+                    search: `?category=${category}`,
+                  }}
                   onClick={() => setSidebarIsOpen(false)}
                 >
                   <Nav.Link>{category}</Nav.Link>
@@ -175,3 +178,21 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+/*  <LinkContainer
+                  to={{ pathname: '/search', search: `category=${category}` }}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  <Nav.Link>{category}</Nav.Link>
+                </LinkContainer>
+
+change to:
+           <LinkContainer
+                  to={{
+                    pathname: "/search", search: `?category=${category}`,
+                  }}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  <Nav.Link>{category}</Nav.Link>
+              </LinkContainer>
+*/

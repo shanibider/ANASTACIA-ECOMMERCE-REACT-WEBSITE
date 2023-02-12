@@ -13,6 +13,8 @@ import Button from 'react-bootstrap/Button';
 import Product from '../components/Product';
 import LinkContainer from 'react-router-bootstrap/LinkContainer';
 
+/*reducer function defination*/
+
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -74,20 +76,24 @@ export const ratings = [
 export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
+
   const sp = new URLSearchParams(search); // /search?category=Shirts
-  const category = sp.get('category') || 'all';
+
+  const category = sp.get('category') || 'all'; //this function will return "Shirts"
   const query = sp.get('query') || 'all';
   const price = sp.get('price') || 'all';
   const rating = sp.get('rating') || 'all';
   const order = sp.get('order') || 'newest';
   const page = sp.get('page') || 1;
 
+  /*reducer*/
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
       loading: true,
       error: '',
     });
 
+  //sending ajax request to this api (/api/products/search)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -103,8 +109,10 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query, rating]);
+  }, [category, error, order, page, price, query, rating]); //dependecy array (include all variables used in quary string)
+  //if you change any of this variables this function runs again and frtchData() will aplly the filter
 
+  //we use useEffect to fetch categories and set them in the categories variable
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchCategories = async () => {
@@ -144,6 +152,12 @@ export default function SearchScreen() {
                 >
                   Any
                 </Link>
+                {/*rendering all categories
+                setting key to category name
+                if current category eqal to selected category make it bold otherwise set the class to empty
+                when user click on it he will redirect to getFilterUrl function
+                and render the name of the link to the category ({c})
+                 */}
               </li>
               {categories.map((c) => (
                 <li key={c}>
@@ -193,6 +207,8 @@ export default function SearchScreen() {
                   </Link>
                 </li>
               ))}
+              {/*setting the rating to zero
+              it remove the rating filter*/}
               <li>
                 <Link
                   to={getFilterUrl({ rating: 'all' })}
@@ -264,7 +280,10 @@ export default function SearchScreen() {
                   <LinkContainer
                     key={x + 1}
                     className="mx-1"
-                    to={getFilterUrl({ page: x + 1 })}
+                    to={{
+                      pathname: '/search',
+                      search: getFilterUrl({ page: x + 1 }).substring(7),
+                    }}
                   >
                     <Button
                       className={Number(page) === x + 1 ? 'text-bold' : ''}
