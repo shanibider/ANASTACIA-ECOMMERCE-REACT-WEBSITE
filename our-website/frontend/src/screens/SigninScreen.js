@@ -66,7 +66,7 @@ export default function SigninScreen() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="mb-3">
-          <Button type="submit">Sign In</Button>
+          <Button type="submit" className="sign-in-button">Sign In</Button>
         </div>
         <div className="mb-3">
           New customer? {''}

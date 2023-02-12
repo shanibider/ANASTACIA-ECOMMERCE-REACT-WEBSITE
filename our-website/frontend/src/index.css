@@ -9,6 +9,10 @@ body {
 .site-container {
   min-height: 100vh;
 }
+.sign-in-button {
+  margin-top: 10px;
+}
+
 main {
   flex: 1;
 }
