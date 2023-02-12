@@ -15,6 +15,9 @@ import { useNavigate } from 'react-router-dom';
 export default function CartScreen() {
   const navigate = useNavigate();
 
+  //for cartItems-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract cartItems
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },

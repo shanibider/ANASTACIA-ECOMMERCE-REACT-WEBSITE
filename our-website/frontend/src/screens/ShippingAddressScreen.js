@@ -21,6 +21,9 @@ export default function ShippingAddressScreen() {
   const [postalCode, setPostalCode] = useState(
     shippingAddress.postalCode || ''
   );
+
+  //useEffect for send an ajax request to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     if (!userInfo) {
       navigate('/signin?redirect=/shipping');

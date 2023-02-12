@@ -22,13 +22,20 @@ const reducer = (state, action) => {
 };
 
 export default function ProfileScreen() {
+  //for userInfo-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract userInfo
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+
   const [name, setName] = useState(userInfo.name);
   const [email, setEmail] = useState(userInfo.email);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  //define a reducer to fetch data from backend
+  //we deconstruct from state from this reducer is { loadingUpdate },
+  //also get dispatch to call this cases and update the state of the reducer
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
   });

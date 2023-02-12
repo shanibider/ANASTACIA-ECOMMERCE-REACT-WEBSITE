@@ -33,13 +33,15 @@ const reducer = (state, action) => {
 export default function PlaceOrderScreen() {
   const navigate = useNavigate();
 
-  //from useReducer we get data (loading state) and dispatch function
+  //from useReducer we get data (loading state), and dispatch function
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
 
-  //we use useContext to get userInfo from Store.js
-  //rename this dispatch to ctxDispatch
+  //for userInfo-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract userInfo
+  //(rename this dispatch to ctxDispatch)
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
 
@@ -89,6 +91,7 @@ export default function PlaceOrderScreen() {
       navigate('/payment');
     }
   }, [cart, navigate]); //dependency array
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>

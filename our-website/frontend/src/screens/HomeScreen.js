@@ -24,6 +24,9 @@ const reducer = (state, action) => {
 };
 
 export default function HomeScreen() {
+  //define a reducer to fetch data from backend
+  //we deconstruct from state from this reducer is { loading, error, product },
+  //also get dispatch to call this cases and update the state of the reducer
   const [{ loading, error, product }, dispatch] = useReducer(logger(reducer), {
     product: [],
     loading: true,
@@ -32,6 +35,8 @@ export default function HomeScreen() {
 
   //const [products, setProducts] = useState([]);
 
+  //useEffect for send an ajax request to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     const fetchData = async () => {
       //ajax request. result is the response from the server (equal to data.products)

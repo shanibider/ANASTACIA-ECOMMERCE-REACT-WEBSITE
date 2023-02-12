@@ -85,6 +85,7 @@ export default function App() {
                 <Navbar.Brand>amazon</Navbar.Brand>
               </LinkContainer>
 
+              {/*header menu*/}
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
@@ -120,6 +121,7 @@ export default function App() {
                     </Link>
                   )}
                   {/*****ADMIN*****/}
+                  {/*if userInfo exist and userInfo.isAdmin is true -> we render a navDropDown*/}
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
                       <LinkContainer to="/admin/dashboard">
@@ -176,6 +178,7 @@ export default function App() {
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
+              {/*we use ProtectedRoute for routes that need authentication*/}
               <Route
                 path="/profile"
                 element={
@@ -192,7 +195,7 @@ export default function App() {
                     <OrderScreen />
                   </ProtectedRoute>
                 }
-              ></Route>{' '}
+              ></Route>
               <Route
                 path="/orderhistory"
                 element={

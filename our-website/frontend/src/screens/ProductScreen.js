@@ -35,6 +35,9 @@ function ProductScreen() {
     loading: true,
     error: '',
   });
+
+  //useEffect for send an ajax request to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
@@ -48,6 +51,9 @@ function ProductScreen() {
     fetchData();
   }, [slug]);
 
+  //for cart-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract cart
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state; //diconstructing
 

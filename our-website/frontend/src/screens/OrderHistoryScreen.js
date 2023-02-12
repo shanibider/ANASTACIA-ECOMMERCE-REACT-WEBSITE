@@ -22,14 +22,23 @@ const reducer = (state, action) => {
 };
 
 export default function OrderHistoryScreen() {
+  //for userInfo-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract userInfo
   const { state } = useContext(Store);
   const { userInfo } = state;
   const navigate = useNavigate();
 
+  //define a reducer to fetch data from backend
+  //we deconstruct from state from this reducer is { loading, error, orders },
+  //also get dispatch to call this cases and update the state of the reducer
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',
   });
+
+  //useEffect for send an ajax request to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });

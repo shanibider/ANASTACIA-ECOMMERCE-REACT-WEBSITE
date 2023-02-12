@@ -87,13 +87,17 @@ export default function SearchScreen() {
   const page = sp.get('page') || 1;
 
   /*reducer*/
+  //define a reducer to fetch data from backend
+  //we deconstruct from state from this reducer- { loading, error, products, pages, countProducts },
+  //also get dispatch to call this cases and update the state of the reducer
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
       loading: true,
       error: '',
     });
 
-  //sending ajax request to this api (/api/products/search)
+  //useEffect for send an ajax request to this api (/api/products/search) to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     const fetchData = async () => {
       try {

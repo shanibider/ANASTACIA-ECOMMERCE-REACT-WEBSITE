@@ -36,9 +36,10 @@ function reducer(state, action) {
   }
 }
 export default function OrderScreen() {
-  //we use useContext to get userInfo from Store.js
+  //for userInfo-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract userInfo
   const { state } = useContext(Store);
-  //userInfo comes from state
   const { userInfo } = state;
 
   //useParams to get the id from url. and we need orderId to get the order information from backend, and use it in useEffect
@@ -47,6 +48,9 @@ export default function OrderScreen() {
   const navigate = useNavigate();
 
   /******reducer declaration*****/
+  //define a reducer to fetch data from backend
+  //we deconstruct from state from this reducer is { loading, error, order, successPay, loadingPay},
+  //also get dispatch to call this cases and update the state of the reducer
   const [{ loading, error, order, successPay, loadingPay }, dispatch] =
     useReducer(reducer, {
       loading: true,
@@ -107,7 +111,8 @@ export default function OrderScreen() {
     toast.error(getError(err));
   }
 
-  /*****useEffect to get the information from backend*****/
+  //useEffect for send an ajax request to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     /*fetchOrder function*/
     const fetchOrder = async () => {

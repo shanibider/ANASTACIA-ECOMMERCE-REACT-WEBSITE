@@ -8,6 +8,9 @@ import { Store } from '../Store';
 
 export default function PaymentMethodScreen() {
   const navigate = useNavigate();
+  //for shippingAddress & paymentMethod-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract shippingAddress & paymentMethod
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { shippingAddress, paymentMethod },
@@ -17,6 +20,8 @@ export default function PaymentMethodScreen() {
     paymentMethod || 'PayPal'
   );
 
+  //useEffect for send an ajax request to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     if (!shippingAddress.address) {
       navigate('/shipping');

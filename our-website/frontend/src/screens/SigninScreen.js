@@ -17,6 +17,9 @@ export default function SigninScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  //for userInfo-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract userInfo
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
 
@@ -37,6 +40,8 @@ export default function SigninScreen() {
     }
   };
 
+  //useEffect for send an ajax request to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     if (userInfo) {
       navigate(redirect);

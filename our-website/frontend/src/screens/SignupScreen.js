@@ -19,6 +19,9 @@ export default function SignupScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  //for userInfo-
+  //we bring it from useContext, and extract state from it
+  //than from state we extract userInfo
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
 
@@ -30,6 +33,7 @@ export default function SignupScreen() {
       return;
     }
     try {
+      //send ajax request using axios to this url: '/api/users/signup'
       const { data } = await Axios.post('/api/users/signup', {
         name,
         email,
@@ -44,6 +48,8 @@ export default function SignupScreen() {
     }
   };
 
+  //useEffect for send an ajax request to get the dashboard data
+  //try and catch beacuse we have to catch any error on ajax requests to backend
   useEffect(() => {
     if (userInfo) {
       navigate(redirect);
