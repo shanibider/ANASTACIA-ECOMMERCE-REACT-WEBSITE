@@ -40,16 +40,27 @@ orderRouter.get(
   '/summary',
   isAuth,
   isAdmin,
+  //implement this api
   expressAsyncHandler(async (req, res) => {
+    /*using aggregate function on the 'orderModel' to get the total price and number of orders.
+    aggregation is operation (in mongoose) that process multiple documents and return computed (calculate) results.
+    aggregate accept array, inside we define objects, and each object is a pipeline
+    and for this pipline we use group-
+    group all data (without id) and calculate some of all items
+    $sum:1 => means: it counts number of elements/documents in the Order collection and set it to numOrders
+    */
     const orders = await Order.aggregate([
       {
         $group: {
           _id: null,
           numOrders: { $sum: 1 },
-          totalSales: { $sum: '$totalPrice' },
+          totalSales: { $sum: '$totalPrice' }, //to pass a field we use $ sign
+          //it calculate sum of total price field in the orderModel
         },
       },
     ]);
+
+    //for users- we calculate the number of users in the user collection
     const users = await User.aggregate([
       {
         $group: {
@@ -76,6 +87,8 @@ orderRouter.get(
         },
       },
     ]);
+
+    //send {users, orders, dailyOrders, productCategories} to frontend
     res.send({ users, orders, dailyOrders, productCategories });
   })
 );

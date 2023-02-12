@@ -116,6 +116,12 @@ export default function DashboardScreen() {
               </Card>
             </Col>
           </Row>
+          {/*This is out chart-
+          first element- array
+          second element- data (summry.dailyOrders) and map each dailyOrder to this array- [x._id, x.sales]
+          
+          
+          */}
           <div className="my-3">
             <h2>Sales</h2>
             {summary.dailyOrders.length === 0 ? (

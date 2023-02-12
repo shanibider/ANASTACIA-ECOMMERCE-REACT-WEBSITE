@@ -43,9 +43,14 @@ export const isAuth = (req, res, next) => {
 
 //here we check req.user (because it come after isAuth, and there req.user filled by userInfo(decode))
 export const isAdmin = (req, res, next) => {
+  /*if req.user exist and isAdmin is true- go to the next middleware 
+  /it means everything is ok, and continue the api
+  */
   if (req.user && req.user.isAdmin) {
     next();
   } else {
+    //it means that this token is only for regular user costumers, not for admin
+
     res.status(401).send({ message: 'Invalid Admin Token' });
   }
 };
