@@ -64,8 +64,13 @@ export default function SignupScreen() {
       <h1 className="my-3">Sign Up</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className="mb-3" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control onChange={(e) => setName(e.target.value)} required />
+          <Form.Label>Firstname and Lastname</Form.Label>
+          <Form.Control
+            onChange={(e) => setName(e.target.value)}
+            pattern="[A-Za-z]+ [A-Za-z]+"
+            title="Enter first and last name"
+            required
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="email">
@@ -73,15 +78,23 @@ export default function SignupScreen() {
           <Form.Control
             type="email"
             required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{1,}$"
+            title=" Please enter a valid email address"
             onChange={(e) => setEmail(e.target.value)}
           />
+          <Form.Control.Feedback type="invalid">
+            Please enter a valid email address
+          </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group className="mb-3" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             required
             onChange={(e) => setPassword(e.target.value)}
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+            title="Password must contain at least 6 characters, including at least one upper case letter, one lower case letter, and one number"
           />
           <Form.Group className="mb-3" controlId="confirmPassword">
             <Form.Label>Confirm Password</Form.Label>
