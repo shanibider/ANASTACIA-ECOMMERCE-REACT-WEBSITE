@@ -3,6 +3,9 @@ import bcrypt from 'bcryptjs';
 import expressAsyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import { isAuth, generateToken } from '../utils.js';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, db } from '../firebase.js';
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 
 const userRouter = express.Router();
 
@@ -33,6 +36,26 @@ userRouter.post(
 userRouter.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
+
+      createUserWithEmailAndPassword(auth, req.body.email, req.body.password).then(
+        async (result) => {
+          try {
+            const FullName = req.body.name;
+            const docRef = await addDoc(collection(db, "users"),{
+              FullName,
+              userId: `${result.user.uid}`,
+              is_admin: false
+            });
+            console.log("Document written with ID: ", docRef.id);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+          }
+        }
+      ).catch(err => {
+        // already exist?
+      })
+    
+
     const newUser = new User({
       name: req.body.name,
       email: req.body.email,

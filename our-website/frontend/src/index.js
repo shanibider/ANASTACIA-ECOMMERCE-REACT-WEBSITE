@@ -10,7 +10,7 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <StoreProvider>
       <HelmetProvider>
         {/*deferLoading=true because we dont loading paypal in the begining of the application*/}
@@ -19,7 +19,7 @@ root.render(
         </PayPalScriptProvider>
       </HelmetProvider>
     </StoreProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
