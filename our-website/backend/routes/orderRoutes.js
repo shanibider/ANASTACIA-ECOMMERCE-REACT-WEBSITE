@@ -4,6 +4,9 @@ import Order from '../models/orderModel.js';
 import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
 import { isAuth, isAdmin } from '../utils.js';
+import { db } from '../firebase.js';
+import { collection, query, getCountFromServer} from 'firebase/firestore';
+
 //api for post
 //expressAsyncHandler to catch all errors
 const orderRouter = express.Router();
@@ -72,15 +75,12 @@ orderRouter.get(
       },
     ]);
 
-    //for users- we calculate the number of users in the user collection
-    const users = await User.aggregate([
-      {
-        $group: {
-          _id: null,
-          numUsers: { $sum: 1 },
-        },
-      },
-    ]);
+    const usersRef = collection(db, 'users');
+    const q = query(usersRef);
+
+    const querySnapshot = await getCountFromServer(q);
+    const users = [{numUsers:querySnapshot.data().count}];
+
     const dailyOrders = await Order.aggregate([
       {
         $group: {
