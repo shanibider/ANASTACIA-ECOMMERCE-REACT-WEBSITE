@@ -184,8 +184,8 @@ export default function ProductListScreen() {
               <option value="all">All</option>
             </select>
           </div>
-          <table className="table table-striped table-hover">
-            <thead className="thead-dark">
+          <table className="table table-striped">
+            <thead className="thead-products">
               <tr>
                 <th></th>
                 <th></th>
@@ -216,7 +216,7 @@ export default function ProductListScreen() {
                   <td>
                     <button
                       type="button"
-                      className="btn btn-secondary"
+                      className="btn-edit"
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
                       Edit
@@ -224,7 +224,7 @@ export default function ProductListScreen() {
                     &nbsp;
                     <button
                       type="button"
-                      className="btn btn-danger"
+                      className="btn-delete"
                       onClick={() => deleteHandler(product)}
                     >
                       Delete

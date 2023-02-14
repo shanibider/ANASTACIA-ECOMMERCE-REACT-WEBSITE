@@ -58,8 +58,8 @@ main {
 }
 
 .checkout-steps > div.active {
-  border-bottom: 0.2rem solid #ffaad2;
-  color: #ffaad2;
+  border-bottom: 0.2rem solid #f6e8ea;
+  color: #f6e8ea;
 }
 
 /* sidebar */
@@ -88,8 +88,26 @@ main {
   font-weight: bold;
 }
 /***/
-.btn,
-.btn-secondary {
-  background-color: #8d99ae;
-  color: #2b2d42;
+.btn-edit {
+  background-color: #f6e8ea;
+  color: #23181a;
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+}
+.btn-delete {
+  background-color: #ef626c;
+  color: #23181a;
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+}
+.thead-products {
+  background-color: #84dccf;
+  color: #23181a;
+}
+.table {
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
