@@ -8,6 +8,17 @@ import { isAuth, isAdmin } from '../utils.js';
 //expressAsyncHandler to catch all errors
 const orderRouter = express.Router();
 
+//list all orders
+orderRouter.get(
+  '/',
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const orders = await Order.find().populate('user', 'name');
+    res.send(orders);
+  })
+);
+
 //create order
 orderRouter.post(
   '/',

@@ -1,4 +1,15 @@
 import mongoose from 'mongoose';
+//review orders schema
+const reviewSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    comment: { type: String, required: true },
+    rating: { type: Number, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 //mongoose schema accepts 2 parameters- fields and options
 const productSchema = new mongoose.Schema(
@@ -13,6 +24,7 @@ const productSchema = new mongoose.Schema(
     countInStock: { type: Number, required: true },
     rating: { type: Number, required: true },
     numReviews: { type: Number, required: true },
+    reviews: [reviewSchema],
   },
   {
     timestamps: true,

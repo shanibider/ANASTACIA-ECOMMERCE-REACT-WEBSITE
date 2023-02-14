@@ -2,15 +2,12 @@ import express from 'express';
 import data from '../data.js';
 import Product from '../models/productModel.js';
 import User from '../models/userModel.js';
-//packages:
-/*
+
+//scrapping imports
 import axios from 'axios';
 import cheerio from 'cheerio';
-//important to install csv-writer
 import { createObjectCsvWriter as createCsvWriter } from 'csv-writer';
 import fs from 'fs';
-import { sync as parse } from 'csv-parse/lib/sync';
-*/
 
 //save data.js in mongoose
 const seedRouter = express.Router();
@@ -25,13 +22,13 @@ seedRouter.get('/', async (req, res) => {
 
 export default seedRouter;
 
-/*********************************************/
-
+/*************************************************/
 /*
+SCRAPPING (GOOD CODE!)
+WORKING GOOD + create csv file
 async function scrape() {
   const result = await axios.get('https://books.toscrape.com/');
   const $ = cheerio.load(result.data);
-
   //const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
   const bookList = $('.product_pod');
@@ -51,6 +48,7 @@ async function scrape() {
 
   console.log(books);
 
+  //create csv file
   const csvWriter = createCsvWriter({
     path: 'books.csv',
     header: ['title', 'rating', 'price', 'availability'],
@@ -60,11 +58,24 @@ async function scrape() {
     .writeRecords(books)
     .then(() => console.log('The CSV file was written successfully'));
 }
-
 scrape();
+*/
 
-/*******/
+/*************************************************/
 /*
+scraping trying-
+
+//to CHATGPT-
+  web scrape https://books.toscrape.com/ using javaScript and BeautifulSoup
+  export the data to CSV file
+  //packages: npm i axios cheerio json2csv
+  important to install csv-writer
+//import fs from 'fs';
+//import { sync as parse } from 'csv-parse/lib/sync';
+*/
+
+/*
+//CONVERT TO JASON (not working)
 //const fs = require('fs');
 //const parse = require('csv-parse/lib/sync');
 
@@ -77,44 +88,9 @@ const records = parse(csvFile, {
 const jsonFile = JSON.stringify(records, null, 2);
 fs.writeFileSync('books.json', jsonFile);
 */
-/*************************************************/
 
 /*
-SCRAPE FROM BOOK WEBSITE
-/*
-FROM CHATGPT-
-  web scrape https://books.toscrape.com/ using javaScript and BeautifulSoup
-  export the data to CSV file
-//const axios = require('axios');
-//const cheerio = require('cheerio');
-
-async function scrape() {
-  const result = await axios.get('https://books.toscrape.com/');
-  const $ = cheerio.load(result.data);
-
-  const bookList = $('.product_pod');
-
-  const books = [];
-  bookList.each((index, element) => {
-    books.push({
-      title: $(element).find('.product_pod h3 a').attr('title'),
-      rating: $(element)
-        .find('.product_pod p.star-rating')
-        .attr('class')
-        .split(' ')[1],
-      price: $(element).find('.product_pod .price_color').text().trim(),
-      availability: $(element).find('.product_pod .availability').text().trim(),
-    });
-  });
-
-  console.log(books);
-}
-
-scrape();
-*/
-
-/*
-//Scrapping data from zara.com
+//Scrapping from zara.com
 seedRouter.get('/', async (req, res) => {
   await User.remove({});
   const createdUsers = await User.insertMany(data.users);
@@ -159,26 +135,4 @@ seedRouter.get('/', async (req, res) => {
   });
 });
 */
-
-/*
-async function scrape() {
-  const url = 'http://books.toscrape.com/';
-  const response = await axios.get(url);
-  const html = response.data;
-  const $ = cheerio.load(html);
-
-  const books = [];
-
-  $('.product_pod').each((i, el) => {
-    const title = $(el).find('h3 > a').attr('title');
-    const rating = $(el).find('.star-rating').attr('class').split(' ')[1];
-    const price = $(el).find('.price_color').text();
-    const availability = $(el).find('.availability').text().trim();
-
-    books.push({ title, rating, price, availability });
-  });
-
-  console.log(books);
-}
-
-scrape();*/
+/*************************************************/
