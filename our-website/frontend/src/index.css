@@ -22,6 +22,11 @@ main {
   color: #2b2d42;
 }
 
+
+.navbar-custom {
+  background-color: #84dccf;
+}
+
 .products {
   display: flex;
   flex-wrap: wrap;
