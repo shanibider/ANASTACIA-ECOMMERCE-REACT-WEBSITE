@@ -30,6 +30,7 @@ export default function ProfileScreen() {
 
   const [name, setName] = useState(userInfo.name);
   const [email, setEmail] = useState(userInfo.email);
+  const [oldPassword] = useState(userInfo.password);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -49,6 +50,7 @@ export default function ProfileScreen() {
           name,
           email,
           password,
+          oldPassword
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
