@@ -18,13 +18,12 @@ main {
 }
 .btn-primary,
 .btn-outline-primary {
-  background-color: #8d99ae;
-  color: #2b2d42;
+  background-color: #f6e8ea;
+  color: #457b9d;
 }
 
-
 .navbar-custom {
-  background-color: #84dccf;
+  background-color: #14213d;
 }
 
 .products {
@@ -33,7 +32,7 @@ main {
   justify-content: center;
 }
 .rating span {
-  color: #2b2d42;
+  color: #457b9d;
 }
 
 .product {
@@ -76,7 +75,7 @@ main {
   height: 100%;
   position: absolute;
   left: -300px;
-  background-color: #84dccf;
+  background-color: #000000;
   transition: 0.5s;
 }
 
@@ -92,27 +91,34 @@ main {
 .text-bold {
   font-weight: bold;
 }
-/***/
+/*Product List Screen*/
 .btn-edit {
-  background-color: #f6e8ea;
+  background-color: #e5e5e5;
   color: #23181a;
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   border: none;
 }
 .btn-delete {
-  background-color: #ef626c;
+  background-color: #fca311;
   color: #23181a;
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   border: none;
 }
 .thead-products {
-  background-color: #84dccf;
-  color: #23181a;
+  background-color: #14213d;
+  color: #f1faee;
 }
 .table {
   margin-top: 1rem;
   border-radius: 0.25rem;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 20px #f1faee(0, 0, 0, 0.15);
+}
+.btn-create-product {
+  background-color: #f1faee;
+  color: #23181a;
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
 }
