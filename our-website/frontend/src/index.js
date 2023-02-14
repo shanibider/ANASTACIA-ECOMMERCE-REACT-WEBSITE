@@ -11,14 +11,15 @@ import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <StoreProvider>
-      <HelmetProvider>
-        {/*deferLoading=true because we dont loading paypal in the begining of the application*/}
-        <PayPalScriptProvider deferLoading={true}>
-          <App />
-        </PayPalScriptProvider>
-      </HelmetProvider>
-    </StoreProvider>
+  <StoreProvider>
+    <HelmetProvider>
+      {/*PayPalScriptProvider is a component that we need to wrap our application with it*/}
+      {/*deferLoading=true because we dont loading paypal in the begining of the application*/}
+      <PayPalScriptProvider deferLoading={true}>
+        <App />
+      </PayPalScriptProvider>
+    </HelmetProvider>
+  </StoreProvider>
   // </React.StrictMode>
 );
 

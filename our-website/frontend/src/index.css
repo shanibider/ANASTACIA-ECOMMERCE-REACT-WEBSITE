@@ -18,8 +18,8 @@ main {
 }
 .btn-primary,
 .btn-outline-primary {
-  background-color: #22333b;
-  color: #000000;
+  background-color: #8d99ae;
+  color: #2b2d42;
 }
 
 .products {
@@ -28,11 +28,11 @@ main {
   justify-content: center;
 }
 .rating span {
-  color: #22333b;
+  color: #2b2d42;
 }
 
 .product {
-  border: 1px #a9927d solid;
+  border: 1px #edf2f4 solid;
   margin: 1rem;
 }
 .product img {
@@ -86,4 +86,10 @@ main {
 }
 .text-bold {
   font-weight: bold;
+}
+/***/
+.btn,
+.btn-secondary {
+  background-color: #8d99ae;
+  color: #2b2d42;
 }

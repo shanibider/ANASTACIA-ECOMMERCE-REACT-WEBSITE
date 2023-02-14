@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import {
   BrowserRouter,
   BrowserRouter as Router,
+  Form,
   Route,
   Routes,
 } from 'react-router-dom';
@@ -38,13 +39,13 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 
-
 import AboutUs from './screens/AboutUsScreen';
-import HowToScreen from "./screens/HowToScreen"
+import HowToScreen from './screens/HowToScreen';
 export default function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state; //diconsrtucture cart from state
 
+  //signout handler
   const signoutHandler = () => {
     ctxDispatch({ type: 'USER_SIGNOUT' }); //the type of actiob we going to dispatch
     localStorage.removeItem('userInfo'); //remove user info from local storage
@@ -89,22 +90,21 @@ export default function App() {
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>amazon</Navbar.Brand>
+                <Navbar.Brand>Anastacia</Navbar.Brand>
               </LinkContainer>
-              
+
               {/*header menu*/}
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
 
-             
                 <LinkContainer to="/about" className="nav-link">
-                <Navbar.Brand>About Us</Navbar.Brand>
-              </LinkContainer>
+                  <Navbar.Brand>About Us</Navbar.Brand>
+                </LinkContainer>
 
-              <LinkContainer to="/howto" className="nav-link" >
-              <Navbar.Brand>How To..</Navbar.Brand>
-              </LinkContainer>
+                <LinkContainer to="/howto" className="nav-link">
+                  <Navbar.Brand>How To..</Navbar.Brand>
+                </LinkContainer>
 
                 <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
@@ -115,6 +115,7 @@ export default function App() {
                       </Badge>
                     )}
                   </Link>
+                  {/*if userInfo exist -> we render a navDropDown*/}
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">

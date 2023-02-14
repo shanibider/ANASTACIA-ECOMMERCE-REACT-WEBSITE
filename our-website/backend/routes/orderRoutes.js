@@ -8,7 +8,7 @@ import { isAuth, isAdmin } from '../utils.js';
 //expressAsyncHandler to catch all errors
 const orderRouter = express.Router();
 
-//list all orders
+//For List of all orders (for Admin)
 orderRouter.get(
   '/',
   isAuth,
@@ -19,7 +19,7 @@ orderRouter.get(
   })
 );
 
-//create order
+//For Create order
 orderRouter.post(
   '/',
   //isAuth is a middleware to fill the user field in the request (implement in utils.js)
@@ -45,8 +45,9 @@ orderRouter.post(
   })
 );
 
-//here we implement "Dashboard" api-
+//For Dashboard screen
 //that is for authenticated and admin users
+//this is the request from frontend: const {data}=await axios.get('/api/orders/summary')
 orderRouter.get(
   '/summary',
   isAuth,
@@ -104,6 +105,7 @@ orderRouter.get(
   })
 );
 
+//For user to see his orders (order History screen)
 orderRouter.get(
   '/mine',
   isAuth,
@@ -113,6 +115,7 @@ orderRouter.get(
   })
 );
 
+//For Order Screen
 orderRouter.get(
   '/:id',
   //isAuth is a middleware to fill the user field in the request (implement in utils.js)
@@ -127,7 +130,7 @@ orderRouter.get(
   })
 );
 
-//from orderScreen (paypal payment)
+//For Order Screen (paypal payment)
 //in this body of this api we find the order, check if exist, set isPaid to true, set paidAt to current data time, and update payment result from the body of this request(req.body). finally save order
 orderRouter.put(
   '/:id/pay',

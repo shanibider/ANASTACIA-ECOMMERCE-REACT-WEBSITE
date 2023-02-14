@@ -54,6 +54,7 @@ const reducer = (state, action) => {
 };
 
 export default function ProductListScreen() {
+  //useReducer to manage state (with loading, error, products, pages, loadingCreate, loadingDelete, successDelete)
   const [
     {
       loading,
@@ -80,20 +81,23 @@ export default function ProductListScreen() {
   //useContext to get userInfo from state
   const { state } = useContext(Store);
   const { userInfo } = state;
-  
-  
+
   const [limit, setLimit] = useState('all');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products/admin?page=${page}&limit=${limit} `, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
+        const { data } = await axios.get(
+          `/api/products/admin?page=${page}&limit=${limit} `,
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
 
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {}
     };
+    //fetch data
     if (successDelete) {
       dispatch({ type: 'DELETE_RESET' });
     } else {
@@ -105,7 +109,7 @@ export default function ProductListScreen() {
     setLimit(e.target.value);
   };
 
-
+  //create product by Admin
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
       try {
@@ -129,6 +133,7 @@ export default function ProductListScreen() {
     }
   };
 
+  //delete product by Admin
   const deleteHandler = async (product) => {
     if (window.confirm('Are you sure to delete?')) {
       try {
@@ -147,7 +152,6 @@ export default function ProductListScreen() {
   };
 
   return (
-    
     <div>
       <Row>
         <Col>
@@ -171,64 +175,65 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-        <div>
-        <select value={limit} onChange={handleLimitChange}>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="all">All</option>
-        </select>
-      </div>
-      <table className="table table-striped table-hover">
-      <thead className="thead-dark">
-      <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th><button id="sort-button">Sort by Brand</button>
-      </th>
-      <th></th>
-    </tr>
-        <tr>
-          <th>ID</th>
-          <th>NAME</th>
-          <th>PRICE</th>
-          <th>CATEGORY</th>
-          <th>BRAND</th>
-          <th>ACTIONS</th>
-        </tr>
-      </thead>
-      <tbody>
-        {products.map((product) => (
-          <tr key={product._id}>
-            <td>{product._id.slice(-5)}</td>
-            <td>{product.name}</td>
-            <td>{product.price}</td>
-            <td>{product.category}</td>
-            <td>{product.brand}</td>
-            <td>
-              <button
-                type="button"
-                className="btn btn-warning"
-                onClick={() => navigate(`/admin/product/${product._id}`)}
-              >
-                Edit
-              </button>
-              &nbsp;
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => deleteHandler(product)}
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          <div>
+            <select value={limit} onChange={handleLimitChange}>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="all">All</option>
+            </select>
+          </div>
+          <table className="table table-striped table-hover">
+            <thead className="thead-dark">
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>
+                  <button id="sort-button">Sort by Brand</button>
+                </th>
+                <th></th>
+              </tr>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>CATEGORY</th>
+                <th>BRAND</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product._id.slice(-5)}</td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.category}</td>
+                  <td>{product.brand}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => navigate(`/admin/product/${product._id}`)}
+                    >
+                      Edit
+                    </button>
+                    &nbsp;
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => deleteHandler(product)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link

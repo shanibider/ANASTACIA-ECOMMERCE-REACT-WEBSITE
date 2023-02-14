@@ -23,6 +23,7 @@ function reducer(state, action) {
       return { ...state, loading: false, order: action.payload, error: '' };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+    //paypal payment
     case 'PAY_REQUEST':
       return { ...state, loadingPay: true };
     case 'PAY_SUCCESS':
@@ -47,9 +48,9 @@ export default function OrderScreen() {
   const { id: orderId } = params; //destructuring orderId from params (and rename it to "id") (like: const id = params.orderId;)
   const navigate = useNavigate();
 
-  /******reducer declaration*****/
+  /*reducer declaration*/
   //define a reducer to fetch data from backend
-  //we deconstruct from state from this reducer is { loading, error, order, successPay, loadingPay},
+  //we deconstruct { loading, error, order, successPay, loadingPay} from state from this reducer,
   //also get dispatch to call this cases and update the state of the reducer
   const [{ loading, error, order, successPay, loadingPay }, dispatch] =
     useReducer(reducer, {
@@ -62,10 +63,10 @@ export default function OrderScreen() {
 
   //usePayPalScriptReducer
   //usePayPalScriptReducer to get the paypal script from paypal- that return the state of loading script ({isPending}) and function that load the script (PayPalDispatch)
-  //paypalDispatch- we use it to load the paypal script in line 87
+  //paypalDispatch- we use it to load the paypal script
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
-  /*createOrder+onApprove+onError implementation*/
+  /*createOrder + onApprove + onError implementation*/
   //here we call 'create' on actions.order and we pass the amount based on the total price of the order (when we click on paypal button the price should be- order.totalPrice)
 
   function createOrder(data, actions) {
