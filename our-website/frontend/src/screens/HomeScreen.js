@@ -56,7 +56,7 @@ export default function HomeScreen() {
   return (
     <div>
       <Helmet>
-        <title>Amazona</title>
+        <title>Anastacia</title>
       </Helmet>
       <h1>Features Products</h1>
       <div className="products">
