@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import axios from 'axios';
 import { Store } from '../Store';
 import LoadingBox from '../components/LoadingBox';
@@ -80,11 +80,14 @@ export default function ProductListScreen() {
   //useContext to get userInfo from state
   const { state } = useContext(Store);
   const { userInfo } = state;
+  
+  
+  const [limit, setLimit] = useState('all');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products/admin?page=${page} `, {
+        const { data } = await axios.get(`/api/products/admin?page=${page}&limit=${limit} `, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
@@ -97,6 +100,11 @@ export default function ProductListScreen() {
       fetchData();
     }
   }, [page, userInfo, successDelete]);
+
+  const handleLimitChange = (e) => {
+    setLimit(e.target.value);
+  };
+
 
   const createHandler = async () => {
     if (window.confirm('Are you sure to create?')) {
@@ -139,8 +147,8 @@ export default function ProductListScreen() {
   };
 
   return (
+    
     <div>
-      <h1>Products</h1>
       <Row>
         <Col>
           <h1>Products</h1>
@@ -163,46 +171,64 @@ export default function ProductListScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.category}</td>
-                  <td>{product.brand}</td>
-                  <td>
-                    <Button
-                      type="button"
-                      variant="light"
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
-                    >
-                      Edit
-                    </Button>
-                    &nbsp;
-                    <Button
-                      type="button"
-                      variant="light"
-                      onClick={() => deleteHandler(product)}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div>
+        <select value={limit} onChange={handleLimitChange}>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="all">All</option>
+        </select>
+      </div>
+      <table className="table table-striped table-hover">
+      <thead className="thead-dark">
+      <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th><button id="sort-button">Sort by Brand</button>
+      </th>
+      <th></th>
+    </tr>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>PRICE</th>
+          <th>CATEGORY</th>
+          <th>BRAND</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((product) => (
+          <tr key={product._id}>
+            <td>{product._id.slice(-5)}</td>
+            <td>{product.name}</td>
+            <td>{product.price}</td>
+            <td>{product.category}</td>
+            <td>{product.brand}</td>
+            <td>
+              <button
+                type="button"
+                className="btn btn-warning"
+                onClick={() => navigate(`/admin/product/${product._id}`)}
+              >
+                Edit
+              </button>
+              &nbsp;
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => deleteHandler(product)}
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
           <div>
             {[...Array(pages).keys()].map((x) => (
               <Link
