@@ -38,6 +38,9 @@ import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
 
+
+import AboutUs from './screens/AboutUsScreen';
+import HowToScreen from "./screens/HowToScreen"
 export default function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state; //diconsrtucture cart from state
@@ -88,11 +91,21 @@ export default function App() {
               <LinkContainer to="/">
                 <Navbar.Brand>amazon</Navbar.Brand>
               </LinkContainer>
-
+              
               {/*header menu*/}
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
+
+             
+                <LinkContainer to="/about" className="nav-link">
+                <Navbar.Brand>About Us</Navbar.Brand>
+              </LinkContainer>
+
+              <LinkContainer to="/howto" className="nav-link" >
+              <Navbar.Brand>How To..</Navbar.Brand>
+              </LinkContainer>
+
                 <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
                     Cart
@@ -180,6 +193,8 @@ export default function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/cart" element={<CartScreen />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/howto" element={<HowToScreen />} />
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
