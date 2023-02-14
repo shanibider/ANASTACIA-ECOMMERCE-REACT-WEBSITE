@@ -84,7 +84,7 @@ export default function App() {
           <Navbar className="navbar-custom" variant="dark" expand="lg">
             <Container>
               <Button
-                variant="dark"
+                variant="light"
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
               >
                 <i className="fas fa-bars"></i>
