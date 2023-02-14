@@ -23,6 +23,7 @@ const reducer = (state, action) => {
   }
 };
 
+/*Fetch Products From Backend*/
 export default function HomeScreen() {
   //define a reducer to fetch data from backend
   //we deconstruct from state from this reducer is { loading, error, product },

@@ -219,6 +219,7 @@ productRouter.get(
   })
 );
 
+//Categories (Sidebar)
 productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {

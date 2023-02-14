@@ -27,6 +27,7 @@ export default function OrderHistoryScreen() {
   //than from state we extract userInfo
   const { state } = useContext(Store);
   const { userInfo } = state;
+
   const navigate = useNavigate();
 
   //define a reducer to fetch data from backend
@@ -58,6 +59,7 @@ export default function OrderHistoryScreen() {
     };
     fetchData();
   }, [userInfo]);
+
   return (
     <div>
       <Helmet>

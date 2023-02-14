@@ -50,6 +50,7 @@ export default function App() {
     //    window.location.href = '/signin';
   };
 
+  //sidebar
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -130,6 +131,7 @@ export default function App() {
                       <LinkContainer to="/admin/dashboard">
                         <NavDropdown.Item>Dashboard</NavDropdown.Item>
                       </LinkContainer>
+
                       <LinkContainer to="/admin/products">
                         <NavDropdown.Item>Products</NavDropdown.Item>
                       </LinkContainer>
@@ -212,6 +214,7 @@ export default function App() {
                 element={<ShippingAddressScreen />}
               ></Route>
               <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+
               {/* Admin Routes */}
               <Route
                 path="/admin/dashboard"
@@ -221,7 +224,6 @@ export default function App() {
                   </AdminRoute>
                 }
               ></Route>
-              {/*List Orders*/}
               <Route
                 path="/admin/orders"
                 element={
@@ -230,6 +232,7 @@ export default function App() {
                   </AdminRoute>
                 }
               ></Route>
+
               <Route
                 path="/admin/products"
                 element={
@@ -238,7 +241,6 @@ export default function App() {
                   </AdminRoute>
                 }
               ></Route>
-              {/*Create-Edit-Product-Screen*/}
               <Route
                 path="/admin/product/:id"
                 element={
@@ -247,6 +249,8 @@ export default function App() {
                   </AdminRoute>
                 }
               ></Route>
+
+              {/********/}
 
               <Route path="/" element={<HomeScreen />} />
             </Routes>

@@ -26,8 +26,10 @@ const reducer = (state, action) => {
 };
 export default function OrderListScreen() {
   const navigate = useNavigate();
+
   const { state } = useContext(Store);
   const { userInfo } = state;
+
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     error: '',

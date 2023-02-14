@@ -1,9 +1,11 @@
 import { createContext, useReducer } from 'react';
 
+/*Create React Context*/
 export const Store = createContext();
 
 const initialState = {
-  //inital value for user info we need to check the local storage
+  //inital value for user info
+  //we need to check the local storage
   userInfo: localStorage.getItem('userInfo') //check the local storage for userInfo
     ? JSON.parse(localStorage.getItem('userInfo')) //if it does exist use JSON.parse to convert userInfo string to a javascript object
     : null, //if it doesn't exist set it to null
@@ -24,7 +26,7 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case 'CART_ADD_ITEM':
-      //add to cart
+      //Add to cart
       const newItem = action.payload;
       const existItem = state.cart.cartItems.find(
         (item) => item._id === newItem._id
@@ -34,7 +36,6 @@ function reducer(state, action) {
             item._id === existItem._id ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
-
       //save the items on the cart in the local storage so when we refreshing the page the items will still be there
       //first parameter is the key in the local storage, second parameter is the string value to save in this key
       // JSON.stringify=> convert the cartItems array to a string

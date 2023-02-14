@@ -50,7 +50,7 @@ export default function ProfileScreen() {
           name,
           email,
           password,
-          oldPassword
+          oldPassword,
         },
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
