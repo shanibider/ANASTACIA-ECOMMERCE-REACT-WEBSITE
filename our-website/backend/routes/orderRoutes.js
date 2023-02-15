@@ -5,13 +5,13 @@ import User from '../models/userModel.js';
 import Product from '../models/productModel.js';
 import { isAuth, isAdmin } from '../utils.js';
 import { db } from '../firebase.js';
-import { collection, query, getCountFromServer} from 'firebase/firestore';
+import { collection, query, getCountFromServer } from 'firebase/firestore';
 
 //api for post
 //expressAsyncHandler to catch all errors
 const orderRouter = express.Router();
 
-//For List of all orders (for Admin)
+//For ajax call from Product List Screen (for Admin)
 orderRouter.get(
   '/',
   isAuth,
@@ -22,7 +22,7 @@ orderRouter.get(
   })
 );
 
-//For Create order
+//For ajax call from Create order
 orderRouter.post(
   '/',
   //isAuth is a middleware to fill the user field in the request (implement in utils.js)
@@ -48,7 +48,7 @@ orderRouter.post(
   })
 );
 
-//For Dashboard screen
+//For ajax call from Dashboard screen
 //that is for authenticated and admin users
 //this is the request from frontend: const {data}=await axios.get('/api/orders/summary')
 orderRouter.get(
@@ -79,7 +79,7 @@ orderRouter.get(
     const q = query(usersRef);
 
     const querySnapshot = await getCountFromServer(q);
-    const users = [{numUsers:querySnapshot.data().count}];
+    const users = [{ numUsers: querySnapshot.data().count }];
 
     const dailyOrders = await Order.aggregate([
       {
@@ -105,7 +105,7 @@ orderRouter.get(
   })
 );
 
-//For user to see his orders (order History screen)
+//For ajax call from History screen (For user to see his orders)
 orderRouter.get(
   '/mine',
   isAuth,
@@ -115,7 +115,7 @@ orderRouter.get(
   })
 );
 
-//For Order Screen
+//For ajax call from Order Screen
 orderRouter.get(
   '/:id',
   //isAuth is a middleware to fill the user field in the request (implement in utils.js)
@@ -130,7 +130,7 @@ orderRouter.get(
   })
 );
 
-//For Order Screen (paypal payment)
+//For ajax call from Order Screen (paypal payment)
 //in this body of this api we find the order, check if exist, set isPaid to true, set paidAt to current data time, and update payment result from the body of this request(req.body). finally save order
 orderRouter.put(
   '/:id/pay',

@@ -31,17 +31,17 @@ export default function CartScreen() {
       return;
     }
     ctxDispatch({
+      //for + button on cart
       type: 'CART_ADD_ITEM',
       payload: { ...item, quantity }, //item beacuse we want to keep the same item and just change the quantity
     });
   };
 
   const removeItemHandler = (item) => {
-    ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+    ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item }); //implement in Store.js
   };
   const checkoutHandler = () => {
-    navigate('/signin?redirect=/shipping'); //?=query string
-    //its mean: in the signin screen we check the user authentication and if the user is not authenticated we redirect the user to the shipping screen, to enter shipping address
+    navigate('/signin?redirect=/shipping'); //?=query string. if the user is authenticated we redirect him to the shipping screen
   };
   return (
     <div>
