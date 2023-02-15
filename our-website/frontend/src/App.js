@@ -1,56 +1,56 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from "react";
 import {
   BrowserRouter,
   BrowserRouter as Router,
   Form,
   Route,
   Routes,
-} from 'react-router-dom';
-import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './screens/ProductScreen';
-import { Link } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Store } from './Store';
-import { Button, Container, Navbar } from 'react-bootstrap';
-import Badge from 'react-bootstrap/Badge';
-import Nav from 'react-bootstrap/Nav';
-import CartScreen from './screens/CartScreen';
-import SigninScreen from './screens/SigninScreen';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import 'react-toastify/dist/ReactToastify.css';
-import ShippingAddressScreen from './screens/ShippingAddressScreen';
-import SignupScreen from './screens/SignupScreen';
-import PaymentMethodScreen from './screens/PaymentMethodScreen';
-import PlaceOrderScreen from './screens/PlaceOrderScreen';
-import OrderScreen from './screens/OrderScreen';
-import OrderHistoryScreen from './screens/OrderHistoryScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import { getError } from './utils';
-import axios from 'axios';
-import { Toast } from 'react-bootstrap';
-import SearchBox from './components/SearchBox';
-import SearchScreen from './screens/SearchScreen';
-import { toast, ToastContainer } from 'react-toastify';
+} from "react-router-dom";
+import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
+import { Link } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+import { Store } from "./Store";
+import { Button, Container, Navbar } from "react-bootstrap";
+import Badge from "react-bootstrap/Badge";
+import Nav from "react-bootstrap/Nav";
+import CartScreen from "./screens/CartScreen";
+import SigninScreen from "./screens/SigninScreen";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import "react-toastify/dist/ReactToastify.css";
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import SignupScreen from "./screens/SignupScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import { getError } from "./utils";
+import axios from "axios";
+import { Toast } from "react-bootstrap";
+import SearchBox from "./components/SearchBox";
+import SearchScreen from "./screens/SearchScreen";
+import { toast, ToastContainer } from "react-toastify";
 
-import ProtectedRoute from './components/ProtectedRoute';
-import DashboardScreen from './screens/DashboardScreen';
-import AdminRoute from './components/AdminRoute';
-import ProductListScreen from './screens/ProductListScreen';
-import ProductEditScreen from './screens/ProductEditScreen';
-import OrderListScreen from './screens/OrderListScreen';
+import ProtectedRoute from "./components/ProtectedRoute";
+import DashboardScreen from "./screens/DashboardScreen";
+import AdminRoute from "./components/AdminRoute";
+import ProductListScreen from "./screens/ProductListScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
+import OrderListScreen from "./screens/OrderListScreen";
 
-import AboutUs from './screens/AboutUsScreen';
-import HowToScreen from './screens/HowToScreen';
+import AboutUs from "./screens/AboutUsScreen";
+import HowToScreen from "./screens/HowToScreen";
 export default function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state; //diconsrtucture cart from state
 
   //signout handler
   const signoutHandler = () => {
-    ctxDispatch({ type: 'USER_SIGNOUT' }); //the type of actiob we going to dispatch
-    localStorage.removeItem('userInfo'); //remove user info from local storage
-    localStorage.removeItem('shippingAddress');
-    localStorage.removeItem('paymentMethod');
+    ctxDispatch({ type: "USER_SIGNOUT" }); //the type of actiob we going to dispatch
+    localStorage.removeItem("userInfo"); //remove user info from local storage
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
     //    window.location.href = '/signin';
   };
 
@@ -75,8 +75,8 @@ export default function App() {
       <div
         className={
           sidebarIsOpen
-            ? 'd-flex flex-column site-container active-cont'
-            : 'd-flex flex-column site-container'
+            ? "d-flex flex-column site-container active-cont"
+            : "d-flex flex-column site-container"
         }
       >
         <ToastContainer position="bottom-center" limit={1} />
@@ -85,12 +85,13 @@ export default function App() {
             <Container>
               <Button
                 variant="light"
+                className="me-3"
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
               >
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>Anastacia</Navbar.Brand>
+                <Navbar.Brand className="brand-name">Anastacia</Navbar.Brand>
               </LinkContainer>
 
               {/*header menu*/}
@@ -98,15 +99,15 @@ export default function App() {
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
 
-                <LinkContainer to="/about" className="nav-link">
-                  <Navbar.Brand>About Us</Navbar.Brand>
-                </LinkContainer>
+                <Nav className="ml-auto">
+                  <LinkContainer to="/about" className="nav-link">
+                    <Navbar.Brand>About Us</Navbar.Brand>
+                  </LinkContainer>
 
-                <LinkContainer to="/howto" className="nav-link">
-                  <Navbar.Brand>How To..</Navbar.Brand>
-                </LinkContainer>
+                  <LinkContainer to="/howto" className="nav-link">
+                    <Navbar.Brand>How To..</Navbar.Brand>
+                  </LinkContainer>
 
-                <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
                     Cart
                     {cart.cartItems.length > 0 && (
@@ -115,6 +116,7 @@ export default function App() {
                       </Badge>
                     )}
                   </Link>
+
                   {/*if userInfo exist -> we render a navDropDown*/}
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
@@ -138,6 +140,7 @@ export default function App() {
                       Sign In
                     </Link>
                   )}
+
                   {/*****ADMIN*****/}
                   {/*if userInfo exist and userInfo.isAdmin is true -> we render a navDropDown*/}
                   {userInfo && userInfo.isAdmin && (
@@ -163,8 +166,8 @@ export default function App() {
         <div
           className={
             sidebarIsOpen
-              ? 'active-nav side-navbar d-flex justify-content-between flex-wrap flex-column'
-              : 'side-navbar d-flex justify-content-between flex-wrap flex-column'
+              ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
+              : "side-navbar d-flex justify-content-between flex-wrap flex-column"
           }
         >
           <Nav className="flex-column text-white w-100 p-2">
@@ -175,7 +178,7 @@ export default function App() {
               <Nav.Item key={category}>
                 <LinkContainer
                   to={{
-                    pathname: '/search',
+                    pathname: "/search",
                     search: `?category=${category}`,
                   }}
                   onClick={() => setSidebarIsOpen(false)}
