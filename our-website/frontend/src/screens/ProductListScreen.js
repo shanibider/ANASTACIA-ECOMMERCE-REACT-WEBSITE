@@ -88,22 +88,23 @@ export default function ProductListScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/admin?page=${page}&limit=${limit} `,
+          `/api/products/admin?page=${page}&limit=${limit}`,
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
         );
 
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
+
+        dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {}
     };
     //fetch data
     if (successDelete) {
-      dispatch({ type: 'DELETE_RESET' });
+      dispatch({ type: "DELETE_RESET" });
     } else {
       fetchData();
     }
-  }, [page, userInfo, successDelete]);
+  }, [page, limit, userInfo, successDelete]);
 
   const handleLimitChange = (e) => {
     setLimit(e.target.value);
