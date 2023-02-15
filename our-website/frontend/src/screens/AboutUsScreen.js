@@ -13,7 +13,7 @@ const AboutUs = () => {
           <h6 className="summery">
             We are passionate and highly motivated software developers. We like
             to challenge ourselves, learn, develop and explore existing and new
-            fields. We really like Full Stack/ Backend/ Frontend development.
+            fields. We specialize in Full-Stack/ Backend/ Frontend development.
             and highly knowledgeable in- React.js, Node.js,express, JavaScript,
             MongoDB, Java.
           </h6>

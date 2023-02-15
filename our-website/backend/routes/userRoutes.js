@@ -88,7 +88,7 @@ userRouter.post(
           });
           console.log('Document written with ID: ', docRef.id);
 
-          //firebase
+          //firebase connection
           const usersRef = collection(db, 'users');
           const q = query(
             usersRef,
@@ -134,6 +134,7 @@ userRouter.put(
   '/profile',
   isAuth,
   expressAsyncHandler(async (req, res) => {
+    //sign in with email and password with firebase
     signInWithEmailAndPassword(auth, req.body.email, req.body.oldPassword)
       .then((userCredential) => {
         updatePassword(auth.currentUser, req.body.password).then(() => {
