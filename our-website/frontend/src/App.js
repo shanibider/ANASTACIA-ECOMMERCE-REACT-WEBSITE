@@ -83,11 +83,11 @@ export default function App() {
         <header>
           <Navbar className="navbar-custom" variant="dark" expand="lg">
             <Container>
-              <Button
-                variant="light"
-                className="me-3"
-                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
-              >
+            <Button
+            variant="light"
+            className="me-3"
+            onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+          >
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">

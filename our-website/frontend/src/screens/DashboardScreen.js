@@ -8,7 +8,7 @@ import MessageBox from '../components/MessageBox';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-
+import { Helmet } from 'react-helmet-async';
 /*reducer function*/
 const reducer = (state, action) => {
   switch (action.type) {
@@ -66,7 +66,11 @@ export default function DashboardScreen() {
 
   return (
     <div>
+    <Helmet>
+    <title>Dashboard</title>
+  </Helmet>
       <h1>Dashboard</h1>
+      
       {loading ? (
         <LoadingBox />
       ) : error ? (
@@ -77,6 +81,7 @@ export default function DashboardScreen() {
             <Col md={4}>
               <Card>
                 <Card.Body>
+                <Card.Text>Number Of Users</Card.Text>
                   <Card.Title>
                     {/*if summery.users and summery.users first element exist-
                     show- summary.users[0].numUsers,
@@ -86,32 +91,34 @@ export default function DashboardScreen() {
                       ? summary.users[0].numUsers
                       : 0}
                   </Card.Title>
-                  <Card.Text> Users</Card.Text>
+                  
                 </Card.Body>
               </Card>
             </Col>
             <Col md={4}>
               <Card>
                 <Card.Body>
+                <Card.Text>Number Of Orders</Card.Text>
                   <Card.Title>
                     {summary.orders && summary.users[0]
                       ? summary.orders[0].numOrders
                       : 0}
                   </Card.Title>
-                  <Card.Text> Orders</Card.Text>
+                  
                 </Card.Body>
               </Card>
             </Col>
             <Col md={4}>
               <Card>
                 <Card.Body>
+                <Card.Text>Money Orders</Card.Text>
                   <Card.Title>
                     $
                     {summary.orders && summary.users[0]
                       ? summary.orders[0].totalSales.toFixed(2) //2 digits after dicimal point
                       : 0}
                   </Card.Title>
-                  <Card.Text> Orders</Card.Text>
+                  
                 </Card.Body>
               </Card>
             </Col>

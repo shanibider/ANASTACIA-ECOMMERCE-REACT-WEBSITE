@@ -33,7 +33,7 @@ mongoose
       const collection = db.collection('products');
 
       products.forEach((product) => {
-        collection.insertOne(product, function (err, result) {
+        collection.insertOne(product, function (err) {
           if (err) {
             console.error(err);
             return;
@@ -69,8 +69,8 @@ app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
-//each component has its own router
-app.use('/api/seed', seedRouter); //seedRouter responded to api/seed
+//seedRouter responded to api/seed
+app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
