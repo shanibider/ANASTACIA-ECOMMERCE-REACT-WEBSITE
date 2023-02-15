@@ -1,6 +1,5 @@
 # React-final-project
-```
-
+#
 ![AnastaciaClothingStore png](https://user-images.githubusercontent.com/72359805/219037587-957f4c20-1d09-433a-ae37-76f5c89af74b.png)
 
 
@@ -8,10 +7,11 @@
 
 
 ![Anastacia clothing store- dashboard screen](https://user-images.githubusercontent.com/72359805/219037727-bfcdbad0-9a7b-4174-8d30-ae3f33c4712f.png)
-```
 
 
-```
+
+
+#
 ## To Run Locally-
 
 ### Run Backend-
