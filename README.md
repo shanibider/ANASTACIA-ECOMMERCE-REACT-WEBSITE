@@ -1,7 +1,7 @@
 # React-final-project
-#
-Online Clothes store:
 
+Online Clothes store:
+#
 Homepage :
 ![AnastaciaClothingStore png](https://user-images.githubusercontent.com/72359805/219037587-957f4c20-1d09-433a-ae37-76f5c89af74b.png)
 
@@ -11,7 +11,8 @@ Product:
 Statistics:
 ![Anastacia clothing store- dashboard screen](https://user-images.githubusercontent.com/72359805/219037727-bfcdbad0-9a7b-4174-8d30-ae3f33c4712f.png)
 
-
+Admin access:
+![Anastacia clothing store- edit products](https://user-images.githubusercontent.com/72359805/219039566-0fd2d95c-576d-4c96-8108-c63e5153597b.png)
 
 
 #
