@@ -57,56 +57,58 @@ export default function CartScreen() {
             </MessageBox>
           ) : (
             <ListGroup>
-  {cartItems.map((item) => (
-    <ListGroup.Item key={item._id} className="my-3">
-      <Row className="align-items-center justify-content-between">
-        <Col md={4}>
-          <img
-            src={item.image}
-            alt={item.name}
-            className="img-fluid rounded img-thumbnail"
-          ></img>{' '}
-          <Link to={`/product/${item.slug}`}>{item.name}</Link>
-        </Col>
-        {/*button to decrese number of items in the cart*/}
-        <Col md={3} className="d-flex align-items-center">
-          <Button
-            onClick={() =>
-              updateCartHandler(item, item.quantity - 1)
-            }
-            variant="primary"
-            size="sm"
-            disabled={item.quantity === 1}
-          >
-            <i className="fas fa-minus-circle"></i>
-          </Button>{' '}
-          <span className="mx-2">{item.quantity}</span>{' '}
-          {/*Increase this item in the cart*/}
-          <Button
-            variant="primary"
-            size="sm"
-            onClick={() =>
-              updateCartHandler(item, item.quantity + 1)
-            }
-            disabled={item.quantity === item.countInStock}
-          >
-            <i className="fas fa-plus-circle"></i>
-          </Button>
-        </Col>
-        <Col md={3} className="d-flex align-items-center">${item.price}</Col>
-        <Col md={2}>
-          <Button
-            onClick={() => removeItemHandler(item)}
-            variant="danger"
-            size="sm"
-          >
-            <i className="fas fa-trash"></i>
-          </Button>
-        </Col>
-      </Row>
-    </ListGroup.Item>
-  ))}
-</ListGroup>
+              {cartItems.map((item) => (
+                <ListGroup.Item key={item._id} className="my-3">
+                  <Row className="align-items-center justify-content-between">
+                    <Col md={4}>
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="img-fluid rounded img-thumbnail"
+                      ></img>{' '}
+                      <Link to={`/product/${item.slug}`}>{item.name}</Link>
+                    </Col>
+                    {/*button to decrese number of items in the cart*/}
+                    <Col md={3} className="d-flex align-items-center">
+                      <Button
+                        onClick={() =>
+                          updateCartHandler(item, item.quantity - 1)
+                        }
+                        variant="primary"
+                        size="sm"
+                        disabled={item.quantity === 1}
+                      >
+                        <i className="fas fa-minus-circle"></i>
+                      </Button>{' '}
+                      <span className="mx-2">{item.quantity}</span>{' '}
+                      {/*Increase this item in the cart*/}
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        onClick={() =>
+                          updateCartHandler(item, item.quantity + 1)
+                        }
+                        disabled={item.quantity === item.countInStock}
+                      >
+                        <i className="fas fa-plus-circle"></i>
+                      </Button>
+                    </Col>
+                    <Col md={3} className="d-flex align-items-center">
+                      ${item.price}
+                    </Col>
+                    <Col md={2}>
+                      <Button
+                        onClick={() => removeItemHandler(item)}
+                        variant="danger"
+                        size="sm"
+                      >
+                        <i className="fas fa-trash"></i>
+                      </Button>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
           )}
         </Col>
         <Col md={4}>
@@ -114,11 +116,13 @@ export default function CartScreen() {
             <Card.Body>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                <h3>
-                Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                items) : $
-                {cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toFixed(3)}
-              </h3>
+                  <h3>
+                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
+                    items) : $
+                    {cartItems
+                      .reduce((a, c) => a + c.price * c.quantity, 0)
+                      .toFixed(3)}
+                  </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div className="d-grid">

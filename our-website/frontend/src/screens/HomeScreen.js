@@ -10,10 +10,15 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import data from '../data';
 
+//Reducer accept current state, and an action that change the state and create a new state
 const reducer = (state, action) => {
   switch (action.type) {
+    //this case happen when we send an ajax request to backend
+    //then we return ...state (keep the previous state values) and only update loading to true (so we can show the loading box)
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
+    //here we need to update product equal to data that coming from action.payload
+    //action.payload contains all data from backend
     case 'FETCH_SUCCESS':
       return { ...state, product: action.payload, loading: false };
     case 'FETCH_FAIL':
@@ -25,30 +30,32 @@ const reducer = (state, action) => {
 
 /*Fetch Products From Backend*/
 export default function HomeScreen() {
-  //define a reducer to fetch data from backend
-  //we deconstruct from state from this reducer is { loading, error, product },
-  //also get dispatch to call this cases and update the state of the reducer
+  //userReducer defined by an object- {loading, error, product}, and dispatch.
+  //and accept a reducer and defualt state, that we set.
+  //we use dispatch to call an action and update the state
   const [{ loading, error, product }, dispatch] = useReducer(logger(reducer), {
     product: [],
     loading: true,
     error: '',
   });
+  //(logger used to log the state changes in the console)
 
-  //const [products, setProducts] = useState([]);
-
-  //useEffect for send an ajax request to get the dashboard data
-  //try and catch beacuse we have to catch any error on ajax requests to backend
+  //useEffect use to send an ajax request to get data
+  //useEffect accpets a function and an array of dependencies
+  //(try and catch beacuse we have to catch any error on ajax requests)
   useEffect(() => {
     const fetchData = async () => {
-      //ajax request. result is the response from the server (equal to data.products)
       dispatch({ type: 'FETCH_REQUEST' });
       try {
+        //ajax request to '/api/products'
+        //result is the response from the server (data.products)
+        //if i successfuly get the result that contains the products from backend i need to dispatch FETCH_SUCCESS
+        //and as payload i need to pass products from backend
         const result = await axios.get('/api/products');
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });
       }
-      //setProducts(result.data);
     };
     fetchData();
   }, []);
@@ -60,6 +67,7 @@ export default function HomeScreen() {
       </Helmet>
       <h1>Features Products</h1>
       <div className="products">
+        {/*Conditional rendering- if loading is true show loading box*/}
         {loading ? (
           <LoadingBox />
         ) : error ? (
@@ -77,3 +85,8 @@ export default function HomeScreen() {
     </div>
   );
 }
+
+/*If we were using useState:
+const [products, setProducts] = useState([]);
+setProducts(result.data);
+*/

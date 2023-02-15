@@ -31,6 +31,7 @@ mongoose
 
       const db = mongoose.connection;
       const collection = db.collection('products');
+
       products.forEach((product) => {
         collection.insertOne(product, function (err, result) {
           if (err) {
@@ -45,18 +46,31 @@ mongoose
     console.log(err.message);
   });
 
+/*SCRAPPING EXPLENATION:
+1. mongoose.connect(process.env.MONGODB_URI) connects to the MongoDB database using the URI specified in the MONGODB_URI environment variable. 
+2. The .then() function is called after the database connection is established. 
+3. The code inside the .then() function reads data from a file named "cloths.json" using the fs library, which is a built-in Node.js library for working with the file system.
+4. If the file is read successfully, the code parses the data in the file as JSON and stores it in a variable called 'products'.
+5. Then the code gets a reference to the MongoDB database using mongoose.connection.
+6. The collection variable is used to access the "products" collection in the database.
+7. A loop is used to iterate over each product in the products array, and the insertOne() function is called to add the product to the "products" collection in the database.
+*/
+
 //data from post request will convert to json object in req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//this method has 2 parameters- first is the path we are going to serve, second is the function that respond to this api
+//when user go to this address we need to return products to frontend (to user)
 //api to return clientID for paypal
 app.get('/api/keys/paypal', (req, res) => {
+  //sending data
   //PAYPAL_CLIENT_ID is a variable in .env file
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
-//seedRouter responded to api/seed
-app.use('/api/seed', seedRouter);
+//each component has its own router
+app.use('/api/seed', seedRouter); //seedRouter responded to api/seed
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);

@@ -17,6 +17,7 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast } from 'react-toastify';
 
+/*Reducer function*/
 const reducer = (state, action) => {
   switch (action.type) {
     //for order review
@@ -45,8 +46,13 @@ function ProductScreen() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const navigate = useNavigate();
+
   const params = useParams();
   const { slug } = params;
+
+  //userReducer defined by an object- {loading, error, product, loadingCreateReview}, and dispatch.
+  //and accept a reducer and defualt state, that we set.
+  //we use dispatch to call an action and update the state
   const [{ loading, error, product, loadingCreateReview }, dispatch] =
     useReducer(reducer, {
       product: [],
@@ -54,12 +60,13 @@ function ProductScreen() {
       error: '',
     });
 
-  //useEffect for send an ajax request to get the dashboard data
-  //try and catch beacuse we have to catch any error on ajax requests to backend
+  //useEffect use to send an ajax request to get data
+  //useEffect accpets a function and an array of dependencies
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
+        //${slug} = the value of slug user entered in the url
         const result = await axios.get(`/api/products/slug/${slug}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
@@ -67,7 +74,9 @@ function ProductScreen() {
       }
     };
     fetchData();
-  }, [slug]);
+  }, [slug]); //we use slug as a dependency, because we want to run the useEffect when slug change (user switch between pages)
+
+  //next step is implement this api in the back
 
   //for cart-
   //we bring it from useContext, and extract state from it

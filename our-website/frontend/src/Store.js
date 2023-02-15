@@ -1,8 +1,9 @@
 import { createContext, useReducer } from 'react';
 
-/*Create React Context*/
+/*React Context comes from React*/
 export const Store = createContext();
 
+//define initial state for Store.Provider
 //inital value for user info
 const initialState = {
   //check the local storage for userInfo (after sign in userInfo exist)
@@ -92,8 +93,11 @@ function reducer(state, action) {
   }
 }
 
+//StoreProvider is a component that will wrap the entire app, and pass global props to children
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
+  //Store coming from createContext, and from Store object get Provider and set the value to the value we created (current state and dispatch to update state),
+  //inside that render the children
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }
