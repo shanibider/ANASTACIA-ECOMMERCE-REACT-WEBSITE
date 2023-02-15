@@ -1,6 +1,7 @@
 # React-final-project
 
 ![Anastacia](/frontend/public/images/AnastaciaClothingStore.jpg)
+![AnastaciaClothingStore png](https://user-images.githubusercontent.com/72359805/219037587-957f4c20-1d09-433a-ae37-76f5c89af74b.png)
 
 ## To Run Locally-
 
