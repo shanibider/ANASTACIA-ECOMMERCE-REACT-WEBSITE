@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
-
+import { Helmet } from 'react-helmet-async';
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -154,6 +154,9 @@ export default function ProductListScreen() {
 
   return (
     <div>
+    <Helmet>
+    <title>Product Admin</title>
+  </Helmet>
       <Row>
         <Col>
           <h1>Products</h1>
