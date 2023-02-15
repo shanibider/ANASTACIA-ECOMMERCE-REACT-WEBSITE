@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
-import axios from "axios";
-import { Store } from "../Store";
-import LoadingBox from "../components/LoadingBox";
-import MessageBox from "../components/MessageBox";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import { toast } from "react-toastify";
-import { getError } from "../utils";
+import React, { useContext, useEffect, useReducer, useState } from 'react';
+import axios from 'axios';
+import { Store } from '../Store';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { toast } from 'react-toastify';
+import { getError } from '../utils';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -153,6 +153,9 @@ export default function ProductListScreen() {
 
   return (
     <div>
+    <Helmet>
+    <title>Product Admin</title>
+  </Helmet>
       <Row>
         <Col>
           <h1>Products</h1>

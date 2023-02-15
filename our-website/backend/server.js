@@ -5,28 +5,32 @@ import seedRouter from "./routes/seedRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
-import Product from "./models/productModel.js";
 import path from "path";
 import fs from "fs";
 
 //fetch variables in .env file
 dotenv.config();
+
 const app = express();
-//connect to mongodb data base
+
+/*SCRAPING*/
+//connect to mongodb data base,
+//read data from cloths.json file and save it in mongodb
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
-    console.log("connected to db");
-    fs.readFile("cloths.json", (err, data) => {
+    //scrapping data from website and save it in mongodb
+    console.log('connected to db');
+    fs.readFile('cloths.json', (err, data) => {
       if (err) {
         console.error(err);
         return;
       }
-
       const products = JSON.parse(data);
 
       const db = mongoose.connection;
-      const collection = db.collection("products");
+      const collection = db.collection('products');
       products.forEach((product) => {
         collection.insertOne(product, function (err) {
           if (err) {
@@ -46,9 +50,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //api to return clientID for paypal
-app.get("/api/keys/paypal", (req, res) => {
+app.get('/api/keys/paypal', (req, res) => {
   //PAYPAL_CLIENT_ID is a variable in .env file
-  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
 //seedRouter responded to api/seed
@@ -58,10 +62,10 @@ app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.use(express.static(path.join(__dirname, '/frontend/build')));
 //* means that everything the user enter after the server name (website domain) is going to be served by index.html file
-app.get("*", (req, res) =>
-  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
 );
 
 //error handler for express
