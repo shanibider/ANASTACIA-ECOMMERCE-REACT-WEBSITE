@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import axios from 'axios';
 import logger from 'use-reducer-logger';
-import { useEffect, useState, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
 import { Helmet } from 'react-helmet-async';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import data from '../data';
+
 
 //Reducer accept current state, and an action that change the state and create a new state
 const reducer = (state, action) => {
