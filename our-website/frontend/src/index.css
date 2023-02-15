@@ -91,6 +91,7 @@ main {
 .text-bold {
   font-weight: bold;
 }
+
 /*Product List Screen*/
 .btn-edit {
   background-color: #e5e5e5;
@@ -121,4 +122,68 @@ main {
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   border: none;
+}
+
+/*About US Screen*/
+.AboutUsContainer {
+  margin: 0.5rem;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #14213d;
+}
+.AboutUs {
+  margin: 0.5rem 0 2rem 0;
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 200;
+  color: #14213d;
+}
+.teamList {
+  margin: 0.5rem 0 2rem 0;
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 200;
+  color: #14213d;
+}
+.person {
+  margin: 1rem 0rem 1.5rem 0;
+  padding: 10px;
+  color: #14213d;
+}
+.role {
+  font-size: 19px;
+  font-weight: 400;
+  padding: 1rem 0 0.5rem 0;
+  color: #14213d;
+}
+.summery {
+  font-size: 18px;
+  font-weight: 400;
+  color: #14213d;
+}
+
+/*How To Screen*/
+.how-to {
+  margin: 1rem;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 200;
+  color: #14213d;
+}
+.title-how-to {
+  font-size: 40px;
+  font-weight: 600;
+  padding: 0 0 1rem 0;
+  color: #14213d;
+}
+.how-to-methods {
+  font-size: 18px;
+  font-weight: 400;
+  padding: 1.5rem 0 2rem 0;
+  color: #14213d;
+}
+.how-to-title {
+  padding: 1.5rem 0 0.5rem 0;
+  color: #14213d;
 }

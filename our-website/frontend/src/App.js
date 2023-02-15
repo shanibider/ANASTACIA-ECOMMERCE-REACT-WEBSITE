@@ -103,7 +103,7 @@ export default function App() {
                 </LinkContainer>
 
                 <LinkContainer to="/howto" className="nav-link">
-                  <Navbar.Brand>How To..</Navbar.Brand>
+                  <Navbar.Brand>How To?</Navbar.Brand>
                 </LinkContainer>
 
                 <Nav className="me-auto  w-100  justify-content-end">
