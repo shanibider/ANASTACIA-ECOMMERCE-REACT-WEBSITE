@@ -1,6 +1,6 @@
 # React-final-project
 
-![Anastacia](/frontend/public/images/AnastaciaClothingStore.png)
+![Anastacia](/frontend/public/images/AnastaciaClothingStore.jpg)
 
 ## To Run Locally-
 
