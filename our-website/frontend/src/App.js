@@ -85,12 +85,13 @@ export default function App() {
             <Container>
               <Button
                 variant="light"
+                className="me-3"
                 onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
               >
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>Anastacia</Navbar.Brand>
+                <Navbar.Brand className="brand-name">Anastacia</Navbar.Brand>
               </LinkContainer>
 
               {/*header menu*/}
@@ -98,15 +99,15 @@ export default function App() {
               <Navbar.Collapse id="basic-navbar-nav">
                 <SearchBox />
 
-                <LinkContainer to="/about" className="nav-link">
-                  <Navbar.Brand>About Us</Navbar.Brand>
-                </LinkContainer>
+                <Nav className="ml-auto">
+                  <LinkContainer to="/about" className="nav-link">
+                    <Navbar.Brand>About Us</Navbar.Brand>
+                  </LinkContainer>
 
-                <LinkContainer to="/howto" className="nav-link">
-                  <Navbar.Brand>How To?</Navbar.Brand>
-                </LinkContainer>
+                  <LinkContainer to="/howto" className="nav-link">
+                    <Navbar.Brand>How To..</Navbar.Brand>
+                  </LinkContainer>
 
-                <Nav className="me-auto  w-100  justify-content-end">
                   <Link to="/cart" className="nav-link">
                     Cart
                     {cart.cartItems.length > 0 && (
@@ -115,6 +116,7 @@ export default function App() {
                       </Badge>
                     )}
                   </Link>
+
                   {/*if userInfo exist -> we render a navDropDown*/}
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
@@ -138,6 +140,7 @@ export default function App() {
                       Sign In
                     </Link>
                   )}
+
                   {/*****ADMIN*****/}
                   {/*if userInfo exist and userInfo.isAdmin is true -> we render a navDropDown*/}
                   {userInfo && userInfo.isAdmin && (
