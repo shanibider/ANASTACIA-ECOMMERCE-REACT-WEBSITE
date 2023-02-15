@@ -5,7 +5,15 @@ import { isAuth, isAdmin } from '../utils.js';
 
 const productRouter = express.Router();
 
-//Define the first route for productRouter
+/*
+'/api/products' 
+is the first part of the url for each "get request", added automatically by:
+app.use('/api/products', productRouter);
+in server.js
+*/
+
+//Define the first api for productRouter
+//return all products
 productRouter.get('/', async (req, res) => {
   const products = await Product.find();
   res.send(products);
@@ -75,7 +83,7 @@ productRouter.delete(
   })
 );
 
-//for creating a new review for order
+//For creating a new review for order
 productRouter.post(
   '/:id/reviews',
   isAuth,
@@ -113,7 +121,7 @@ productRouter.post(
 );
 
 const PAGE_SIZE = 100;
-//for Admin Product List (manage products)
+//For Admin Product List (manage products)
 productRouter.get(
   '/admin',
   isAuth,
@@ -142,9 +150,8 @@ productRouter.get(
   })
 );
 
-//for search screen
+//For search screen
 //api to filter products at this address (/search)
-
 productRouter.get(
   '/search',
   expressAsyncHandler(async (req, res) => {
@@ -227,7 +234,7 @@ productRouter.get(
   })
 );
 
-//Categories (for Sidebar and Search Box)
+//For categories (for Sidebar and Search Box)
 productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {
@@ -236,7 +243,7 @@ productRouter.get(
   })
 );
 
-//Sample Products (api to return product info by slug)
+//api to return product info by slug (From Product Screen->useEffect)
 productRouter.get('/slug/:slug', async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
@@ -246,7 +253,7 @@ productRouter.get('/slug/:slug', async (req, res) => {
   }
 });
 
-//new api tp return product by id
+//api to return product by id (From Product Screen->addToCartHandler)
 productRouter.get('/:id', async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {

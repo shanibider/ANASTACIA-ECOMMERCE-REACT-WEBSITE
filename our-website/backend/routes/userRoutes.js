@@ -18,6 +18,11 @@ import { isAuth, isAdmin, generateToken } from '../utils.js';
 
 const userRouter = express.Router();
 
+/*
+'/api/users' is the first part of the url for each "get request", added automatically by:
+app.use('/api/users', userRouter);
+*/
+
 //for Admin user list
 userRouter.get(
   '/',
@@ -29,6 +34,7 @@ userRouter.get(
   })
 );
 
+//for ajax call from Signin screen-> submitHandler
 userRouter.post(
   '/signin',
   expressAsyncHandler(async (req, res) => {
@@ -73,7 +79,7 @@ userRouter.post(
   })
 );
 
-//for sign up screen
+//for ajax call from Signup screen-> submitHandler
 userRouter.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {
@@ -129,7 +135,7 @@ userRouter.post(
   })
 );
 
-//Profile Screen
+//for ajax call from Profile screen-> submitHandler
 userRouter.put(
   '/profile',
   isAuth,

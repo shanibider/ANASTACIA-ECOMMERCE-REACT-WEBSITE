@@ -69,8 +69,8 @@ app.get('/api/keys/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
-//seedRouter responded to api/seed
-app.use('/api/seed', seedRouter);
+//each component has its own router
+app.use('/api/seed', seedRouter); //seedRouter responded to api/seed
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
 app.use('/api/orders', orderRouter);
