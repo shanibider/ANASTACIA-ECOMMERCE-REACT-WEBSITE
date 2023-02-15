@@ -5,13 +5,13 @@ import { isAuth, isAdmin } from '../utils.js';
 
 const productRouter = express.Router();
 
-//define the first route for productRouter
+//Define the first route for productRouter
 productRouter.get('/', async (req, res) => {
   const products = await Product.find();
   res.send(products);
 });
 
-//for creating a new product
+//For Admin Product List (create new product)
 productRouter.post(
   '/',
   isAuth,
@@ -34,7 +34,7 @@ productRouter.post(
   })
 );
 
-//update product
+//Update product (by Admin)
 productRouter.put(
   '/:id',
   isAuth,
@@ -59,7 +59,7 @@ productRouter.put(
   })
 );
 
-//delete product
+//Delete product (by Admin)
 productRouter.delete(
   '/:id',
   isAuth,
@@ -112,9 +112,8 @@ productRouter.post(
   })
 );
 
-//api to filter products at this address (/search)
 const PAGE_SIZE = 3;
-
+//for Admin Product List (manage products)
 productRouter.get(
   '/admin',
   isAuth,
@@ -136,6 +135,9 @@ productRouter.get(
     });
   })
 );
+
+//for search screen
+//api to filter products at this address (/search)
 
 productRouter.get(
   '/search',
@@ -219,7 +221,7 @@ productRouter.get(
   })
 );
 
-//Categories (Sidebar)
+//Categories (for Sidebar and Search Box)
 productRouter.get(
   '/categories',
   expressAsyncHandler(async (req, res) => {

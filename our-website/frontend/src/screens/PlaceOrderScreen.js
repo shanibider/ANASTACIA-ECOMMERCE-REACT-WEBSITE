@@ -17,6 +17,7 @@ import LoadingBox from '../components/LoadingBox';
 //here we define switch case that check the action.type
 //(reducer is independent component)
 
+//for create order
 const reducer = (state, action) => {
   switch (action.type) {
     case 'CREATE_REQUEST':
@@ -58,7 +59,6 @@ export default function PlaceOrderScreen() {
       dispatch({ type: 'CREATE_REQUEST' });
       //send ajax request to backend to '/api/orders' api
       //second parameter in post request is options. By the option we create here- this api is authenticated and in the server i can detect if the request is coming from a looged in user or a hacker
-
       const { data } = await Axios.post(
         '/api/orders',
         {

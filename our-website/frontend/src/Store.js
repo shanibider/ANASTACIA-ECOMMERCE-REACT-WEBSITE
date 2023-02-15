@@ -3,9 +3,9 @@ import { createContext, useReducer } from 'react';
 /*Create React Context*/
 export const Store = createContext();
 
+//inital value for user info
 const initialState = {
-  //inital value for user info
-  //we need to check the local storage
+  //check the local storage for userInfo (after sign in userInfo exist)
   userInfo: localStorage.getItem('userInfo') //check the local storage for userInfo
     ? JSON.parse(localStorage.getItem('userInfo')) //if it does exist use JSON.parse to convert userInfo string to a javascript object
     : null, //if it doesn't exist set it to null
@@ -25,8 +25,8 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
+    //Add to cart
     case 'CART_ADD_ITEM':
-      //Add to cart
       const newItem = action.payload;
       const existItem = state.cart.cartItems.find(
         (item) => item._id === newItem._id
@@ -43,6 +43,7 @@ function reducer(state, action) {
 
       return { ...state, cart: { ...state.cart, cartItems } };
 
+    //Remove from cart
     case 'CART_REMOVE_ITEM': {
       //filter out the cartItems array
       const cartItems = state.cart.cartItems.filter(
@@ -51,21 +52,24 @@ function reducer(state, action) {
       localStorage.setItem('cartItems', JSON.stringify(cartItems));
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    //lear the cart (after placing the order)
     //here we keep the state of the context, also keep the state of cart. and we change the cartItems to an empty array
     case 'CART_CLEAR':
       return { ...state, cart: { ...state.cart, cartItems: [] } };
     case 'USER_SIGNIN':
-      return { ...state, userInfo: action.payload }; //we return- keeping the previos state and add the userInfo property to it (based on the data we get from backend)
+      return { ...state, userInfo: action.payload }; //here we return- keeping the previos state and add the userInfo property to it (based on the data we get from backend)
     case 'USER_SIGNOUT':
       return {
         ...state,
         userInfo: null, //previos state and set userInfo to null
         cart: {
+          //after signing out we want to clear the cart
           cartItems: [],
           shippingAddress: {},
           paymentMethod: '',
         },
       };
+    //save the shipping address in the local storage
     case 'SAVE_SHIPPING_ADDRESS':
       return {
         ...state,
@@ -74,6 +78,7 @@ function reducer(state, action) {
           shippingAddress: action.payload,
         },
       };
+    //save the payment method in the local storage
     case 'SAVE_PAYMENT_METHOD':
       return {
         ...state,

@@ -73,6 +73,7 @@ userRouter.post(
   })
 );
 
+//for sign up screen
 userRouter.post(
   '/signup',
   expressAsyncHandler(async (req, res) => {

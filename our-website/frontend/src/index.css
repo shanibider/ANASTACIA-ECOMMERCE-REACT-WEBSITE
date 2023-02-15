@@ -18,8 +18,12 @@ main {
 }
 .btn-primary,
 .btn-outline-primary {
-  background-color: #22333b;
-  color: #000000;
+  background-color: #f6e8ea;
+  color: #457b9d;
+}
+
+.navbar-custom {
+  background-color: #14213d;
 }
 
 .products {
@@ -28,11 +32,11 @@ main {
   justify-content: center;
 }
 .rating span {
-  color: #22333b;
+  color: #457b9d;
 }
 
 .product {
-  border: 1px #a9927d solid;
+  border: 1px #edf2f4 solid;
   margin: 1rem;
 }
 .product img {
@@ -58,8 +62,8 @@ main {
 }
 
 .checkout-steps > div.active {
-  border-bottom: 0.2rem solid #ffaad2;
-  color: #ffaad2;
+  border-bottom: 0.2rem solid #f6e8ea;
+  color: #f6e8ea;
 }
 
 /* sidebar */
@@ -71,7 +75,7 @@ main {
   height: 100%;
   position: absolute;
   left: -300px;
-  background-color: #8d99ae;
+  background-color: #000000;
   transition: 0.5s;
 }
 
@@ -86,4 +90,35 @@ main {
 }
 .text-bold {
   font-weight: bold;
+}
+/*Product List Screen*/
+.btn-edit {
+  background-color: #e5e5e5;
+  color: #23181a;
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+}
+.btn-delete {
+  background-color: #fca311;
+  color: #23181a;
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+}
+.thead-products {
+  background-color: #14213d;
+  color: #f1faee;
+}
+.table {
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 20px #f1faee(0, 0, 0, 0.15);
+}
+.btn-create-product {
+  background-color: #f1faee;
+  color: #23181a;
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
 }
