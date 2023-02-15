@@ -195,16 +195,6 @@ export default function ProductListScreen() {
           <table className="table table-striped">
             <thead className="thead-products">
               <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>
-                  <button id="sort-button">Sort by Brand</button>
-                </th>
-                <th></th>
-              </tr>
-              <tr>
                 <th>ID</th>
                 <th>NAME</th>
                 <th>PRICE</th>
