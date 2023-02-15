@@ -111,11 +111,11 @@ export default function CartScreen() {
             <Card.Body>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <h3>
-                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                    items) : $
-                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
-                  </h3>
+                <h3>
+                Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
+                items) : $
+                {cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toFixed(3)}
+              </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div className="d-grid">
