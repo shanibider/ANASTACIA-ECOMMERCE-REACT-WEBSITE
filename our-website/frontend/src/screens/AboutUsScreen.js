@@ -54,7 +54,7 @@ const AboutUs = () => {
             </a>
             <p className="role">Content Manager</p>
             <img
-              src="https://media.licdn.com/dms/image/D4D35AQFItEE6fqeIDA/profile-framedphoto-shrink_400_400/0/1653036154705?e=1676995200&v=beta&t=8R2rlpAlDkR0PtyFHamNIywLfuw3BCXk4TJo78fS2jY"
+              src="https://media.licdn.com/dms/image/D4D35AQFItEE6fqeIDA/profile-framedphoto-shrink_200_200/0/1653036154705?e=1681743600&v=beta&t=6nxmtdy-lSyrstsyqrlw2aLUD0cJ4EV7x_QhhQVU06A"
               alt="Shani Bider"
               width="200"
               height="200"

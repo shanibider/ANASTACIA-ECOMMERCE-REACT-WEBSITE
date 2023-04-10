@@ -62,8 +62,8 @@ main {
 }
 
 .checkout-steps > div.active {
-  border-bottom: 0.2rem solid #fca311;
-  color: #fca311;
+  border-bottom: 0.2rem solid #fadde1;
+  color: #ff758f;
 }
 
 /* sidebar */
@@ -101,7 +101,7 @@ main {
   border: none;
 }
 .btn-delete {
-  background-color: #fca311;
+  background-color: #fadde1;
   color: #23181a;
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
