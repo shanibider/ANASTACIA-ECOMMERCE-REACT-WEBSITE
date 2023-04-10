@@ -66,6 +66,7 @@ export default function HomeScreen() {
         <title>Anastacia</title>
       </Helmet>
       <h1>Features Products</h1>
+      <br></br>
       <div className="products">
         {/*Conditional rendering- if loading is true show loading box*/}
         {loading ? (
