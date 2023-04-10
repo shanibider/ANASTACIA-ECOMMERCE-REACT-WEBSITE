@@ -1,6 +1,6 @@
 # Ecommerce Website
 <h3 align="left">Languages and Tools used in this project:</h3>
-[![My Skills](https://skillicons.dev/icons?i=react,js,html,css,,bootstrap,mongodb,nodejs)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=react,js,html,css,bootstrap,mongodb,nodejs)](https://skillicons.dev)
 
 
 ### Back-End Development Languages
