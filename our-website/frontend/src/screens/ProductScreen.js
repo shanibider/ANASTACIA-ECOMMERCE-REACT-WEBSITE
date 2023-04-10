@@ -78,7 +78,7 @@ function ProductScreen() {
 
   //next step is implement this api in the back
 
-  //for cart-
+  //By using useContext we have access to the state of the context, and change the context (ctxDispatch)
   //we bring it from useContext, and extract state from it
   //than from state we extract cart
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -86,8 +86,10 @@ function ProductScreen() {
 
   //increase quantity when user click add to cart multiple times
   const addToCartHandler = async () => {
+    //if current product exist in cart, increase quantity by 1 when clicked
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
+    //ajax request to current product to check if the product stock is less than the quantity im going to add to the cart
     const { data } = await axios.get(`/api/products/${product._id}`);
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
@@ -163,7 +165,7 @@ function ProductScreen() {
                 numReviews={product.numReviews}
               ></Rating>
             </ListGroup.Item>
-            <ListGroup.Item>Pirce : ${product.price}</ListGroup.Item>
+            <ListGroup.Item>Price : ${product.price}</ListGroup.Item>
             <ListGroup.Item>
               Description:
               <p>{product.description}</p>

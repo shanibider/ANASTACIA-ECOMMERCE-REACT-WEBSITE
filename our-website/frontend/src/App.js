@@ -83,11 +83,11 @@ export default function App() {
         <header>
           <Navbar className="navbar-custom" variant="dark" expand="lg">
             <Container>
-            <Button
-            variant="light"
-            className="me-3"
-            onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
-          >
+              <Button
+                variant="light"
+                className="me-3"
+                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+              >
                 <i className="fas fa-bars"></i>
               </Button>
               <LinkContainer to="/">
@@ -112,6 +112,8 @@ export default function App() {
                     Cart
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
+                        {/*number of items in cart based on quantity and not id
+                        prevent multiply the same  product*/}
                         {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                       </Badge>
                     )}

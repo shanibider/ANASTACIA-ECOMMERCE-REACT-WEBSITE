@@ -12,8 +12,8 @@ import { getError } from '../utils';
 export default function SigninScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const redirectInUrl = new URLSearchParams(search).get('redirect');
-  const redirect = redirectInUrl ? redirectInUrl : '/';
+  const redirectInUrl = new URLSearchParams(search).get('redirect'); //'/shipping'
+  const redirect = redirectInUrl ? redirectInUrl : '/'; //if redirectInUrl exist, redirect is redirectInUrl, else redirect is '/'
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,7 +71,9 @@ export default function SigninScreen() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="mb-3">
-          <Button type="submit" className="sign-in-button">Sign In</Button>
+          <Button type="submit" className="sign-in-button">
+            Sign In
+          </Button>
         </div>
         <div className="mb-3">
           New customer? {''}

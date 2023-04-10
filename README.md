@@ -1,7 +1,8 @@
-# React-final-project
+# React Final Project-
+## React online clothing store Website
 
-Online Clothes store:
-#
+
+
 Homepage :
 ![AnastaciaClothingStore png](https://user-images.githubusercontent.com/72359805/219037587-957f4c20-1d09-433a-ae37-76f5c89af74b.png)
 
