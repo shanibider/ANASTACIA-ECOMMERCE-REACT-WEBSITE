@@ -1,6 +1,7 @@
 # Ecommerce Website
 <h3 align="left">Languages and Tools used in this project:</h3>
- <img src="./icons/React-Dark.svg" width="48">     <img src="./icons/React-Dark.svg" width="48">  <img src="./icons/MongoDB.svg" width="48">    <img src="./icons/NodeJS-Dark.svg" width="48">   <img src="./icons/Bootstrap.svg" width="48">       <img src="./icons/CSS.svg" width="48">    <img src="./icons/HTML.svg" width="48"> 
+[![My Skills](https://skillicons.dev/icons?i=react,js,bootstrap,mongodb,nodejs,css,html&theme=light)](https://skillicons.dev)
+
 
 ### Back-End Development Languages
 - Node.JS  
@@ -14,7 +15,7 @@
 - CSS
 - Database- MongoDB: Mongoose
 
-## Future Features
+## Features
 
 - [x] Home (List products)
 - [x] Detail products
