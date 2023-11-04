@@ -1,4 +1,7 @@
 # Ecommerce Website
+
+Comprehensive e-commerce website with a rich feature set, including secure user registration and login functionality, storage and retrieval from MongoDB and Firebase databases. The website encompasses a shopping cart, review system, categorized product listings, secure PayPal payment integration, and comprehensive admin and user actions. Admin capabilities include managing 'Products' and 'Orders' lists, a dashboard, and the ability to edit, create, and delete products. Users can access their order history and edit their profiles.
+
 <h3 align="left">Languages and Tools used in this project:</h3>
 
 [![My Skills](https://skillicons.dev/icons?i=js,react,html,css,bootstrap,mongodb,nodejs)](https://skillicons.dev)
