@@ -1,37 +1,36 @@
-# Ecommerce Website
+# E-commerce Clothing Website
 
-Comprehensive e-commerce website with a rich feature set, including secure user registration and login functionality, storage and retrieval from MongoDB and Firebase databases. The website encompasses a shopping cart, review system, categorized product listings, secure PayPal payment integration, and comprehensive admin and user actions. Admin capabilities include managing 'Products' and 'Orders' lists, a dashboard, and the ability to edit, create, and delete products. Users can access their order history and edit their profiles.
+Comprehensive feature-rich e-commerce website, including secure user registration and login functionality, storage and retrieval from MongoDB and Firebase databases, shopping cart, review system, categorized product listings, secure PayPal payment integration, and comprehensive admin and user actions. Admin capabilities include managing 'Products' and 'Orders' lists, a dashboard, and the ability to edit, create, and delete products. Users can access their order history and edit their profiles.
 
-<h3 align="left">Languages and Tools used in this project:</h3>
+### Languages and Tools used in this project:
 
 [![My Skills](https://skillicons.dev/icons?i=js,react,html,css,bootstrap,mongodb,nodejs)](https://skillicons.dev)
 
 ### Front-End Development Languages
 - JavaScript 
-- React: Components, Props, Events, Hooks, Router, Axios
-- react-bootstrap
+- React-bootstrap, React: Components, Props, Events, Hooks, Router, Axios
 - CSS3
 - HTML5 
 - CSS
-- Database- MongoDB: Mongoose
 
 ### Back-End Development Languages
 - Node.JS  
+- Database- MongoDB: Mongoose
 
-## Features
+## Key Features
 
-- [x] Home (List products)
-- [x] Detail products
-- [x] Product category
-- [x] Cart
-- [x] Place order + paypal payment method
-- [x] Login / Register
-- [x] Admin actions - Products list, Orders list, Dashbord, edit/create/delete products
-- [x] User actions- orders history, edit profile
-- [x] About the team
+- [x] Home Page - Lists products
+- [x] Detailed Product View
+- [x] Product Categories
+- [x] Shopping Cart
+- [x] Order Processing with PayPal
+- [x] Secure User Registration and Login
+- [x] Admin Functionalities - Products and Orders management, Dashboard, Edit, create and delete products.
+- [x] User Functionalities- orders history, edit user profile
+- [x] About The Team Page
+
 
 ## Ecommerce Website Preview :
-
 ### Demo Website
 
 👉 Demo : 
@@ -117,3 +116,19 @@ Run this on browser: http://localhost:5000/api/seed
 
 Admin Login-
 Run http://localhost:3000/signin
+
+
+<br>
+
+## 🔗 Connect with me 👩‍💻😊
+[![github](https://img.shields.io/badge/my_github-000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shanibider)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shani-bider-0848b8177/)
+
+
+
+<footer>
+<p style="float:left; width: 20%;">
+Copyright © Shani Bider, 2023
+</p>
+</footer>
+
