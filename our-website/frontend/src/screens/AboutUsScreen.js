@@ -38,7 +38,7 @@ const AboutUs = () => {
             </a>
             <p className="role">Lead Developer</p>
             <img
-              src="https://media.licdn.com/dms/image/D4D03AQF1ATwg7f0rSA/profile-displayphoto-shrink_800_800/0/1676454943752?e=1681948800&v=beta&t=UbdKbxPns1LTxDR6vEupuAy8rcThM0Yg6SAfIoBdVLc"
+              src="https://media.licdn.com/dms/image/D4D03AQGYZLdHyRlnYA/profile-displayphoto-shrink_200_200/0/1683093302504?e=1710979200&v=beta&t=g7Nz4XN9YISaQlxr86kcvJjF7fedSb9A7y-r5_vttJU"
               alt="Shani Bider"
               width="200"
               height="200"
@@ -54,8 +54,8 @@ const AboutUs = () => {
             </a>
             <p className="role">Content Manager</p>
             <img
-              src="https://media.licdn.com/dms/image/D4D35AQFItEE6fqeIDA/profile-framedphoto-shrink_200_200/0/1653036154705?e=1681743600&v=beta&t=6nxmtdy-lSyrstsyqrlw2aLUD0cJ4EV7x_QhhQVU06A"
-              alt="Shani Bider"
+              src="https://media.licdn.com/dms/image/D4D35AQFItEE6fqeIDA/profile-framedphoto-shrink_200_200/0/1653036155024?e=1706018400&v=beta&t=ZnJni374I0GT-29stT5SM1A6BU8NouPXTjD7xzZoFYI"
+              alt="Shira"
               width="200"
               height="200"
             />
@@ -70,8 +70,8 @@ const AboutUs = () => {
             </a>
             <p className="role">Lead Designer</p>
             <img
-              src="https://media.licdn.com/dms/image/C4E03AQHEw_eJ8c3JMw/profile-displayphoto-shrink_400_400/0/1616965889497?e=1681948800&v=beta&t=9GRHUTUCwThdwXcNVcb-DXVXqjldWeswaX56CJk_6T0"
-              alt="Shani Bider"
+              src="https://media.licdn.com/dms/image/C4E03AQHEw_eJ8c3JMw/profile-displayphoto-shrink_200_200/0/1616965892206?e=1710979200&v=beta&t=S7jDwsGQ_4ixAJCFq3F7XwAd_wxEqYjslpMlOwBJ8yM"
+              alt="Refael Navon"
               width="200"
               height="200"
             />
@@ -86,8 +86,8 @@ const AboutUs = () => {
             </a>
             <p className="role">Founder and CEO</p>
             <img
-              src="https://media.licdn.com/dms/image/C5603AQEpgoWEFh_DkQ/profile-displayphoto-shrink_400_400/0/1606381029456?e=1681948800&v=beta&t=uMMwlzF8_v5Y2wNjLxC_HtM4IEPeCg_Jc6tDAmsl7DI"
-              alt="Shani Bider"
+              src="https://media.licdn.com/dms/image/C5603AQEpgoWEFh_DkQ/profile-displayphoto-shrink_200_200/0/1606381030583?e=1710979200&v=beta&t=1__LCaI8gxAxo6RK4y-xfS08xQuflSL4wWlRCwtBs6Y"
+              alt="Or Reuven"
               width="200"
               height="200"
             />
