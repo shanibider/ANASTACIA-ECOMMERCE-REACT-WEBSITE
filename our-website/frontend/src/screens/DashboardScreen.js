@@ -9,11 +9,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { Helmet } from 'react-helmet-async';
-/*reducer function*/
+
+
+/* reducer function - handles state changes based on different actions. 
+'FETCH_REQUEST' for indicating loading, 'FETCH_SUCCESS' for successful data fetching, and 'FETCH_FAIL' for handling errors. */
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_REQUEST':
+    case 'FETCH_REQUEST':       
       return { ...state, loading: true };
+
     //when we successfuly fetch data from backend we fill the summary field with summery data from backend (in action.payload)
     case 'FETCH_SUCCESS':
       return {
@@ -21,23 +25,25 @@ const reducer = (state, action) => {
         summary: action.payload,
         loading: false,
       };
+
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }
 };
+
+
 export default function DashboardScreen() {
-  //define a reducer to fetch data from backend
-  //we deconstruct from state from this reducer is { loading, summary, error },
-  //also get dispatch to call this cases and update the state of the reducer
-  const [{ loading, summary, error }, dispatch] = useReducer(reducer, {
+  // define a reducer to fetch data from backend
+  // deconstruct { loading, summary, error }, and get dispatch to call this cases and update the state of the reducer
+  const [{ loading, summary, error }, dispatch] = useReducer (reducer, {
     loading: true,
     error: '',
   });
 
-  //to get userInfo (from state)
-  //we need the { userInfo } token to authenticate the request for getting dashboard data
+  //to get userInfo (from state). we need the { userInfo } token to authenticate the request for getting dashboard data
   const { state } = useContext(Store);
   const { userInfo } = state;
 
@@ -63,6 +69,8 @@ export default function DashboardScreen() {
     //calling fetchData()
     fetchData();
   }, [userInfo]);
+
+
 
   return (
     <div>

@@ -65,6 +65,7 @@ export default function CartScreen() {
       <h1>Shopping Cart</h1>
       
       <Row>
+      {/* sets the column size using the Bootstrap grid. Column should take up 8 out of 12 available grid columns on medium-sized screens. */}
         <Col md={8}>
 
           {/*if the cart is empty, show a message with a link to "/" to go shopping.
@@ -143,31 +144,36 @@ export default function CartScreen() {
         </Col>
 
 
+
         {/*  displays a summary of the cart in a Card. Shows the subtotal (total quantity and price),
         and a button to proceed to checkout, which is disabled if the cart is empty. */}
-        <Col md={4}>
+        <Col md={4}>          {/* Column take up 4 out of 12 available grid columns on medium-sized screens. */}
           <Card>
             <Card.Body>
-              <ListGroup variant="flush">
+            
+              <ListGroup variant="flush"> {/* removes the default borders and rounded corners, giving cleaner look. */}
 
-
-                <ListGroup.Item>
+                <ListGroup.Item>        
                   <h3>
-                    Subtotal ({cartItems.reduce ((a, c) => a + c.quantity, 0) }{' '}
-                    items) : $
-                    {cartItems
-                      .reduce((a, c) => a + c.price * c.quantity, 0)
-                      .toFixed(3)}
+                  {/* reduce applied to the cartItems array, calculate the total quantity of items in the cart. 
+                  (a, c)=>a+c.quantity: callback function provided to reduce. Takes two parameters 
+                  (a for accumulator and c for each element in the array) and sums up the quantities of each item in the cart.
+                  0: This is the initial value of the accumulator (a). */}
+                    Subtotal 
+                    ( {cartItems.reduce ( (a, c) => a + c.quantity, 0) } {' '}
+                    items ) : $
+                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0).toFixed(3)}    {/* multiplies the price of each item by its quantity before summing them up. */}
                   </h3>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
+                 {/* disabled is property of the button component that determines whether the button is disabled. */}
                   <div className="d-grid">
                     <Button
                       type="button"
                       variant="primary"
                       onClick={checkoutHandler}
-                      disabled={cartItems.length === 0}
+                      disabled={cartItems.length === 0}  
                     >
                       Proceed to Checkout
                     </Button>
@@ -176,10 +182,11 @@ export default function CartScreen() {
 
 
               </ListGroup>
+
             </Card.Body>
           </Card>
 
-        </Col>
+        </Col> {/* end of the right col */}
 
 
       </Row>    {/* end of row from begining */}
