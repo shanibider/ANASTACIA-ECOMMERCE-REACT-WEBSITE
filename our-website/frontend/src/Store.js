@@ -166,14 +166,14 @@ function reducer(state, action) {
 
 
 
-/* StoreProvider component wrap the entire app, and pass global props to children. (acts as a provider for the entire app).
+/* StoreProvider, a custom provider component that wrap the entire app, and pass global props to children. (acts as a provider for the entire app).
   StoreProvider utilizes the 'useReducer' hook to create a state and a dispatch function based on the reducer and initial state.
   This component sets up a container that manages the application state, and provides it to all its child components.
   It uses the useReducer hook to handle state changes, and the value object ensures that both the current state and the function to update the state are available to its children.
  */
 export function StoreProvider (props) {
 
-  //  hook used to manage state using the reducer function and an initial state. Returns the current state and a dispatch function to trigger state changes.
+  //  hook used to manage state of the app using the reducer function and an initial state. Returns the current state and a dispatch function to trigger state changes.
   const [state, dispatch] = useReducer (reducer, initialState);
 
   // creates an object containing the current state and the dispatch function, will be used as the value for Store.Provider.
@@ -242,16 +242,16 @@ LocalStorage is a web storage solution that allows web applications to store dat
 
 Here are some key points about LocalStorage:
 
-1. **Key-Value Storage:**
+1. Key-Value Storage:
    - LocalStorage stores data in key-value pairs.
    - The keys and values are both strings.
 
-2. **Usage:**
+2. Usage:
    - To store data in LocalStorage, you use the `localStorage` object in JavaScript.
    - Example of setting a key-value pair: `localStorage.setItem('key', 'value')`.
    - Example of retrieving the value associated with a key: `const value = localStorage.getItem('key')`.
 
-3. **Data Type Limitation:**
+3. Data Type Limitation:
    - While values can be retrieved as strings, it's common to use `JSON.stringify` to convert complex objects into strings when storing them, and `JSON.parse` to convert them back when retrieving.
 
 Here's a simple example of using LocalStorage:

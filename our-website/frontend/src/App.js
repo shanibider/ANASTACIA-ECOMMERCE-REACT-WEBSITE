@@ -41,12 +41,19 @@ import OrderListScreen from './screens/OrderListScreen';
 
 import AboutUs from './screens/AboutUsScreen';
 import HowToScreen from './screens/HowToScreen';
-export default function App() {
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart, userInfo } = state; //diconsrtucture cart from state
 
-  //signout handler
+/* This App component serves as the main structure for eCommerce web app, managing state, user authentication, navigation, and screen rendering based on routes.
+The code is well-organized, utilizing React hooks and components for a modular and maintainable structure. */
+
+export default function App() {
+
+  // State Management:
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;   // Destructuring cart and userInfo from state
+
+  // Signout handler by dispatching a 'USER_SIGNOUT' action and removing user-related data from local storage.
   const signoutHandler = () => {
+    
     ctxDispatch({ type: 'USER_SIGNOUT' }); //the type of actiob we going to dispatch
     localStorage.removeItem('userInfo'); //remove user info from local storage
     localStorage.removeItem('shippingAddress');
@@ -54,11 +61,22 @@ export default function App() {
     //    window.location.href = '/signin';
   };
 
-  //sidebar
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
+  // States for managing the sidebar visibility and fetching product categories.
+  /* useState is a React hook that allows functional components to manage state. It initializes a state variable sidebarIsOpen with an initial value of false,
+  and setSidebarIsOpen is a function used to update the value of sidebarIsOpen. The purpose of this state is to track whether the sidebar in the app is open or closed. */
+  const [sidebarIsOpen, setSidebarIsOpen] = useState (false);
+  const [categories, setCategories] = useState ([]);
 
+  /* Use Effect for Fetching Categories, fetches product categories when the component mounts.
+  // http://localhost:5000/api/products/categories give:
+  [
+    "HM",
+    "Pants",
+    "Shirts"
+  ] */
   useEffect(() => {
+
+    // data is obtained through an asynchronous Axios request.
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(`/api/products/categories`);
@@ -67,9 +85,14 @@ export default function App() {
         Toast.error(getError(err));
       }
     };
+
     fetchCategories();
   }, []);
 
+
+
+
+  // The main component is wrapped in <BrowserRouter> for navigation handling.
   return (
     <BrowserRouter>
       <div
@@ -80,13 +103,15 @@ export default function App() {
         }
       >
         <ToastContainer position="bottom-center" limit={1} />
+
+        {/* header includes navigation links, a search box, and conditional rendering based on user authentication and admin status. */}
         <header>
           <Navbar className="navbar-custom" variant="dark" expand="lg">
             <Container>
               <Button
                 variant="light"
                 className="me-3"
-                onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+                onClick= {() => setSidebarIsOpen(!sidebarIsOpen)}
               >
                 <i className="fas fa-bars"></i>
               </Button>
@@ -112,14 +137,19 @@ export default function App() {
                     Cart
                     {cart.cartItems.length > 0 && (
                       <Badge pill bg="danger">
-                        {/*number of items in cart based on quantity and not id
-                        prevent multiply the same  product*/}
-                        {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                        {/*number of items in cart based on quantity and not id prevent multiply the same  product
+                        'cart'- cart objec, 'cartItems'- array within the cart object, 'reduce'- iterate over each item in the cartItems array and accumulate their quantities.
+                          a: Accumulator. accumulates the result of the reduction.
+                          c: Current item in the array.
+                          a + c.quantity: It adds the quantity of the current item to the accumulator.
+                          , 0: The 0 is the initial value of the accumulator (a). The reduce function starts with this value.
+                        */}
+                        {cart.cartItems.reduce ( (a, c) => a + c.quantity, 0 )}
                       </Badge>
                     )}
                   </Link>
 
-                  {/*if userInfo exist -> we render a navDropDown*/}
+                  {/* Conditional rendering based on whether a user is authenticated. If yes, a NavDropdown with user-related links is displayed; otherwise, "Sign In" link is shown. */}
                   {userInfo ? (
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">
@@ -144,7 +174,7 @@ export default function App() {
                   )}
 
                   {/*****ADMIN*****/}
-                  {/*if userInfo exist and userInfo.isAdmin is true -> we render a navDropDown*/}
+                  {/* if userInfo exist and userInfo.isAdmin is true -> we render a admin-related links navDropDown */}
                   {userInfo && userInfo.isAdmin && (
                     <NavDropdown title="Admin" id="admin-nav-dropdown">
                       <LinkContainer to="/admin/dashboard">
@@ -160,11 +190,15 @@ export default function App() {
                     </NavDropdown>
                   )}
                   {/**********/}
+
                 </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
         </header>
+
+
+        {/* side bar - displays product categories as links, based on whether it is open or closed.. */}
         <div
           className={
             sidebarIsOpen
@@ -176,7 +210,7 @@ export default function App() {
             <Nav.Item>
               <strong>Categories</strong>
             </Nav.Item>
-            {categories.map((category) => (
+            {categories.map ((category) => (
               <Nav.Item key={category}>
                 <LinkContainer
                   to={{
@@ -191,6 +225,9 @@ export default function App() {
             ))}
           </Nav>
         </div>
+
+
+        {/* Main Section (Routing): The Routes component handles routing using react-router-dom, defining routes for different screens such as Home, Product, Cart, About Us, etc. */}
         <main>
           <Container className="mt-3">
             <Routes>
@@ -201,7 +238,7 @@ export default function App() {
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
-              {/*we use ProtectedRoute for routes that need authentication*/}
+              {/* <ProtectedRoute> is used for routes that need authentication*/}
               <Route
                 path="/profile"
                 element={
@@ -267,13 +304,15 @@ export default function App() {
                   </AdminRoute>
                 }
               ></Route>
-
               {/********/}
 
               <Route path="/" element={<HomeScreen />} />
             </Routes>
           </Container>
         </main>
+
+
+
         <footer>
           <div className="text-center">All rights reserved</div>
         </footer>
@@ -281,6 +320,8 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+
 
 /*  <LinkContainer
                   to={{ pathname: '/search', search: `category=${category}` }}

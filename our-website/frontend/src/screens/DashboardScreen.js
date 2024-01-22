@@ -11,8 +11,12 @@ import Card from 'react-bootstrap/Card';
 import { Helmet } from 'react-helmet-async';
 
 
-/* reducer function - handles state changes based on different actions. 
-'FETCH_REQUEST' for indicating loading, 'FETCH_SUCCESS' for successful data fetching, and 'FETCH_FAIL' for handling errors. */
+// This component fetches data from the server, manages the state using a reducer, and displays various statistics and charts related to user activity and sales
+// The use of a reducer provides a clean way to handle asynchronous data fetching and state update
+
+
+// reducer function - handles state changes based on different actions, related to fetching dashboard data. 
+// 'FETCH_REQUEST' for indicating loading, 'FETCH_SUCCESS' for successful data fetching, and 'FETCH_FAIL' for handling errors. 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':       
@@ -35,21 +39,24 @@ const reducer = (state, action) => {
 };
 
 
+
 export default function DashboardScreen() {
-  // define a reducer to fetch data from backend
+  // uses the useReducer hook to manage the state defined by the reducer function.
   // deconstruct { loading, summary, error }, and get dispatch to call this cases and update the state of the reducer
   const [{ loading, summary, error }, dispatch] = useReducer (reducer, {
     loading: true,
     error: '',
   });
 
-  //to get userInfo (from state). we need the { userInfo } token to authenticate the request for getting dashboard data
-  const { state } = useContext(Store);
+  // to get userInfo (from state). we need the { userInfo } token to authenticate the request for getting dashboard data.
+  const { state } = useContext (Store);
   const { userInfo } = state;
 
-  //useEffect for send an ajax request to get the dashboard data
-  //try and catch beacuse we have to catch any error on ajax requests to backend
-  useEffect(() => {
+  
+  // useEffect hook - to fetch data when the component mounts or when the userInfo changes.
+  // The data is fetched using Axios from the '/api/orders/summary' endpoint, and the result is dispatched to the reducer to update the state.
+    useEffect(() => {
+
     const fetchData = async () => {
       try {
         //send ajax request using axios to this url: '/api/orders/summary'
@@ -59,6 +66,7 @@ export default function DashboardScreen() {
         });
         //here we get the data from backend and set it as a payload for 'FETCH_SUCCESS'
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
+
       } catch (err) {
         dispatch({
           type: 'FETCH_FAIL',
@@ -67,11 +75,19 @@ export default function DashboardScreen() {
       }
     };
     //calling fetchData()
+
     fetchData();
-  }, [userInfo]);
+
+    // the dependency array is used to specify the dependencies that the effect depends on.When any of the dependencies in the array change, the effect will be re-executed.
+    // `userInfo` is specified as a dependency here, so The effect code inside the `useEffect` hook will run whenever `userInfo` changes.
+  }, [userInfo]);    
 
 
 
+
+
+  // renders a set of Cards displaying info about the number of users, number of orders, and total sales.
+  // also includes two charts using the Chart component, showing sales over time and product categories.
   return (
     <div>
     <Helmet>

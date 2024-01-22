@@ -1,0 +1,141 @@
+REACT HOOKS:
+React hooks are functions that enable functional components to have state and lifecycle features that were previously only available in class components. Some common React hooks:
+
+1. useState:
+- Purpose: Manages state in functional components. (Keeps track of data within a component).
+- Syntax:
+    const [state, setState] = useState(initialState);
+- Reason: Allows functional components to have local state, making it possible to manage and update data within the component.
+
+
+ 2. useEffect:
+- Purpose: Performs side effects in functional components (data fetching, subscriptions, manually changing the DOM). (takes care of things that need to happen when your component is born).
+- Syntax:
+    useEffect(() => {
+        // Side effect code here
+        return () => {
+        // Cleanup code (optional)
+        };
+    }, [dependencies]);
+
+- Reason: Enables handling of side effects and lifecycle methods in functional components.
+
+
+ 3. useContext:
+- Purpose: Accesses the value of a React context. (Shares information between components without passing it through props).
+- Syntax:
+    const contextValue = useContext(MyContext);
+- Reason: Allows functional components to consume values provided by a context without the need for a consumer component.
+
+
+
+ 4. useReducer:
+- Purpose: Manages more complex state logic, often in combination with `useContext`, in a structured way.
+- Syntax:
+    const [state, dispatch] = useReducer(reducer, initialState);
+- Reason: Provides a way to handle state updates in a more structured and scalable manner compared to `useState`.
+
+
+
+Summary:
+React hooks provide a way to add state and lifecycle features to functional components, making them more powerful and concise,
+help functional components do more powerful things, like remembering data, managing effects, sharing information, and handling complex state changes.
+Understanding when and how to use these hooks helps in building efficient and maintainable React applications.
+
+
+
+
+
+
+
+HOOKS + EXAMPLES FROM THE CODE:
+
+1. useState:
+
+const [{ loading, summary, error }, dispatch] = useReducer(reducer, {
+  loading: true,
+  error: '',
+});
+
+Explanation:
+- "useState" is used to manage the state within your component.
+In this example, i"m using "useReducer", which is a hook that includes a state and a dispatch function for updating that state.
+- "loading", "summary", and "error" are pieces of state.
+- "dispatch" is a function you can call to update the state by dispatching actions.
+
+
+
+2. useEffect:
+the dependency array `[userInfo]` in the `useEffect` ensures that the effect runs when there is a change in the `userInfo` variable, allowing you to react to changes in that specific piece of state.
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const { data } = await axios.get('/api/orders/summary', {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      });
+      dispatch({ type: 'FETCH_SUCCESS', payload: data });
+    } catch (err) {
+      dispatch({
+        type: 'FETCH_FAIL',
+        payload: getError(err),
+      });
+    }
+  };
+
+  fetchData();
+}, [userInfo]);
+
+Explanation:
+- useEffect is used for side effects in your component (data fetching, subscriptions).
+- In this example, it's fetching data when the component mounts or when userInfo changes.
+- The function inside useEffect is the side effect code.
+- `userInfo` is specified as a dependency in the dependency array. The [userInfo] in the dependency array ensures that the effect runs when userInfo changes.
+- the dependency array is used to specify the dependencies that the effect depends on. When any of the dependencies in the array change, the effect will be re-executed.
+- If `userInfo` is initially `null` or some default value, the effect will run when `userInfo` is updated with actual user information.
+- It ensures that the data-fetching logic inside the `useEffect` is triggered when there's a change in the `userInfo` variable.
+- This is particularly useful for scenarios where you want to fetch or perform actions based on the latest user information.
+
+
+
+
+
+
+3. IM HERE!!!!!!!!!
+3. useContext:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+component MOUNTS:
+
+When we talk about a component "mounting," we are referring to the moment when a React component is being created and inserted into the DOM (Document Object Model) for the first time.
+It's the initial rendering phase of the component's lifecycle.
+
+In a React component's lifecycle, the mounting phase includes the following methods:
+
+- `constructor`: The component's constructor is called first, where you typically initialize state and bind event handlers.
+- `render`: The `render` method is responsible for generating the component's UI.
+- `componentDidMount`: This method is invoked immediately after the component is inserted into the DOM. It's often used to perform tasks like data fetching or setting up subscriptions.
+
+
+
+
