@@ -69,10 +69,45 @@ It includes secure user registration and login functionality via Firebase databa
 
 - [x] **About The Team Page:**
   - Provides information about the development team
+    
 <br>
 
 
 
+## The application follows these key patterns:
+THe architecture focuses on structured state management, components, and effective handling of side effects and navigation in a React app.
+
+1. **State Management:**
+   - Uses `useReducer` for organized state management.
+
+2. **Global State:**
+   - Manages global state for properties like `cart`, `userInfo`, `loading`, and `error`.
+
+3. **Side Effects:**
+   - Handles side effects, such as data fetching, with `useEffect`.
+
+4. **Component Structure:**
+   - Organizes the app into modular components, promoting a component-based architecture.
+
+5. **React Router:**
+   - Implements React Router for navigation.
+
+6. **Conditional Rendering:**
+   - Conditionally displays UI elements based on the application's state.
+
+7. **Authentication Handling:**
+   - Manages user authentication through global state.
+
+8. **Middleware (`logger`):**
+   - Uses a middleware function (`logger`) for state change logging.
+
+9. **RESTful API Calls:**
+   - Utilizes Axios for making API calls to a backend server.
+
+
+
+
+<br>
 
 ## Ecommerce Website Preview :
 ### Demo Website
