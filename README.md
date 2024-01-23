@@ -121,6 +121,10 @@ THe architecture focuses on structured state management, components, and effecti
 ###### Home Page
 ![home](https://user-images.githubusercontent.com/72359805/230922135-b29b6c60-afd5-48ec-9fc4-d5e2e44a085a.PNG)
 
+###### Product out of stock alert
+
+![out of stock alert](https://github.com/shanibider/Anastacia-Ecommerce-React-Website/assets/72359805/58f0ea96-a220-47e3-a682-9e683fd04557)
+
 ###### Detailed Product View
 ![product](https://user-images.githubusercontent.com/72359805/230922485-2206ef84-98bf-42fa-8365-c2e0c192ade0.PNG)
 
@@ -153,7 +157,7 @@ THe architecture focuses on structured state management, components, and effecti
 
 <br>
 
-### User functionality:
+## User functionality:
 
 ###### User order history
 ![order history](https://user-images.githubusercontent.com/72359805/230922850-bf35dce7-eaea-4ff2-9d95-741a9b0edb77.PNG)
@@ -163,7 +167,7 @@ THe architecture focuses on structured state management, components, and effecti
 
 <br>
 
-### Admin functionality:
+## Admin functionality:
 
 ###### Admin dashboard displaying real-time metrics: registered users, order count, and financial performance through total money orders
 ![Admin info](https://user-images.githubusercontent.com/72359805/230922856-8218eadd-3c44-4689-8710-5757060e9177.PNG)
