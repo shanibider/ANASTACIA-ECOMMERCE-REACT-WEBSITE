@@ -52,7 +52,7 @@ export default function DashboardScreen() {
   const { state } = useContext (Store);
   const { userInfo } = state;
 
-  
+  git 
   // useEffect hook - to fetch data when the component mounts or when the userInfo changes.
   // The data is fetched using Axios from the '/api/orders/summary' endpoint, and the result is dispatched to the reducer to update the state.
     useEffect(() => {
