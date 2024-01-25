@@ -69,10 +69,45 @@ It includes secure user registration and login functionality via Firebase databa
 
 - [x] **About The Team Page:**
   - Provides information about the development team
+    
 <br>
 
 
 
+## The application follows these key patterns:
+THe architecture focuses on structured state management, components, and effective handling of side effects and navigation in a React app.
+
+1. **State Management:**
+   - Uses `useReducer` for organized state management.
+
+2. **Global State:**
+   - Manages global state for properties like `cart`, `userInfo`, `loading`, and `error`.
+
+3. **Side Effects:**
+   - Handles side effects, such as data fetching, with `useEffect`.
+
+4. **Component Structure:**
+   - Organizes the app into modular components, promoting a component-based architecture.
+
+5. **React Router:**
+   - Implements React Router for navigation.
+
+6. **Conditional Rendering:**
+   - Conditionally displays UI elements based on the application's state.
+
+7. **Authentication Handling:**
+   - Manages user authentication through global state.
+
+8. **Middleware (`logger`):**
+   - Uses a middleware function (`logger`) for state change logging.
+
+9. **RESTful API Calls:**
+   - Utilizes Axios for making API calls to a backend server.
+
+
+
+
+<br>
 
 ## Ecommerce Website Preview :
 ### Demo Website
@@ -85,6 +120,10 @@ It includes secure user registration and login functionality via Firebase databa
 
 ###### Home Page
 ![home](https://user-images.githubusercontent.com/72359805/230922135-b29b6c60-afd5-48ec-9fc4-d5e2e44a085a.PNG)
+
+###### Product out of stock alert
+
+![out of stock alert](https://github.com/shanibider/Anastacia-Ecommerce-React-Website/assets/72359805/58f0ea96-a220-47e3-a682-9e683fd04557)
 
 ###### Detailed Product View
 ![product](https://user-images.githubusercontent.com/72359805/230922485-2206ef84-98bf-42fa-8365-c2e0c192ade0.PNG)
@@ -118,7 +157,7 @@ It includes secure user registration and login functionality via Firebase databa
 
 <br>
 
-### User functionality:
+## User functionality:
 
 ###### User order history
 ![order history](https://user-images.githubusercontent.com/72359805/230922850-bf35dce7-eaea-4ff2-9d95-741a9b0edb77.PNG)
@@ -128,7 +167,7 @@ It includes secure user registration and login functionality via Firebase databa
 
 <br>
 
-### Admin functionality:
+## Admin functionality:
 
 ###### Admin dashboard displaying real-time metrics: registered users, order count, and financial performance through total money orders
 ![Admin info](https://user-images.githubusercontent.com/72359805/230922856-8218eadd-3c44-4689-8710-5757060e9177.PNG)
@@ -147,10 +186,15 @@ It includes secure user registration and login functionality via Firebase databa
 ###### Search bar
 ![search](https://user-images.githubusercontent.com/72359805/230922982-83d66ae1-cc6d-4cca-b5be-b21c1f7c7628.PNG)
 
+
 ###### about us page
 ![about us](https://user-images.githubusercontent.com/72359805/230923017-44b75026-def1-40bf-af5f-7d8f2d76ee1b.PNG)
 
 ![about us2](https://user-images.githubusercontent.com/72359805/230923021-ee53f35c-7676-485a-93a7-5f53cb9eaec9.PNG)
+
+###### Spinner Component showing the loading state
+
+![loadingBox component](https://github.com/shanibider/Anastacia-Ecommerce-React-Website/assets/72359805/51546c31-6154-4802-9eed-ea4128915cd9)
 
 
 
