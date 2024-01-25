@@ -13,13 +13,15 @@ import Button from 'react-bootstrap/Button';
 import Product from '../components/Product';
 import LinkContainer from 'react-router-bootstrap/LinkContainer';
 
-/*reducer function defination*/
 
+// Reducer function to manage the state related to product fetching
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_REQUEST':
-      return { ...state, loading: true };
-    case 'FETCH_SUCCESS':
+   // When a product fetch request is initiated
+   case 'FETCH_REQUEST':
+    return { ...state, loading: true };
+  // When product fetching is successful, Updates the state with product data 
+  case 'FETCH_SUCCESS':
       return {
         ...state,
         products: action.payload.products,
@@ -30,12 +32,14 @@ const reducer = (state, action) => {
       };
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
-
+    // Default case returns the current state
     default:
       return state;
   }
 };
 
+
+// Price range options for filtering products
 const prices = [
   {
     name: '$1 to $50',
@@ -50,6 +54,7 @@ const prices = [
     value: '201-1000',
   },
 ];
+
 
 export const ratings = [
   {
@@ -73,31 +78,34 @@ export const ratings = [
   },
 ];
 
+
+// Functional component for the SearchScreen
 export default function SearchScreen() {
+  
   const navigate = useNavigate();
   const { search } = useLocation();
 
+    // Extracting query parameters from the URL
   const sp = new URLSearchParams(search); // /search?category=Shirts
 
-  const category = sp.get('category') || 'all'; //this function will return "Shirts"
+  const category = sp.get('category') || 'all'; // return "Shirts"
   const query = sp.get('query') || 'all';
   const price = sp.get('price') || 'all';
   const rating = sp.get('rating') || 'all';
   const order = sp.get('order') || 'newest';
   const page = sp.get('page') || 1;
+ 
 
-  /*reducer*/
-  //define a reducer to fetch data from backend
-  //we deconstruct from state from this reducer- { loading, error, products, pages, countProducts },
-  //also get dispatch to call this cases and update the state of the reducer
+  // UseReducer to manage state related to product fetching
   const [{ loading, error, products, pages, countProducts }, dispatch] =
     useReducer(reducer, {
       loading: true,
       error: '',
     });
 
-  //useEffect for send an ajax request to this api (/api/products/search) to get the dashboard data
-  //try and catch beacuse we have to catch any error on ajax requests to backend
+  
+
+  // useEffect for sending an AJAX request to fetch product data
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -114,9 +122,11 @@ export default function SearchScreen() {
     };
     fetchData();
   }, [category, error, order, page, price, query, rating]); //dependecy array (include all variables used in quary string)
-  //if you change any of this variables this function runs again and frtchData() will aplly the filter
 
-  //we use useEffect to fetch categories and set them in the categories variable
+
+
+
+  // useEffect to fetch categories and set them in the categories variable
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchCategories = async () => {
@@ -130,6 +140,10 @@ export default function SearchScreen() {
     fetchCategories();
   }, [dispatch]);
 
+
+
+
+  // Function to generate a filter URL based on selected filters
   const getFilterUrl = (filter) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
@@ -139,6 +153,10 @@ export default function SearchScreen() {
     const sortOrder = filter.order || order;
     return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
   };
+
+
+
+
   return (
     <div>
       <Helmet>
@@ -149,6 +167,7 @@ export default function SearchScreen() {
           <h3>Department</h3>
           <div>
             <ul>
+              {/* Render 'Any' option for category */}
               <li>
                 <Link
                   className={'all' === category ? 'text-bold' : ''}

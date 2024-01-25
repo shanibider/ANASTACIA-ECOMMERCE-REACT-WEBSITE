@@ -8,37 +8,58 @@ import MessageBox from '../components/MessageBox';
 import { Store } from '../Store';
 import { getError } from '../utils';
 
+
+// Reducer function to handle state changes based on dispatched actions.
+// responds to: 'FETCH_REQUEST', 'FETCH_SUCCESS', and 'FETCH_FAIL'.
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true };
+
     case 'FETCH_SUCCESS':
       return {
         ...state,
         orders: action.payload,
         loading: false,
       };
+
     case 'FETCH_FAIL':
       return { ...state, loading: false, error: action.payload };
+
     default:
       return state;
   }
 };
+
+
+
+
+
 export default function OrderListScreen() {
+
+  // useNavigate hook from React Router for programmatic navigation
   const navigate = useNavigate();
 
+  // uses useContext hook to access global state (userInfo) from the Store context.
   const { state } = useContext(Store);
   const { userInfo } = state;
 
-  const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
+  // useReducer hook manages state (loading, error, orders) and dispatches actions using the reducer function.
+  // Destructuring to extract values from the array returned by useReducer. { loading, error, orders } represents the state properties, and dispatch represents the dispatch function.
+  // useReducer is used to manage state and actions with the reducer function.
+  // The initial state is set with loading: true and error: ''.
+  const [{ loading, error, orders }, dispatch] = useReducer (reducer, {
     loading: true,
     error: '',
   });
 
+
+  // useEffect hook for asynchronous data fetching when the component mounts or userInfo changes.
   useEffect(() => {
     const fetchData = async () => {
       try {
-        dispatch({ type: 'FETCH_REQUEST' });
+        dispatch({ type: 'FETCH_REQUEST' });        //dispatch PAY_REQUEST to show loading box
+        // Fetch data from the /api/orders endpoint
         const { data } = await axios.get(`/api/orders`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
@@ -50,11 +71,14 @@ export default function OrderListScreen() {
         });
       }
     };
+
     fetchData();
   }, [userInfo]);
 
 
 
+
+    // Component rendering
   return (
     <div>
       <Helmet>
@@ -93,11 +117,12 @@ export default function OrderListScreen() {
                     : 'No'}
                 </td>
                 <td>
+                  {/* Utilizes the navigate function to create a button for navigating to the details page of each order. */}
                   <Button
                     type="button"
                     variant="light"
-                    onClick={() => {
-                      navigate(`/order/${order._id}`);
+                    onClick = { () => {
+                      navigate (`/order/${order._id}`);
                     }}
                   >
                     Details

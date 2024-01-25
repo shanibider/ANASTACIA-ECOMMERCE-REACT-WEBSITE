@@ -17,7 +17,9 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast } from 'react-toastify';
 
-/*Reducer function*/
+// Functional component for displaying product details and reviews
+
+// Reducer function to manage the state based on dispatched actions
 const reducer = (state, action) => {
   switch (action.type) {
     //for order review
@@ -40,19 +42,24 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
+
+
 function ProductScreen() {
+
+  // useRef to store a reference to the reviews section for scrolling
   let reviewsRef = useRef();
 
+  // State variables for rating and comment inputs
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const navigate = useNavigate();
 
+  // Extracting parameters from the URL using useParams
   const params = useParams();
   const { slug } = params;
 
-  //userReducer defined by an object- {loading, error, product, loadingCreateReview}, and dispatch.
-  //and accept a reducer and defualt state, that we set.
-  //we use dispatch to call an action and update the state
+  // useReducer to manage state and dispatch actions using the defined reducer
   const [{ loading, error, product, loadingCreateReview }, dispatch] =
     useReducer(reducer, {
       product: [],
@@ -60,8 +67,9 @@ function ProductScreen() {
       error: '',
     });
 
-  //useEffect use to send an ajax request to get data
-  //useEffect accpets a function and an array of dependencies
+
+
+  // useEffect to fetch product data when the component mounts or slug changes
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
@@ -74,17 +82,18 @@ function ProductScreen() {
       }
     };
     fetchData();
-  }, [slug]); //we use slug as a dependency, because we want to run the useEffect when slug change (user switch between pages)
+  }, [slug]);     // run useEffect when slug change (user switch between pages)
 
-  //next step is implement this api in the back
 
-  //By using useContext we have access to the state of the context, and change the context (ctxDispatch)
-  //we bring it from useContext, and extract state from it
-  //than from state we extract cart
+
+  
+  // Extracting cart and user information from the global state using useContext
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state; //diconstructing
 
-  //increase quantity when user click add to cart multiple times
+
+
+  // Event handler for adding the product to the cart
   const addToCartHandler = async () => {
     //if current product exist in cart, increase quantity by 1 when clicked
     const existItem = cart.cartItems.find((x) => x._id === product._id);
@@ -95,6 +104,8 @@ function ProductScreen() {
       window.alert('Sorry. Product is out of stock');
       return;
     }
+
+    // Dispatch an action to add the item to the cart
     ctxDispatch({
       type: 'CART_ADD_ITEM',
       payload: { ...product, quantity },
@@ -103,6 +114,9 @@ function ProductScreen() {
     navigate('/cart');
   };
 
+
+
+  // Event handler for submitting a review
   const submitHandler = async (e) => {
     e.preventDefault();
     if (!comment || !rating) {
@@ -110,23 +124,30 @@ function ProductScreen() {
       return;
     }
     try {
+      // Send a POST request to submit the review
       const { data } = await axios.post(
         `/api/products/${product._id}/reviews`,
         { rating, comment, name: userInfo.name },
         {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
+          headers: { Authorization: `Bearer ${userInfo.token}` },   //server requires valid user token to access protected routes
         }
       );
 
-      //dispatch for order review
+      // Dispatch actions for order review
       dispatch({
         type: 'CREATE_SUCCESS',
       });
       toast.success('Review submitted successfully');
+
+      // Update product reviews and ratings
       product.reviews.unshift(data.review);
       product.numReviews = data.numReviews;
       product.rating = data.rating;
+
+      // Refresh the product in the global state
       dispatch({ type: 'REFRESH_PRODUCT', payload: product });
+
+      // Scroll to the reviews section
       window.scrollTo({
         behavior: 'smooth',
         top: reviewsRef.current.offsetTop,
@@ -137,12 +158,16 @@ function ProductScreen() {
     }
   };
 
+
+
+
   return loading ? (
     <LoadingBox />
   ) : error ? (
     <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div>
+      {/* Displaying product details */}
       <Row>
         <Col md={6}>
           <img

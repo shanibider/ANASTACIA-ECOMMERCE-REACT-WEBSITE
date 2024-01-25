@@ -13,11 +13,8 @@ import { toast } from 'react-toastify';
 import { getError } from '../utils';
 import LoadingBox from '../components/LoadingBox';
 
-//reducer function itself.
-//here we define switch case that check the action.type
-//(reducer is independent component)
 
-//for create order
+//Reducer to manage loading state during the order creation process
 const reducer = (state, action) => {
   switch (action.type) {
     case 'CREATE_REQUEST':
@@ -31,34 +28,39 @@ const reducer = (state, action) => {
   }
 };
 
+// Exporting the PlaceOrderScreen component
 export default function PlaceOrderScreen() {
   const navigate = useNavigate();
 
-  //from useReducer we get data (loading state), and dispatch function
+  // useReducer to manage the loading state during the order creation process
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
   });
 
-  //for userInfo-
-  //we bring it from useContext, and extract state from it
-  //than from state we extract userInfo
-  //(rename this dispatch to ctxDispatch)
+  // Extracting cart and userInfo from the global state using useContext
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
 
-  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
-  cart.itemsPrice = round2(
-    cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
-  );
+  // Helper function to round a number to 2 decimal places
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.
+  
+  // Calculating itemsPrice - the total price of all items in the cart
+  cart.itemsPrice = round2 ( cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0) );
+  // Calculating shippingPrice based on itemsPrice (0 (free shipping) or 10)
   cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
-  cart.taxPrice = round2(0.15 * cart.itemsPrice);
+  // Calculating taxPrice as 15% of itemsPrice
+  cart.taxPrice = round2 (0.15 * cart.itemsPrice);
+  // Calculating totalPrice by summing itemsPrice, shippingPrice, and taxPrice
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
+
+
+    // Handler for placing an order
   const placeOrderHandler = async () => {
     try {
       dispatch({ type: 'CREATE_REQUEST' });
-      //send ajax request to backend to '/api/orders' api
-      //second parameter in post request is options. By the option we create here- this api is authenticated and in the server i can detect if the request is coming from a looged in user or a hacker
+      // Sending an ajax request to the backend to create an order. second parameter in post request is options.
+      // By the option we create here- this api is authenticated and in the server i can detect if the request is coming from a looged in user or a hacker
       const { data } = await Axios.post(
         '/api/orders',
         {
@@ -76,22 +78,33 @@ export default function PlaceOrderScreen() {
           },
         }
       );
-      ctxDispatch({ type: 'CART_CLEAR' }); //this one goes to the Store.js
-      dispatch({ type: 'CREATE_SUCCESS' }); //this one goes to the reducer we defined here
-      localStorage.removeItem('cartItems'); //remove cartItems from localStorage (after we send the order the cart should be clear)
-      navigate(`/order/${data.order._id}`);
-    } catch (err) {
-      dispatch({ type: 'CREATE_FAIL' });
-      toast.error(getError(err));
-    }
-  };
+     // Clearing the cart in the global state
+     ctxDispatch({ type: 'CART_CLEAR' });
+     // Updating the local loading state to indicate success
+     dispatch({ type: 'CREATE_SUCCESS' });
+     // Removing cartItems from localStorage (clearing the cart after the order is placed)
+     localStorage.removeItem('cartItems');
+     // Navigating to the order details screen
+     navigate(`/order/${data.order._id}`);
+   } catch (err) {
+     // Updating the local loading state to indicate failure
+     dispatch({ type: 'CREATE_FAIL' });
+     // Displaying an error message using toast
+     toast.error(getError(err));
+   }
+ };
 
+
+
+  // useEffect to check if paymentMethod is available; if not, redirect to the payment screen
   useEffect(() => {
     if (!cart.paymentMethod) {
       navigate('/payment');
     }
   }, [cart, navigate]); //dependency array
 
+
+  // Rendering the PlaceOrderScreen component
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
@@ -101,15 +114,19 @@ export default function PlaceOrderScreen() {
       <h1 className="my-3">Preview Order</h1>
       <Row>
         <Col md={8}>
+          {/* Shipping information card */}
           <Card className="mb-3">
             <Card.Body>
               <Card.Title>Shipping</Card.Title>
+
+              {/* Displaying shipping address details */}
               <Card.Text>
                 <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
                 <strong>Address: </strong> {cart.shippingAddress.address},
                 {cart.shippingAddress.city}, {cart.shippingAddress.postalCode},
                 {cart.shippingAddress.country}
               </Card.Text>
+
               <Link to="/shipping">Edit</Link>
             </Card.Body>
           </Card>
@@ -182,6 +199,7 @@ export default function PlaceOrderScreen() {
                     </Col>
                   </Row>
                 </ListGroup.Item>
+
                 <ListGroup.Item>
                   <div className="d-grid">
                     <Button
@@ -194,6 +212,7 @@ export default function PlaceOrderScreen() {
                   </div>
                   {loading && <LoadingBox></LoadingBox>}
                 </ListGroup.Item>
+
               </ListGroup>
             </Card.Body>
           </Card>

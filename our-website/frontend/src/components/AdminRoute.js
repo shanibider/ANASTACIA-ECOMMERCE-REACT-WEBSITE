@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Store } from '../Store';
 
-//for admin route- we need to check if user is admin or not
+//for admin route - checks if the user is an admin
 //(in Admin menu we have some options that only admin can see)
 export default function AdminRoute({ children }) {
   //for userInfo- we bring it from useContext like always, and extract state from it
