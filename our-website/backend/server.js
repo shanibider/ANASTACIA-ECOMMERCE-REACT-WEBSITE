@@ -8,86 +8,109 @@ import orderRouter from './routes/orderRoutes.js';
 import path from 'path';
 import fs from 'fs';
 
-//fetch variables in .env file
+// Load environment variables from the .env file
 dotenv.config();
 
+// Create an Express application
 const app = express();
 
 /*SCRAPING*/
 //connect to mongodb data base,
-//read data from cloths.json file and save it in mongodb
 
 mongoose
   .connect(process.env.MONGODB_URI)
-  .then(() => {
+  .then ( () => {
     //scrapping data from website and save it in mongodb
     console.log('connected to db');
+        // Read data from the 'cloths.json' file and save it in MongoDB
     fs.readFile('cloths.json', (err, data) => {
       if (err) {
         console.error(err);
         return;
       }
+            // Parse the JSON data
       const products = JSON.parse(data);
 
+            // Get a reference to the MongoDB database
       const db = mongoose.connection;
+            // Access the 'products' collection in the database
       const collection = db.collection('products');
 
-      products.forEach((product) => {
-        collection.insertOne(product, function (err) {
+
+            // Insert each product into the 'products' collection
+      products.forEach ( (product) => {
+        collection.insertOne ( product, function (err) {
           if (err) {
             console.error(err);
             return;
           }
         });
       });
+
+
     });
   })
   .catch((err) => {
     console.log(err.message);
   });
 
-/*SCRAPPING EXPLENATION:
-1. mongoose.connect(process.env.MONGODB_URI) connects to the MongoDB database using the URI specified in the MONGODB_URI environment variable. 
-2. The .then() function is called after the database connection is established. 
-3. The code inside the .then() function reads data from a file named "cloths.json" using the fs library, which is a built-in Node.js library for working with the file system.
-4. If the file is read successfully, the code parses the data in the file as JSON and stores it in a variable called 'products'.
-5. Then the code gets a reference to the MongoDB database using mongoose.connection.
-6. The collection variable is used to access the "products" collection in the database.
-7. A loop is used to iterate over each product in the products array, and the insertOne() function is called to add the product to the "products" collection in the database.
+
+/* SCRAPPING EXPLANATION:
+1. Connect to MongoDB using the provided URI.
+2. After the connection is established, read data from 'cloths.json' and store it in the 'products' collection in MongoDB.
+3. Use fs.readFile to read the JSON data, parse it, and insert each product into the collection.
 */
 
-//data from post request will convert to json object in req.body
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-//this method has 2 parameters- first is the path we are going to serve, second is the function that respond to this api
-//when user go to this address we need to return products to frontend (to user)
-//api to return clientID for paypal
-app.get('/api/keys/paypal', (req, res) => {
-  //sending data
-  //PAYPAL_CLIENT_ID is a variable in .env file
-  res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
+// Parse JSON and URL-encoded data from POST requests
+app.use (express.json ());
+app.use (express.urlencoded ({ extended: true }));
+
+
+// API to return clientID for PayPal
+app.get ('/api/keys/paypal', (req, res) => {
+  // Send PayPal client ID (from .env file)
+  res.send (process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
-//each component has its own router
-app.use('/api/seed', seedRouter); //seedRouter responded to api/seed
-app.use('/api/products', productRouter);
-app.use('/api/users', userRouter);
-app.use('/api/orders', orderRouter);
 
+// Each component has its own router
+// http://localhost:5000/api/products gets all the products
+// When a request is made to a path starting with /api/seed, /api/products, /api/users, or /api/orders,
+// Express will pass the request to the corresponding router (seedRouter, productRouter, userRouter, or orderRouter) for further handling.
+// EEach endpoints has purpose. 
+
+app.use ('/api/seed', seedRouter); //seedRouter responds to api/seed
+app.use ('/api/products', productRouter);
+app.use ('/api/users', userRouter);
+app.use ('/api/orders', orderRouter);
+
+
+
+// Serve static files from the 'frontend/build' directory
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/frontend/build')));
-//* means that everything the user enter after the server name (website domain) is going to be served by index.html file
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+app.use (express.static (path.join(__dirname, '/frontend/build')));
+
+
+
+// '*' means any path not matched by previous routes; serve 'index.html'.
+// commonly used for client-side routing in Single Page Applications (SPAs). To catch-all route ensures that the server returns the main HTML file for any URL
+app.get ('*', (req, res) =>
+  // res.sendFile is used to send the specified file (index.html) as the response.
+  res.sendFile (path.join(__dirname, '/frontend/build/index.html'))
 );
 
-//error handler for express
+
+
+// Error handler for express
 app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(500).send({ message: err.message });
 });
 
+
+
+// Set the port to the environment variable PORT or default to 5000
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`serve at http://localhost:${port}`);
