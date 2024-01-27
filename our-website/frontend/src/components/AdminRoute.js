@@ -16,7 +16,7 @@ export default function AdminRoute ({ children }) {
  // If userInfo exists and isAdmin is true, renders the children (admin content. content wrapped by AdminRoute). Otherwise, it redirects to the "/signin" route using the Navigate component.
  //  (? :) is a shorthand for an if-else statement in javaScript.  
  return userInfo && userInfo.isAdmin ? children : <Navigate to="/signin" />;
-}
+}   
 
 
 
