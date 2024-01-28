@@ -7,6 +7,9 @@ import { isAuth, isAdmin } from '../utils.js';
 import { db } from '../firebase.js';
 import { collection, query, getCountFromServer } from 'firebase/firestore';
 
+// Server-side route handles requests/ functionalities related to orders. Include routes for placing orders, viewing order history, and managing order status.
+
+
 //api for post
 //expressAsyncHandler to catch all errors
 const orderRouter = express.Router();
@@ -32,7 +35,7 @@ orderRouter.post(
     const newOrder = new Order({
       //for each order item we need to get the product id (for OrderModel)
       //by map function we convert _id to product
-      orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
+      orderItems: req.body.orderItems.map ( (x) => ({ ...x, product: x._id })),
       shippingAddress: req.body.shippingAddress,
       paymentMethod: req.body.paymentMethod,
       itemsPrice: req.body.itemsPrice,

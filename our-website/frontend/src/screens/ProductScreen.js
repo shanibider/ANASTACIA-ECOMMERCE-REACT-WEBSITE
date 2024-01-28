@@ -17,6 +17,7 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { toast } from 'react-toastify';
 
+
 // Functional component for displaying product details and reviews
 
 // Reducer function to manage the state based on dispatched actions
@@ -69,20 +70,21 @@ function ProductScreen() {
 
 
 
-  // useEffect to fetch product data when the component mounts or slug changes
+  // uses the useEffect hook to fetch product data when the component mounts or when the slug parameter changes.
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        //${slug} = the value of slug user entered in the url
-        const result = await axios.get(`/api/products/slug/${slug}`);
+        //${slug} is the value of slug user entered in the url
+        const result = await axios.get (`/api/products/slug/${slug}`);
+        // if the request is successful, it dispatches a 'FETCH_SUCCESS' action with the fetched data.
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
     fetchData();
-  }, [slug]);     // run useEffect when slug change (user switch between pages)
+  }, [slug]);     // run useEffect when slug change (when user click on a different product)
 
 
 

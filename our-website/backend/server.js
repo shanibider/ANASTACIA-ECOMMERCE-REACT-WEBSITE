@@ -8,21 +8,29 @@ import orderRouter from './routes/orderRoutes.js';
 import path from 'path';
 import fs from 'fs';
 
+// Main entry point for the backend. 
+// Sets up the Express application, connects to MongoDB database, initializes data scraping from 'cloths.json' to populate the database, 
+// configures middleware for parsing requests.
+// defines routes for different components (products, users, orders), 
+// serves static files for the frontend, provides an API endpoint for the PayPal client ID, and includes error handling. 
+
+
+
 // Load environment variables from the .env file
 dotenv.config();
 
 // Create an Express application
 const app = express();
 
-/*SCRAPING*/
-//connect to mongodb data base,
 
+//Database Connection
 mongoose
   .connect(process.env.MONGODB_URI)
   .then ( () => {
-    //scrapping data from website and save it in mongodb
     console.log('connected to db');
-        // Read data from the 'cloths.json' file and save it in MongoDB
+
+    // Data Scraping
+    // Read data from the 'cloths.json' file and  and inserts it into 'products' collection in MongoDB
     fs.readFile('cloths.json', (err, data) => {
       if (err) {
         console.error(err);
@@ -62,37 +70,42 @@ mongoose
 */
 
 
-// Parse JSON and URL-encoded data from POST requests
+// Express Setup
 app.use (express.json ());
 app.use (express.urlencoded ({ extended: true }));
 
 
-// API to return clientID for PayPal
+// API endpoint to return clientID for PayPal
 app.get ('/api/keys/paypal', (req, res) => {
   // Send PayPal client ID (from .env file)
   res.send (process.env.PAYPAL_CLIENT_ID || 'sb');
 });
 
 
-// Each component has its own router
-// http://localhost:5000/api/products gets all the products
-// When a request is made to a path starting with /api/seed, /api/products, /api/users, or /api/orders,
-// Express will pass the request to the corresponding router (seedRouter, productRouter, userRouter, or orderRouter) for further handling.
-// EEach endpoints has purpose. 
+// Base path for each set of routes - uses separate routers for different components (seed, products, users, orders).
+// app.use() is telling the Express application to use the 'orderRouter' for handling HTTP requests that start with "/api/orders".
+// This means that any request to paths like "/api/orders", "/api/orders/somepath", etc., will be passed to the orderRouter for further handling.
 
-app.use ('/api/seed', seedRouter); //seedRouter responds to api/seed
-app.use ('/api/products', productRouter);
+
+// app.use is an Express method used to mount middleware or sub-applications at specified paths.
+// here it's used to define the base paths for different components of the app.
+
+
+app.use ('/api/seed', seedRouter);                 //seedRouter responds to api/seed
+app.use ('/api/products', productRouter);         // http://localhost:5000/api/products gets all the products
 app.use ('/api/users', userRouter);
 app.use ('/api/orders', orderRouter);
 
 
 
+
 // Serve static files from the 'frontend/build' directory
-const __dirname = path.resolve();
+const __dirname = path.resolve ();
 app.use (express.static (path.join(__dirname, '/frontend/build')));
 
 
 
+// Catch-All Route for Client-Side Routing:
 // '*' means any path not matched by previous routes; serve 'index.html'.
 // commonly used for client-side routing in Single Page Applications (SPAs). To catch-all route ensures that the server returns the main HTML file for any URL
 app.get ('*', (req, res) =>
