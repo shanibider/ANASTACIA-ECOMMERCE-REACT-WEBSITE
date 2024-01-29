@@ -572,3 +572,36 @@ The provided functions, `generateToken`, `isAuth`, and `isAdmin`, are typically 
    
 
 These examples are simplified and should be adapted to fit the specific authentication and authorization logic of your application.
+
+
+
+
+
+
+Tokens:
+
+JWT (JSON Web Token): A JSON Web Token is a compact, URL-safe means of representing claims between two parties.
+In the context of user authentication and authorization, JWTs are commonly used to securely transmit information between parties.
+
+generateToken(user): This is a function that takes a user object as an argument and generates a JWT based on the user's information.
+The generated token typically contains information like the user's ID, name, email, and any other relevant data. It is signed with a secret key known only to the server.
+
+Purpose of the Token:
+
+Authentication: The token can be sent back to the client (front end) as a means of verifying the user's identity.
+Authorization: The token may include information about the user's role or permissions (isAdmin in this case), allowing the server to make authorization decisions.
+
+
+Advantages of Using Tokens:
+
+Stateless: Tokens allow for stateless authentication, meaning the server doesn't need to keep track of the user's session.
+Each request from the client includes the token, and the server can independently verify it.
+
+Secure: Tokens are cryptographically signed, providing a level of security. As long as the server keeps the signing key secret, it can trust the information in the token.
+
+Token Handling on the Client Side: On the client side, the token is typically stored securely (e.g., in an HTTP-only cookie or local storage) and included in the headers of subsequent requests to authenticated endpoints.
+
+
+
+
+
