@@ -1,7 +1,6 @@
 //Order Model to create order in database
 import mongoose from 'mongoose';
 
-//user is reference to User model
 //orderItems is array of objects
 //paymentResult is object
 
@@ -53,4 +52,5 @@ const orderSchema = new mongoose.Schema(
 );
 
 const Order = mongoose.model('Order', orderSchema);
+
 export default Order;
