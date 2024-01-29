@@ -39,10 +39,11 @@ const reducer = (state, action) => {
 };
 
 
+// useReducer from Store.js for example:  const [state, dispatch] = useReducer (reducer, initialState);
 
 export default function DashboardScreen() {
   // uses the useReducer hook to manage the state defined by the reducer function.
-  // deconstruct { loading, summary, error }, and get dispatch to call this cases and update the state of the reducer
+  // deconstruct '{ loading, summary, error }', and get dispatch to call *this cases* and update the state of the reducer
   const [{ loading, summary, error }, dispatch] = useReducer (reducer, {
     loading: true,
     error: '',

@@ -1,10 +1,11 @@
-/* This code setting up a global state management system using React context and the reducer pattern.
-It provides a centralized state (Store) and a set of actions to modify that state.
-The use of local storage ensures persistence of certain data across page refreshes.
-The StoreProvider component acts as a provider for the entire application, offering a consistent way to manage and share global state.
-This architecture enables components throughout the app to access and update the global state without the need for prop drilling.
+// - Manages global state using the React context API and `useReducer`.
 
-Defines a context (Store) and a provider (StoreProvider) that wraps the entire application. */
+// It provides a centralized state (Store) and a set of actions to modify that state.
+// The use of local storage ensures persistence of certain data across page refreshes.
+// The <StoreProvider> component acts as a provider for the entire application, offering a consistent way to manage and share global state.
+// This architecture enables components throughout the app to access and update the global state without the need for prop drilling.
+
+// Defines a context (Store) and a provider (StoreProvider) that wraps the entire application. 
 
 import { createContext, useReducer } from 'react';
 
@@ -45,9 +46,9 @@ const initialState = {              // initializes initialState with an object.
 
 
 
-// Reducer function responsible for handling state changes based on different actions.
+// Implement a reducer function to handle state changes based on different action types.
 // The state parameter represents the current state of the application, and action represents the action to be performed.
-// Typically used with the useReducer hook in React to manage complex state logic in a more organized manner.
+// Actions include adding/removing items from the cart, user sign-in/sign-out, saving shipping/payment information, etc.
 function reducer(state, action) {
 
   // Actions are objects that have a type property indicating the type of action to perform.
@@ -67,7 +68,7 @@ function reducer(state, action) {
       // if the item exist (existItem is truthy), map over the cartItems array and replace the item with the same id with the new item
       // Updates the cartItems array based on whether the item already exists.
       // otherwise, it adds the new item to the end of the array.
-      // state.cart.cartItems: represents the current array of items in the shopping cart.
+      // 'state.cart.cartItems': represents the current array of items in the shopping cart.
 
       const cartItems = existItem
         ? state.cart.cartItems.map ( (item) =>
@@ -166,22 +167,22 @@ function reducer(state, action) {
 
 
 
-/* StoreProvider, a custom provider component that wrap the entire app, and pass global props to children. (acts as a provider for the entire app).
-  StoreProvider utilizes the 'useReducer' hook to create a state and a dispatch function based on the reducer and initial state.
-  This component sets up a container that manages the application state, and provides it to all its child components.
-  It uses the useReducer hook to handle state changes, and the value object ensures that both the current state and the function to update the state are available to its children.
+/* 'StoreProvider', a custom provider component that wrap the entire app, and pass global props to children. (acts as a provider for the entire app).
+  uses `useReducer` to manage the state and provides the state and dispatch function to its children via the `Store` context.
+  'value' object ensures that both the current state and the function to update the state are available to its children.
+  Used in index.js
  */
 export function StoreProvider (props) {
 
-  //  hook used to manage state of the app using the reducer function and an initial state. Returns the current state and a dispatch function to trigger state changes.
+  // hook used to manage 'state' of the app using the reducer function and an 'initial state'. Returns the current state and a dispatch function to trigger state changes.
   const [state, dispatch] = useReducer (reducer, initialState);
 
   // creates an object containing the current state and the dispatch function, will be used as the value for Store.Provider.
   const value = { state, dispatch };
 
-  //Store coming from createContext, and from Store object get Provider and set the value to the value we created (current state and dispatch to update state),
   
-  // context provider from React, provides the value (containing state and dispatch) to all its childs through the React context named <Store>. 'props.children' refers to the child components nested within StoreProvider.
+  // context provider from React, provides the value (containing state and dispatch) to all its childs through the React context named <Store>.
+  // 'props.children' refers to the child components nested within StoreProvider.
   return <Store.Provider value = {value}> {props.children} </Store.Provider>;
 
 }
@@ -196,17 +197,21 @@ INFO:
 
 The separation between <Store> and <Store.Provider>:
 
-1. Store Component:
-- The Store component represents the React context created using createContext(). ("export const Store = createContext()")
+1. <Store> Component:
+- The Store component represents the React 'context' created using createContext(). ("export const Store = createContext()")
 - It serves as a reference to the context itself and provides a way for components to consume the global state.
 
 Why is it needed?
 This context allows components in the application to access the global state without having to pass props down through multiple levels of the component tree.
 It's a way to share state without prop drilling.
+For example in each screen we want to access the userInfo, we can use the Store component to access the userInfo from the global state;
+  const { state } = useContext (Store);
+  const { userInfo } = state;
 
 
-2. StoreProvider Component:
-- The StoreProvider component is responsible for setting up and managing the global state using the useReducer hook.
+
+2. <StoreProvider> Component:
+- The StoreProvider component is responsible for setting up and managing the global state using the 'useReducer' hook.
 - It acts as a provider for the entire app, wrapping the app's component tree and supplying the global state to its children.
 
 Why is it needed?
@@ -216,7 +221,8 @@ It uses the useReducer hook to manage complex state logic in a more organized ma
 
 In Summary:
 - Store is the context itself, allowing components to consume the global state.
-- StoreProvider is a component that wraps the entire app, providing a centralized place for state management. It uses useReducer to handle state changes and ensures that the global state is accessible to all its child components through the Store context.
+- StoreProvider is a component that wraps the entire app, providing a centralized place for state management.
+It uses useReducer to handle state changes and ensures that the global state is accessible to all its child components through the Store context.
 
 
 
@@ -226,7 +232,7 @@ No rendering, just a reference to the context.
 
 <Store.Provider>:
 Wraps a portion of your component tree, providing the context values to its descendants.
-Renders its children.
+Renders it's children.
 
 
 

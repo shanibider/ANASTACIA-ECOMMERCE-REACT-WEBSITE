@@ -519,7 +519,7 @@ Fetching: "Fetching" refers to retrieving data from a server (backend) to show o
 
 
 
-Backend - 
+BACKEND - 
 
 The provided functions, `generateToken`, `isAuth`, and `isAdmin`, are typically used in the context of a Node.js web application, especially when building a server using a framework like Express. Let's discuss where and how you might use these functions:
 

@@ -6,6 +6,8 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
+
+// Import your application-specific components/screens
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import { Link } from 'react-router-dom';
@@ -25,13 +27,14 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import OrderHistoryScreen from './screens/OrderHistoryScreen';
 import ProfileScreen from './screens/ProfileScreen';
+
+
 import { getError } from './utils';
 import axios from 'axios';
 import { Toast } from 'react-bootstrap';
 import SearchBox from './components/SearchBox';
 import SearchScreen from './screens/SearchScreen';
 import { toast, ToastContainer } from 'react-toastify';
-
 import ProtectedRoute from './components/ProtectedRoute';
 import DashboardScreen from './screens/DashboardScreen';
 import AdminRoute from './components/AdminRoute';
@@ -42,8 +45,8 @@ import OrderListScreen from './screens/OrderListScreen';
 import AboutUs from './screens/AboutUsScreen';
 import HowToScreen from './screens/HowToScreen';
 
-/* This App component serves as the main structure for eCommerce web app, managing state, user authentication, navigation, and screen rendering based on routes.
-The code is well-organized, utilizing React hooks and components for a modular and maintainable structure. */
+// - This App component serves as the main structure for eCommerce web app, managing state, user authentication, navigation, and screen rendering based on routes.
+// Contains the structure of the application, including routing, navigation, and state management. 
 
 export default function App() {
 
@@ -51,21 +54,26 @@ export default function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;   // Destructuring cart and userInfo from state
 
+
   // Signout handler by dispatching a 'USER_SIGNOUT' action and removing user-related data from local storage.
   const signoutHandler = () => {
     
-    ctxDispatch({ type: 'USER_SIGNOUT' }); //the type of actiob we going to dispatch
-    localStorage.removeItem('userInfo'); //remove user info from local storage
-    localStorage.removeItem('shippingAddress');
-    localStorage.removeItem('paymentMethod');
-    //    window.location.href = '/signin';
+    ctxDispatch ({ type: 'USER_SIGNOUT' });      // the type of action we going to dispatch
+    localStorage.removeItem ('userInfo');        // remove user info from local storage
+    localStorage.removeItem ('shippingAddress');
+    localStorage.removeItem ('paymentMethod');
+    // window.location.href = '/signin';        // Optionally redirect to a sign-in page
   };
 
+
   // States for managing the sidebar visibility and fetching product categories.
-  /* useState is a React hook that allows functional components to manage state. It initializes a state variable sidebarIsOpen with an initial value of false,
-  and setSidebarIsOpen is a function used to update the value of sidebarIsOpen. The purpose of this state is to track whether the sidebar in the app is open or closed. */
+  /* useState initializes a state variable 'sidebarIsOpen' with an initial value of 'false',
+  and setSidebarIsOpen is a function used to update the value of sidebarIsOpen.
+  The purpose of this state is to track whether the sidebar in the app is open or closed. */
   const [sidebarIsOpen, setSidebarIsOpen] = useState (false);
   const [categories, setCategories] = useState ([]);
+
+
 
   /* Use Effect for Fetching Categories, fetches product categories when the component mounts.
   // http://localhost:5000/api/products/categories give:
@@ -75,11 +83,10 @@ export default function App() {
     "Shirts"
   ] */
   useEffect(() => {
-
-    // data is obtained through an asynchronous Axios request.
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`/api/products/categories`);
+        // data is obtained through an asynchronous Axios request.
+        const { data } = await axios.get (`/api/products/categories`);
         setCategories(data);
       } catch (err) {
         Toast.error(getError(err));
@@ -87,6 +94,7 @@ export default function App() {
     };
 
     fetchCategories();
+
   }, []);
 
 
@@ -148,17 +156,23 @@ export default function App() {
                       </Badge>
                     )}
                   </Link>
+                  
 
-                  {/* Conditional rendering based on whether a user is authenticated. If yes, a NavDropdown with user-related links is displayed; otherwise, "Sign In" link is shown. */}
+                  {/* Conditional rendering based on whether a user is authenticated. If yes, a NavDropdown with user-related links is displayed;
+                  otherwise, "Sign In" link is shown. */}
                   {userInfo ? (
+
                     <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
                       <LinkContainer to="/profile">
-                        <NavDropdown.Item>User Profile</NavDropdown.Item>
+                        <NavDropdown.Item> User Profile </NavDropdown.Item>
                       </LinkContainer>
+
                       <LinkContainer to="/orderhistory">
-                        <NavDropdown.Item>Order History</NavDropdown.Item>
+                        <NavDropdown.Item> Order History </NavDropdown.Item>
                       </LinkContainer>
+
                       <NavDropdown.Divider />
+
                       <Link
                         className="dropdown-item"
                         to="#signout"
@@ -167,11 +181,13 @@ export default function App() {
                         Sign Out
                       </Link>
                     </NavDropdown>
+
                   ) : (
                     <Link className="nav-link" to="/signin">
                       Sign In
                     </Link>
                   )}
+
 
                   {/*****ADMIN*****/}
                   {/* if userInfo exist and userInfo.isAdmin is true -> we render a admin-related links navDropDown */}
@@ -227,8 +243,13 @@ export default function App() {
         </div>
 
 
-        {/* Main Section (Routing): The Routes component handles routing using react-router-dom, defining routes for different screens such as Home, Product, Cart, About Us, etc. */}
+
+
+        {/* Main Section (Routing): 
+        The Routes component handles routing using react-router-dom, defining routes for different screens such as Home, Product, Cart, About Us, etc. */}
+        
         <main>
+
           <Container className="mt-3">
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
@@ -238,6 +259,7 @@ export default function App() {
               <Route path="/search" element={<SearchScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
               <Route path="/signup" element={<SignupScreen />} />
+
               {/* <ProtectedRoute> is used for routes that need authentication*/}
               <Route
                 path="/profile"
@@ -247,6 +269,7 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
+
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route
                 path="/order/:id"
@@ -256,6 +279,7 @@ export default function App() {
                   </ProtectedRoute>
                 }
               ></Route>
+
               <Route
                 path="/orderhistory"
                 element={
@@ -264,11 +288,13 @@ export default function App() {
                   </ProtectedRoute>
                 }
               ></Route>
+
               <Route
                 path="/shipping"
                 element={<ShippingAddressScreen />}
               ></Route>
               <Route path="/payment" element={<PaymentMethodScreen />}></Route>
+
 
               {/* Admin Routes */}
               <Route
@@ -279,6 +305,7 @@ export default function App() {
                   </AdminRoute>
                 }
               ></Route>
+
               <Route
                 path="/admin/orders"
                 element={
@@ -296,6 +323,7 @@ export default function App() {
                   </AdminRoute>
                 }
               ></Route>
+
               <Route
                 path="/admin/product/:id"
                 element={
@@ -304,12 +332,17 @@ export default function App() {
                   </AdminRoute>
                 }
               ></Route>
-              {/********/}
+              {/****End of Admin routes****/}
 
               <Route path="/" element={<HomeScreen />} />
+
             </Routes>
+
+
           </Container>
         </main>
+
+
 
 
 
@@ -320,6 +353,9 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+
+
 
 
 
