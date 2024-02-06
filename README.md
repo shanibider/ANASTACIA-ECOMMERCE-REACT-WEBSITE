@@ -3,7 +3,14 @@
 ## Overview
 
 This is a comprehensive feature-rich e-commerce website developed as a server-client React application.
+Follows a standard React application structure with routing, state management, and component-based architecture for building modular and maintainable user interfaces.
 It includes secure user registration and login functionality via Firebase database. Utilizes MongoDB for data storage, and integrates PayPal API for secure payment processing during the demo order. The project also incorporates a shopping cart, review system, categorized product listings, and offers comprehensive admin and user actions.
+
+
+
+Dynamic E-commerce application developed with JavaScript, node.js, and React. follows a standard React application structure with routing, state management, and component-based architecture for building modular and maintainable user interfaces.
+
+
 
 ### Languages and Tools used in this project:
 
