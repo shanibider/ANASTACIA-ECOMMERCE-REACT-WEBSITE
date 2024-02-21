@@ -2,13 +2,10 @@
 
 ## Overview
 
-This is a comprehensive feature-rich e-commerce website developed as a server-client React application.
-Follows a standard React application structure with routing, state management, and component-based architecture for building modular and maintainable user interfaces.
-It includes secure user registration and login functionality via Firebase database. Utilizes MongoDB for data storage, and integrates PayPal API for secure payment processing during the demo order. The project also incorporates a shopping cart, review system, categorized product listings, and offers comprehensive admin and user actions.
+A comprehensive feature-rich e-commerce website developed as a server-client React application, leveraging HTML, CSS, and JavaScript technologies. With an architecture following standard React application structures, with routing, state management, and component-based architecture for building modular and maintainable user interfaces. Seamlessly integrates responsive design principles for optimal viewing across devices. The project boasts secure user authentication powered by Firebase, ensuring data confidentiality over HTTP/S protocols.
 
+Backed by secure user registration and login functionality via Firebase database, MongoDB, to ensures efficient data storage, and seamless PayPal API integration for secure transaction processing. The platform features a dynamic shopping cart, an interactive review system, and organized product listings for enhanced user experience. Administrators enjoy comprehensive control over user interactions, facilitating efficient management of the platform.
 
-
-Dynamic E-commerce application developed with JavaScript, node.js, and React. follows a standard React application structure with routing, state management, and component-based architecture for building modular and maintainable user interfaces.
 
 
 
@@ -20,25 +17,23 @@ Dynamic E-commerce application developed with JavaScript, node.js, and React. fo
 ## Technologies Used
 
 - **Frontend:**
-  - React
-  - HTML5
+  - HTML, CSS, JS
+  - React (include React Hooks: useState, useReducer, useContext, useEffect, useParams)
   - Bootstrap
+   - [x] Include responsive design for optimal viewing across devices
  
 - **Backend:**
   - Node.js
   - Express.js
 
-- **State Management:**
-  - React Hooks (useState, useReducer, useContext, useEffect, useParams)
-
-- **HTTP Requests:**
+- **HTTP/S protocols:**
   - Axios
   - AJAX
   - Fetch API
 
 - **Database:**
-  - MongoDB (for product data)
-  - Firebase (for user data)
+  - MongoDB, for efficient data storage
+  - Firebase, for Secure user authentication
 
 - **Payment Integration:**
   - PayPal API
