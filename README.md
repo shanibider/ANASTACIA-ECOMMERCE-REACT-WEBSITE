@@ -1,10 +1,18 @@
 # Comprehensive MERN E-commerce React Website 🖥👜
 
-A comprehensive feature-rich e-commerce website developed as a server-client React application, powered by the 
-### MERN (MongoDB, Express.js, React.js, Node.js) stack. 💼
-<br>My server-client React application incorporates **HTML, CSS, and JavaScript technologies**, following standard React application structures for routing, state management, and component-based architecture, ensuring modular and maintainable user interfaces. I prioritize responsive design principles to guarantee optimal viewing experiences across various devices. With secure user authentication powered by **Firebase**, our platform ensures data confidentiality over **HTTP/S protocols**.
+### **Live Demo:** [Explore the live website.🖥](https://anastacia-mern-ecommerce-website.onrender.com/)
 
-Backed by a robust combination of Firebase database and **MongoDB**, we ensure efficient data storage and seamless **PayPal API** integration for secure transaction processing. Our platform features a dynamic shopping cart, an interactive review system, and organized product listings for an enhanced user experience. Administrators enjoy comprehensive control over user interactions, facilitating efficient platform management.
+<div align="center">
+<img height="350px" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/9717a097-24f9-4175-af71-1b3ebac20dc3">
+</div>
+
+A comprehensive feature-rich e-commerce website developed as a server-client React application, powered by the 
+### MERN (MongoDB, Express.js, React.js, Node.js) <img height=30px src="https://skillicons.dev/icons?i=mongodb"> <img height=30px src="https://skillicons.dev/icons?i=express"> <img height=30px src="https://skillicons.dev/icons?i=react"> <img height=30px src="https://skillicons.dev/icons?i=nodejs"> stack. 💼 
+
+
+<br>My server-client React application incorporates **JavaScript, HTML, and CSS technologies**  <img height=20px src="https://skillicons.dev/icons?i=js">  <img height=20px src="https://skillicons.dev/icons?i=html">  <img height=20px src="https://skillicons.dev/icons?i=css">, following standard React application structures for routing, state management, and component-based architecture, ensuring modular and maintainable user interfaces. I prioritize responsive design principles to guarantee optimal viewing experiences across various devices. With secure user authentication powered by **Firebase**, our platform ensures data confidentiality over **HTTP/S protocols**.
+
+Backed by a robust combination of Firebase database and **MongoDB** <img height=20px src="https://skillicons.dev/icons?i=mongodb">, we ensure efficient data storage and seamless **PayPal API** integration for secure transaction processing. Our platform features a dynamic shopping cart, an interactive review system, and organized product listings for an enhanced user experience. Administrators enjoy comprehensive control over user interactions, facilitating efficient platform management.
 
 
 
