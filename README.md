@@ -82,6 +82,30 @@ Backed by a robust combination of Firebase database and **MongoDB** <img height=
 
 
 
+## 💵 Paypal API <img align="center" height="90px" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/3a7ae41d-ece6-42db-bc19-b095f15a4d17"> -
+
+### Paypal Sandbox test accounts -
+![paypalapi](https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/c4790512-1e54-4b9f-a240-07d336ab2d6b)
+
+
+### 💲Demo Payment via <img height="40px" align="center" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/49484e34-14f1-46b9-9153-a25754eb797c"> -
+
+To experience the payment process with PayPal, you can use our demo feature. Follow these steps to make a demo payment:
+
+1. **Visit the Demo Payment Page**: Navigate to the payment page.
+2. **Login with Demo Credentials**: Use the provided demo username and password to access the demo environment.
+3. **Initiate Payment**: Enter the demo payment section and select PayPal as the payment method.
+4. **Complete Payment**: Follow the instructions to proceed with the demo payment through PayPal.
+
+**Demo Credentials:**
+- Username: `sb-gt6zp25024137@personal.example.com`
+- Password: `W=Flx8z1`
+
+By following these steps, you can simulate a payment transaction using PayPal without the need to create a real order💰. This allows you to experience the payment process and familiarize yourself with its functionality.
+
+
+<br>
+
 ## The application follows these key patterns:
 THe architecture focuses on structured state management, components, and effective handling of side effects and navigation in a React app.
 
