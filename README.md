@@ -15,7 +15,6 @@ A comprehensive feature-rich e-commerce website developed as a server-client Rea
 Backed by a robust combination of Firebase database and **MongoDB** <img height=20px src="https://skillicons.dev/icons?i=mongodb">, we ensure efficient data storage and seamless **PayPal API** integration for secure transaction processing. Our platform features a dynamic shopping cart, an interactive review system, and organized product listings for an enhanced user experience. Administrators enjoy comprehensive control over user interactions, facilitating efficient platform management.
 
 
-
 ## Technologies Used 🏆
 [![My Skills](https://skillicons.dev/icons?i=js,react,html,css,bootstrap,mongodb,nodejs)](https://skillicons.dev)
 
@@ -27,7 +26,6 @@ Backed by a robust combination of Firebase database and **MongoDB** <img height=
       
 ### **Firebase:**
 - [x] Utilized for secure user authentication and real-time database functionalities.
-
 
 ### **HTTP/S protocols:**
 - [x] Axios
@@ -82,7 +80,63 @@ Backed by a robust combination of Firebase database and **MongoDB** <img height=
 
 
 
-## 💵 Paypal API <img align="center" height="90px" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/3a7ae41d-ece6-42db-bc19-b095f15a4d17"> -
+## Folder Structure 📁
+
+```
+project-name/
+├── frontend/
+│   ├── components/
+│   │   ├── AdminRoute.js
+│   │   ├── CheckoutSteps.js
+│   │   ├── LoadingBox.js
+│   │   ├── MessageBox.js
+│   │   ├── Product.js
+│   │   ├── ProtectedRoute.js
+│   │   ├── Rating.js
+│   │   └── SearchBox.js
+│   ├── screens/
+│   │   ├── AboutUsScreen.js
+│   │   ├── CartScreen.js
+│   │   ├── DashboardScreen.js
+│   │   ├── HomeScreen.js
+│   │   ├── HowToScreen.js
+│   │   ├── OrderHistoryScreen.js
+│   │   ├── OrderListScreen.js
+│   │   ├── OrderScreen.js
+│   │   ├── PaymentMethodScreen.js
+│   │   ├── PlaceOrderScreen.js
+│   │   ├── ProductEditScreen.js
+│   │   ├── ProductListScreen.js
+│   │   ├── ProductScreen.js
+│   │   ├── ProfileScreen.js
+│   │   ├── SearchScreen.js
+│   │   ├── ShippingAddressScreen.js
+│   │   ├── SigninScreen.js
+│   │   └── SignupScreen.js
+│   ├── App.js
+│   ├── Store.js
+│   ├── index.js
+│   └── utils.js
+├── Backend/
+│   ├── routes/
+│   │   ├── orderRoutes.js
+│   │   ├── productRoutes.js
+│   │   ├── seedRoutes.js
+│   │   └── userRoutes.js
+│   ├── models/
+│   │   ├── orderModel.js
+│   │   ├── productModel.js
+│   │   └── userModel.js
+│   ├── server.js
+│   ├── firebase.js
+│   ├── utils.js
+│   ├── data.js
+│   └── cloths.json
+└── ...
+```
+
+
+## 💵 Paypal API <img align="center" height="60px" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/3a7ae41d-ece6-42db-bc19-b095f15a4d17"> -
 
 ### Paypal Sandbox test accounts -
 ![paypalapi](https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/c4790512-1e54-4b9f-a240-07d336ab2d6b)
@@ -97,7 +151,7 @@ To experience the payment process with PayPal, you can use our demo feature. Fol
 3. **Initiate Payment**: Enter the demo payment section and select PayPal as the payment method.
 4. **Complete Payment**: Follow the instructions to proceed with the demo payment through PayPal.
 
-**Demo Credentials:**
+**Demo Credentials 💳:**
 - Username: `sb-gt6zp25024137@personal.example.com`
 - Password: `W=Flx8z1`
 
@@ -106,34 +160,34 @@ By following these steps, you can simulate a payment transaction using PayPal wi
 
 <br>
 
-## The application follows these key patterns:
+## The application follows these key patterns 🏆 -
 THe architecture focuses on structured state management, components, and effective handling of side effects and navigation in a React app.
 
-1. **State Management:**
+1. 🚀**State Management:**
    - Uses `useReducer` for organized state management.
 
-2. **Global State:**
+2. 🚀**Global State:**
    - Manages global state for properties like `cart`, `userInfo`, `loading`, and `error`.
 
-3. **Side Effects:**
+3. 🚀**Side Effects:**
    - Handles side effects, such as data fetching, with `useEffect`.
 
-4. **Component Structure:**
+4. 🚀**Component Structure:**
    - Organizes the app into modular components, promoting a component-based architecture.
 
-5. **React Router:**
+5. 🚀**React Router:**
    - Implements React Router for navigation.
 
-6. **Conditional Rendering:**
+6. 🚀**Conditional Rendering:**
    - Conditionally displays UI elements based on the application's state.
 
-7. **Authentication Handling:**
+7. 🚀**Authentication Handling:**
    - Manages user authentication through global state.
 
-8. **Middleware (`logger`):**
+8. 🚀**Middleware (`logger`):**
    - Uses a middleware function (`logger`) for state change logging.
 
-9. **RESTful API Calls:**
+9. 🚀**RESTful API Calls:**
    - Utilizes Axios for making API calls to a backend server.
 
 
