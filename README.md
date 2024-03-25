@@ -3,7 +3,7 @@
 #### **Live Demo:** [Explore the live website.🖥](https://anastacia-mern-ecommerce-website.onrender.com/)
 
 <div align="center">
-<img height="350px" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/9717a097-24f9-4175-af71-1b3ebac20dc3">
+<img height="250px" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/9717a097-24f9-4175-af71-1b3ebac20dc3">
 </div>
 
 A comprehensive feature-rich e-commerce website developed as a server-client React application, powered by the: 
@@ -13,9 +13,6 @@ My server-client React application leverages a comprehensive stack of **JavaScri
 <br> to deliver a seamless user experience. Following established React application structures, including **routing, state management, and component-based architecture**, ensures scalability and maintainability. Emphasizing **responsive design**, the application guarantees optimal display across diverse devices.
 
 With **Firebase** <img height=20px src="https://skillicons.dev/icons?i=firebase"> powering our **secure user authentication** mechanism, data confidentiality is maintained through **HTTP/S protocols**. Moreover, our robust backend comprises a blend of **Firebase database🔐 and MongoDB <img height=20px src="https://skillicons.dev/icons?i=mongodb">**, ensuring efficient data storage and management. Integration with the **<img height="30px" align="center" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/49484e34-14f1-46b9-9153-a25754eb797c"> API** facilitates secure transactions, providing users with a seamless shopping experience.
-
--  [x] Key features include a dynamic shopping cart 🛒, an interactive review system🖊, and organized product listings📋, enhancing user engagement. Administrators benefit from comprehensive control over user interactions, and streamlining platform management.
-
 
 
 ## Technologies Used 🏆
@@ -90,88 +87,6 @@ This project demonstrates proficiency in full-stack development, including front
     
 <br>
 
-
-
-## Folder Structure 📁
-
-```
-project-name/
-├── frontend/
-│   ├── components/
-│   │   ├── AdminRoute.js
-│   │   ├── CheckoutSteps.js
-│   │   ├── LoadingBox.js
-│   │   ├── MessageBox.js
-│   │   ├── Product.js
-│   │   ├── ProtectedRoute.js
-│   │   ├── Rating.js
-│   │   └── SearchBox.js
-│   ├── screens/
-│   │   ├── AboutUsScreen.js
-│   │   ├── CartScreen.js
-│   │   ├── DashboardScreen.js
-│   │   ├── HomeScreen.js
-│   │   ├── HowToScreen.js
-│   │   ├── OrderHistoryScreen.js
-│   │   ├── OrderListScreen.js
-│   │   ├── OrderScreen.js
-│   │   ├── PaymentMethodScreen.js
-│   │   ├── PlaceOrderScreen.js
-│   │   ├── ProductEditScreen.js
-│   │   ├── ProductListScreen.js
-│   │   ├── ProductScreen.js
-│   │   ├── ProfileScreen.js
-│   │   ├── SearchScreen.js
-│   │   ├── ShippingAddressScreen.js
-│   │   ├── SigninScreen.js
-│   │   └── SignupScreen.js
-│   ├── App.js
-│   ├── Store.js
-│   ├── index.js
-│   └── utils.js
-├── Backend/
-│   ├── routes/
-│   │   ├── orderRoutes.js
-│   │   ├── productRoutes.js
-│   │   ├── seedRoutes.js
-│   │   └── userRoutes.js
-│   ├── models/
-│   │   ├── orderModel.js
-│   │   ├── productModel.js
-│   │   └── userModel.js
-│   ├── server.js
-│   ├── firebase.js
-│   ├── utils.js
-│   ├── data.js
-│   └── cloths.json
-└── ...
-```
-
-
-## 💵 Paypal API <img align="center" height="60px" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/3a7ae41d-ece6-42db-bc19-b095f15a4d17"> -
-
-### Paypal Sandbox test accounts -
-![paypalapi](https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/c4790512-1e54-4b9f-a240-07d336ab2d6b)
-
-
-### 💲Demo Payment via <img height="40px" align="center" src="https://github.com/shanibider/ANASTACIA-MERN-ECOMMERCE-WEBSITE/assets/72359805/49484e34-14f1-46b9-9153-a25754eb797c"> -
-
-To experience the payment process with PayPal, you can use our demo feature. Follow these steps to make a demo payment:
-
-1. **Visit the Demo Payment Page**: Navigate to the payment page.
-2. **Login with Demo Credentials**: Use the provided demo username and password to access the demo environment.
-3. **Initiate Payment**: Enter the demo payment section and select PayPal as the payment method.
-4. **Complete Payment**: Follow the instructions to proceed with the demo payment through PayPal.
-
-**Demo Credentials 💳:**
-- Username: `sb-gt6zp25024137@personal.example.com`
-- Password: `W=Flx8z1`
-
-By following these steps, you can simulate a payment transaction using PayPal without the need to create a real order💰. This allows you to experience the payment process and familiarize yourself with its functionality.
-
-
-<br>
-
 ## The application follows these key patterns 🏆 -
 THe architecture focuses on structured state management, components, and effective handling of side effects and navigation in a React app.
 
@@ -213,8 +128,6 @@ THe architecture focuses on structured state management, components, and effecti
 👉 Demo : 
 
 <img src="https://user-images.githubusercontent.com/72359805/230923394-09e38358-b620-4bc1-a3f0-f2620eb510c0.mp4" alt=" Click here for Demo" width="300">
-
-
 
 ###### Home Page
 ![home](https://user-images.githubusercontent.com/72359805/230922135-b29b6c60-afd5-48ec-9fc4-d5e2e44a085a.PNG)
@@ -335,8 +248,6 @@ Run http://localhost:3000/signin
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shani-bider/)
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://shanibider.github.io/Portfolio/)
 [![gmail](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:shanibider@gmail.com)
-
-
 
 
 <footer>
